@@ -62,8 +62,7 @@ ALTER TABLE [dbo].[patrons] CHECK CONSTRAINT [FK_patrons_users]
 
 CREATE TABLE [dbo].[parking_spots](
 	[parking_spot_id] [varchar](10) NOT NULL,
-	[parking_spot_status] [bit] NOT NULL,
-	[current_vehicle] [int] NULL,
+	[is_occupied] [bit] NOT NULL,
  CONSTRAINT [PK_parking_spots] PRIMARY KEY CLUSTERED 
 (
 	[parking_spot_id] ASC
