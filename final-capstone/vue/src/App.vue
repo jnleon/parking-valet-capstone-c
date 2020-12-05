@@ -6,12 +6,10 @@
       </header>
 
         <ul>
-        
           <li>
              <router-link v-bind:to="{name: 'login'}">
             <a href="#">Login</a>
               </router-link></li>
-       
           <li>
               <router-link v-bind:to="{name: 'register'}">
             <a href="#">Register</a> </router-link></li>
