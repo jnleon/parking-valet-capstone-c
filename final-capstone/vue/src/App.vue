@@ -44,7 +44,7 @@ header{
 
 img{
   max-width: 100%;
-  max-height: 10%;
+  
   padding: 0%;
   margin: 0%;
 }

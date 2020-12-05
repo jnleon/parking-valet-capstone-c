@@ -12,8 +12,10 @@
       <h1>$5 AN HOUR ALL DAY EVERY DAY</h1>
       </div>
       <div>
+        
         <parking-lot />
         </div>
+        
     </div>
 
   <div id="map">

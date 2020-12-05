@@ -1,13 +1,20 @@
 <template>
-  <div class="spots" v-bind:class="{occupied: !parkingSpot.available, available: parkingSpot.available}">
-      <p> {{parkingSpot.spotId}} </p>
+  <div class="spots" v-bind:class="{occupied: parkingSpot.isOccupied, available: !parkingSpot.isOccupied}">
+     
+      <p> {{parkingSpot.parkingSpotId}} </p>
+      
       </div>
 </template>
 
 <script>
+
+
 export default {
+    
     name: 'parking-spot',
-    props: ['parkingSpot']
+    props: ['parkingSpot'],
+    
+
 }
 </script>
 
