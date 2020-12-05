@@ -81,7 +81,6 @@ CREATE TABLE [dbo].[parking_statuses](
 CREATE TABLE [dbo].[vehicles](
 	[license_plate] [varchar](10) NOT NULL,
 	[patron_id] [int] NOT NULL,
-	[valet_id] [int] NOT NULL,
 	[vehicle_make] [varchar](20) NOT NULL,
 	[vehicle_model] [varchar](20) NOT NULL,
 	[vehicle_vin] [varchar](30) NOT NULL,
@@ -93,20 +92,10 @@ CREATE TABLE [dbo].[vehicles](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 
-ALTER TABLE [dbo].[vehicles]  WITH CHECK ADD  CONSTRAINT [FK_vehicles_parking_statuses] FOREIGN KEY([parking_status_id])
-REFERENCES [dbo].[parking_statuses] ([parking_status_id])
-
-ALTER TABLE [dbo].[vehicles] CHECK CONSTRAINT [FK_vehicles_parking_statuses]
-
 ALTER TABLE [dbo].[vehicles]  WITH CHECK ADD  CONSTRAINT [FK_vehicles_patrons] FOREIGN KEY([patron_id])
 REFERENCES [dbo].[patrons] ([patron_id])
 
 ALTER TABLE [dbo].[vehicles] CHECK CONSTRAINT [FK_vehicles_patrons]
-
-ALTER TABLE [dbo].[vehicles]  WITH CHECK ADD  CONSTRAINT [FK_vehicles_valets] FOREIGN KEY([valet_id])
-REFERENCES [dbo].[valets] ([valet_id])
-
-ALTER TABLE [dbo].[vehicles] CHECK CONSTRAINT [FK_vehicles_valets]
 
 CREATE TABLE [dbo].[valet_slips](
 	[ticket_id] [int] IDENTITY(1,1) NOT NULL,
