@@ -18,17 +18,84 @@ namespace Capstone.DAO
 
         public ParkingSpot Create(ParkingSpot parkingSpotToCreate)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("INSERT INTO parking_spots (is_occupied) " +
+                                                    "VALUES (@isoccupied)", conn);
+                    cmd.Parameters.AddWithValue("@isoccupied", parkingSpotToCreate.IsOccupied);
+                    cmd.ExecuteNonQuery();
+
+                    cmd = new SqlCommand("SELECT @@IDENTITY", conn);
+                    int newId = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    return Get(newId);
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
         }
 
         public bool Delete(string idToDelete)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("DELETE FROM parking_spots " +
+                                                    "WHERE parking_spot_id=@parkingspotid", conn);
+                    cmd.Parameters.AddWithValue("@parkingspotid", idToDelete);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected != 1)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
         }
 
-        public ParkingSpot Get(string id)
+        public ParkingSpot Get(int id)
         {
-            throw new NotImplementedException();
+            ParkingSpot ps = null;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT parking_spot_id, is_occupied " +
+                                                    "FROM parking_spots " +
+                                                    "WHERE parking_spot_id = @parkingspotid " +
+                                                    "ORDER BY parking_spot_id", conn);
+                    cmd.Parameters.AddWithValue("@parkingspotid", id);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows && reader.Read())
+                    {
+                        ps = GetParkingSpotFromReader(reader);
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+
+            return ps;
         }
 
         public List<ParkingSpot> List()
@@ -42,7 +109,9 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT parking_spot_id, is_occupied FROM parking_spots ORDER BY parking_spot_id", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT parking_spot_id, is_occupied " +
+                                                    "FROM parking_spots " +
+                                                    "ORDER BY parking_spot_id", conn);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.HasRows && reader.Read())
@@ -60,16 +129,33 @@ namespace Capstone.DAO
             return parkingSpots;
         }
 
-        public ParkingSpot Update(ParkingSpot parkingSpotToCreate)
+        public ParkingSpot Update(ParkingSpot parkingSpotToUpdate)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("UPDATE parking_spots " +
+                                                    "SET is_occupied = @isoccupied", conn);
+                    cmd.Parameters.AddWithValue("@isoccupied", parkingSpotToUpdate.IsOccupied);
+                    cmd.ExecuteNonQuery();
+
+                    return Get(parkingSpotToUpdate.ParkingSpotId);
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
         }
 
         private ParkingSpot GetParkingSpotFromReader(SqlDataReader reader)
         {
             ParkingSpot ps = new ParkingSpot()
             {
-                ParkingSpotId = Convert.ToString(reader["parking_spot_id"]),
+                ParkingSpotId = Convert.ToInt32(reader["parking_spot_id"]),
                 IsOccupied = Convert.ToBoolean(reader["is_occupied"])
             };
 
