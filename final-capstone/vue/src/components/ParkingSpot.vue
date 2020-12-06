@@ -3,17 +3,16 @@
      
       <p> {{parkingSpot.parkingSpotId}} </p>
       
+      
       </div>
 </template>
 
 <script>
 
 
-export default {
-    
+export default {    
     name: 'parking-spot',
-    props: ['parkingSpot'],
-    
+    props: ['parkingSpot'],   
 
 }
 </script>

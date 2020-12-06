@@ -14,6 +14,7 @@
       <div>
         
         <parking-lot />
+        <p>where is this?</p>
         </div>
         
     </div>
