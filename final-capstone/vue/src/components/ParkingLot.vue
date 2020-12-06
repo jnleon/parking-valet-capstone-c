@@ -1,18 +1,30 @@
 <template>
   <div class="parking-lot-container">
-      <parking-spot v-for="parkingSpot in $store.state.parkingSpots" 
-      v-bind:key="parkingSpot.spotId" 
+      <parking-spot v-for="parkingSpot in parkingSpots" :key="parkingSpot.parkingSpotId" 
       v-bind:parkingSpot="parkingSpot"/>
+      
     </div>
 </template>
 
 <script>
-import ParkingSpot from '@/components/ParkingSpot.vue';
+import ParkingSpot from '@/services/ParkingLotService.js';
+
+
 export default {
-    components: {
-        ParkingSpot
+    data() {
+        return {
+        parkingSpots: []
+        }
     },
+    components: {ParkingSpot},
     name: 'parking-lot',
+    
+    created() {
+        
+        ParkingSpot.getParkingSpots().then((response) => {
+            this.parkingSpots = response.data
+        })
+    },
 }
 </script>
 

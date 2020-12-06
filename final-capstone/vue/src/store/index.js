@@ -20,58 +20,7 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    parkingSpots: [
-      {
-        spotName: "spot-1",
-        spotId: 1,
-        available: false
-      },
-      {
-        spotName: "spot-2",
-        spotId: 2,
-        available: true
-      },
-      {
-        spotName: "spot-3",
-        spotId: 3,
-        available: true
-      },
-      {
-        spotName: "spot-4",
-        spotId: 4,
-        available: false
-      },
-      {
-        spotName: "spot-5",
-        spotId: 5,
-        available: true
-      },
-      {
-        spotName: "spot-6",
-        spotId: 6,
-        available: false
-      },
-      {
-        spotName: "spot-7",
-        spotId: 7,
-        available: true
-      },
-      {
-        spotName: "spot-8",
-        spotId: 8,
-        available: true
-      },
-      {
-        spotName: "spot-9",
-        spotId: 9,
-        available: true
-      },
-      {
-        spotName: "spot-10",
-        spotId: 10,
-        available: true
-      },
-    ],
+    
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
