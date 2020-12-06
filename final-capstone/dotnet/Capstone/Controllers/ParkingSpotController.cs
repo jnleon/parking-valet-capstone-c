@@ -18,7 +18,7 @@ namespace Capstone.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllParkingSpots()
+        public IActionResult List()
         {
             List<ParkingSpot> parkingSpots = parkingSpotDAO.List();
 
@@ -31,6 +31,64 @@ namespace Capstone.Controllers
                 // Switch to 200 OK
                 return Ok(parkingSpots);
             }         
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            ParkingSpot ps = parkingSpotDAO.Get(id);
+
+            if (ps == null)
+            {
+                //return StatusCode(500);
+                return NoContent();
+            }
+            else
+            {
+                // Switch to 200 OK
+                return Ok(ps);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Create(ParkingSpot parkingSpotToCreate)
+        {
+            ParkingSpot createdParkingSpot = parkingSpotDAO.Create(parkingSpotToCreate);
+            if (createdParkingSpot == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return Created("", createdParkingSpot);
+            }
+        }
+
+        [HttpPut]
+        public IActionResult Update(ParkingSpot parkingSpotToUpdate)
+        {
+            ParkingSpot updatedParkingSpot = parkingSpotDAO.Update(parkingSpotToUpdate);
+            if (updatedParkingSpot == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return Ok(updatedParkingSpot);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(string id)
+        {
+            if (parkingSpotDAO.Delete(id))
+            {
+                return NoContent();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }

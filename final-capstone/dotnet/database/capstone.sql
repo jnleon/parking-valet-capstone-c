@@ -61,7 +61,7 @@ REFERENCES [dbo].[users] ([user_id])
 ALTER TABLE [dbo].[patrons] CHECK CONSTRAINT [FK_patrons_users]
 
 CREATE TABLE [dbo].[parking_spots](
-	[parking_spot_id] [varchar](10) NOT NULL,
+	[parking_spot_id] [int] IDENTITY(1,1) NOT NULL,
 	[is_occupied] [bit] NOT NULL,
  CONSTRAINT [PK_parking_spots] PRIMARY KEY CLUSTERED 
 (
@@ -85,7 +85,6 @@ CREATE TABLE [dbo].[vehicles](
 	[vehicle_model] [varchar](20) NOT NULL,
 	[vehicle_vin] [varchar](30) NOT NULL,
 	[vehicle_color] [varchar](20) NOT NULL,
-	[parking_status_id] [int] NOT NULL,
  CONSTRAINT [PK_vehicles] PRIMARY KEY CLUSTERED 
 (
 	[license_plate] ASC
@@ -101,36 +100,36 @@ CREATE TABLE [dbo].[valet_slips](
 	[ticket_id] [int] IDENTITY(1,1) NOT NULL,
 	[valet_id] [int] NOT NULL,
 	[license_plate] [varchar](10) NOT NULL,
-	[parking_spot_id] [varchar](10) NOT NULL,
-	[date] [date] NOT NULL,
-	[time_in] [time](7) NOT NULL,
+	[parking_spot_id] [int] NULL,
+	[date] [date] NULL,
+	[time_in] [time](7) NULL,
 	[time_out] [time](7) NULL,
 	[amount_owed] [money] NULL,
 	[parking_status_id] [int] NOT NULL,
- CONSTRAINT [PK_valet_slips] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_valet_slip] PRIMARY KEY CLUSTERED 
 (
 	[ticket_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 
-ALTER TABLE [dbo].[valet_slips]  WITH CHECK ADD  CONSTRAINT [FK_valet_slips_parking_spots] FOREIGN KEY([parking_spot_id])
+ALTER TABLE [dbo].[valet_slips]  WITH CHECK ADD  CONSTRAINT [FK_valet_slip_parking_spots] FOREIGN KEY([parking_spot_id])
 REFERENCES [dbo].[parking_spots] ([parking_spot_id])
 
-ALTER TABLE [dbo].[valet_slips] CHECK CONSTRAINT [FK_valet_slips_parking_spots]
+ALTER TABLE [dbo].[valet_slips] CHECK CONSTRAINT [FK_valet_slip_parking_spots]
 
-ALTER TABLE [dbo].[valet_slips]  WITH CHECK ADD  CONSTRAINT [FK_valet_slips_parking_statuses] FOREIGN KEY([parking_status_id])
+ALTER TABLE [dbo].[valet_slips]  WITH CHECK ADD  CONSTRAINT [FK_valet_slip_parking_statuses] FOREIGN KEY([parking_status_id])
 REFERENCES [dbo].[parking_statuses] ([parking_status_id])
 
-ALTER TABLE [dbo].[valet_slips] CHECK CONSTRAINT [FK_valet_slips_parking_statuses]
+ALTER TABLE [dbo].[valet_slips] CHECK CONSTRAINT [FK_valet_slip_parking_statuses]
 
-ALTER TABLE [dbo].[valet_slips]  WITH CHECK ADD  CONSTRAINT [FK_valet_slips_valets] FOREIGN KEY([valet_id])
+ALTER TABLE [dbo].[valet_slips]  WITH CHECK ADD  CONSTRAINT [FK_valet_slip_valets] FOREIGN KEY([valet_id])
 REFERENCES [dbo].[valets] ([valet_id])
 
-ALTER TABLE [dbo].[valet_slips] CHECK CONSTRAINT [FK_valet_slips_valets]
+ALTER TABLE [dbo].[valet_slips] CHECK CONSTRAINT [FK_valet_slip_valets]
 
-ALTER TABLE [dbo].[valet_slips]  WITH CHECK ADD  CONSTRAINT [FK_valet_slips_vehicles] FOREIGN KEY([license_plate])
+ALTER TABLE [dbo].[valet_slips]  WITH CHECK ADD  CONSTRAINT [FK_valet_slip_vehicles] FOREIGN KEY([license_plate])
 REFERENCES [dbo].[vehicles] ([license_plate])
 
-ALTER TABLE [dbo].[valet_slips] CHECK CONSTRAINT [FK_valet_slips_vehicles]
+ALTER TABLE [dbo].[valet_slips] CHECK CONSTRAINT [FK_valet_slip_vehicles]
 
 COMMIT TRANSACTION;

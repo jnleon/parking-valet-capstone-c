@@ -4,9 +4,7 @@ namespace Capstone.Models
 {
     public class ParkingSpot
     {
-        [Required]
-        [MaxLength(10, ErrorMessage ="Max length for parking spot id is 10.")]
-        public string ParkingSpotId { get; set; }
+        public int ParkingSpotId { get; set; }
         [Required]
         public bool IsOccupied { get; set; }
 
@@ -15,9 +13,9 @@ namespace Capstone.Models
 
         }
 
-        public ParkingSpot(string parkingSpotId, bool isOccupied)
+        public ParkingSpot(bool isOccupied)
         {
-            ParkingSpotId = parkingSpotId;
+            //ParkingSpotId = parkingSpotId;
             IsOccupied = isOccupied;
         }
     }
