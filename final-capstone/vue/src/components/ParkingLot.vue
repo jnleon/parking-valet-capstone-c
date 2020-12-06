@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import ParkingSpot from '../services/ParkingLotService.js';
-
+import ParkingSpot from '../components/ParkingSpot.vue'
+import ParkingService from '../services/ParkingLotService.js';
 
 
 export default {
@@ -18,11 +18,11 @@ export default {
         theParkingSpots: []
         }
     },
-    components: {ParkingSpot},
+    components: {ParkingSpot, ParkingService},
     name: 'parking-lot',
     methods: {
         getSpotInfo () {
-            ParkingSpot.getParkingSpots().then((response) => {
+            ParkingService.getParkingSpots().then((response) => {
             this.theParkingSpots = response.data
         })
         }
