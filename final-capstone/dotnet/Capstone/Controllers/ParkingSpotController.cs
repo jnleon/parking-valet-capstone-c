@@ -56,7 +56,7 @@ namespace Capstone.Controllers
         // https://localhost:44315/parkingspot/
         
         [HttpPost]
-        [Authorize(Roles = "admin, patron")]
+        [Authorize(Roles = "admin, owner")]
         public IActionResult Create(ParkingSpot parkingSpotToCreate)
         {
             ParkingSpot createdParkingSpot = parkingSpotDAO.Create(parkingSpotToCreate);
@@ -72,7 +72,7 @@ namespace Capstone.Controllers
 
         // https://localhost:44315/parkingspot/1
         [HttpPut("{id}")]
-        [Authorize(Roles = "admin, patron")]
+        [Authorize(Roles = "admin, owner, valet")]
         public IActionResult Update(int id, ParkingSpot parkingSpotToUpdate)
         {
             ParkingSpot updatedParkingSpot = parkingSpotDAO.Update(id, parkingSpotToUpdate);
@@ -88,7 +88,7 @@ namespace Capstone.Controllers
 
         // https://localhost:44315/parkingspot/1
         [HttpDelete("{id}")]
-        [Authorize(Roles = "admin, patron")]
+        [Authorize(Roles = "admin, owner")]
         public IActionResult Delete(int id)
         {
             if (parkingSpotDAO.Delete(id))
