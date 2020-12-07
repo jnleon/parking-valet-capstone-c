@@ -4,7 +4,6 @@ namespace Capstone.Models
 {
     public class Valet
     {
-        [Required]
         public int ValetId { get; set; }
         [Required]
         public int UserId { get; set; }
