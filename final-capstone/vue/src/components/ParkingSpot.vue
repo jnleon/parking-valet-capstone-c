@@ -19,11 +19,13 @@ export default {
 
 <style>
 .spots {
-    border: 2px solid black;
+    border: 2px solid orange;
     border-radius: 10px;
     width: 10%;
     height: 40%;
     margin: 4%;
+    color: white;
+    text-align: center;
 }
 
 .available {

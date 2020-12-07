@@ -1,15 +1,27 @@
 <template>
   <div class="home">
     <div id="menu"> 
-      <div id="lot-info">
-        <h2>Lot Info</h2>
-        <br>Street Address
-        <br>City, State, Zip
-        <br>Email
-        <br>Phone
+      <div id="simpleBar">
+       <p> full service Valet </p>
         </div>
-    <div id="pricing">
-      <h1>$5 AN HOUR ALL DAY EVERY DAY</h1>
+        <div id="lotInfo">
+          <div class="svcBarName">
+      <h1>Tech Elevator</h1>
+      <h2>Cincinnati</h2>
+      <p>1776 Mentor Ave Suite 355</p>
+      <p>Cincinnati OH 45212</p>
+          </div>
+          <div class="svcContacts ">
+      <p>✉ hello@techelevator.com</p>
+       <p><i class="fa">&#xf095;</i> (877) 606-3203</p>
+       
+         </div>
+        </div>
+        
+    <div id="pricingSection">
+     
+        <div>
+    <marquee font style="bold" scrolldelay="0.4"><font size="5" face="Jua" family='Jua'/><font color="#BC8F8F"/>$5 AN HOUR ALL DAY EVERY DAY</marquee></div>   
       </div>
       <div>
         <parking-lot />
@@ -33,12 +45,73 @@ export default {
 </script>
 
 <style >
-#lot-info{
-  padding: 2%;
-  background-color: white;
-  border-radius: 1rem;
-  border:solid 0.6vh white
 
+marquee{
+  font-family: 'Jua';
+  font-size: 6vh;
+}
+#simpleBar{
+  display: flex;
+  background-color: orange;
+  font-family: 'Jua';
+  font-weight: 900;
+  text-transform: uppercase;
+  justify-content: center;
+  padding-top: 1.3%;
+}
+
+
+#lotInfo{
+  background-color: rgb(236, 234, 234);
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+   "SvcBarInfo SvcBarContact";
+  padding:3%;
+  grid-gap: 5vh;
+}
+
+#pricingSection{
+  display: block;
+  background-color: orange;
+  padding:3%;
+}
+
+.svcBarName{
+  grid-area: SvcBarInfo;
+
+}
+
+.svcContacts{
+  grid-area: SvcBarContact;
+}
+
+.svcContacts p{
+    margin-top: 1%;
+  margin-bottom: 1%;
+  font-family: "Jua", sans-serif;
+  font-weight: 500;
+  text-align: right;
+}
+
+.svcContacts img{
+max-width: 50%;
+align-items: right;
+}
+
+.svcBarName h1,h2{
+  margin-top: 1%;
+  margin-bottom: 1%;
+  text-transform: uppercase;
+  font-family: "Jua", sans-serif;
+  font-weight: 900;
+}
+
+.svcBarName P{
+  margin-top: 0%;
+  margin-bottom: 0%;
+  font-family: "Jua", sans-serif;
+  font-weight: 300;
 }
 
 .home{
@@ -49,13 +122,13 @@ grid-template-areas:
 grid-gap:40px;
 height:fit-content;
 margin: 0px 40px;
+
 }
 
 #menu {
-  background-color: rgb(240, 240, 240);
+  background-color: rgb(240, re, 240);
   grid-area: menu;
-  padding: 4%;
-  border-radius: .5rem;
+  background-color:  rgb(236, 234, 234);
 }
 
 #map {

@@ -1,4 +1,4 @@
-<template>
+<!--<template>
   <div id="app">
       <div id="headerBar">
         <header>
@@ -14,9 +14,7 @@
               <router-link v-bind:to="{name: 'register'}">
             <a href="#">Register</a> </router-link></li>
       </ul>
-    <!--\\  <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
-     <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>-->
-    
+
     
 
     </div>
@@ -126,5 +124,5 @@ ul li a:hover {
 
 
 
-
+-->
 
