@@ -15,7 +15,6 @@ namespace Capstone.Models
 
         public ParkingSpot(bool isOccupied)
         {
-            //ParkingSpotId = parkingSpotId;
             IsOccupied = isOccupied;
         }
     }

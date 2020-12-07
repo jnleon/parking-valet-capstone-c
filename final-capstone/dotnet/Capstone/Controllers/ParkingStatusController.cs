@@ -9,6 +9,7 @@ namespace Capstone.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize(Roles = "admin, patron")]
     public class ParkingStatusController : ControllerBase
     {
         private readonly IParkingStatusDAO parkingStatusDAO;
