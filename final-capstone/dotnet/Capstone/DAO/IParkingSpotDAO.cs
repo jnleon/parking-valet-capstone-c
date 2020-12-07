@@ -9,7 +9,7 @@ namespace Capstone.DAO
         ParkingSpot Get(int id);
         List<ParkingSpot> List();
         ParkingSpot Create(ParkingSpot parkingSpotToCreate);
-        bool Delete(string idToDelete);
-        ParkingSpot Update(ParkingSpot parkingSpotToUpdate);
+        bool Delete(int idToDelete);
+        ParkingSpot Update(int idToUpdate, ParkingSpot parkingSpotToUpdate);
     }
 }

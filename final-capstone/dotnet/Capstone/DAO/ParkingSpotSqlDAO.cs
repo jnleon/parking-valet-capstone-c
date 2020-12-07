@@ -41,7 +41,7 @@ namespace Capstone.DAO
             }
         }
 
-        public bool Delete(string idToDelete)
+        public bool Delete(int idToDelete)
         {
             try
             {
@@ -129,7 +129,7 @@ namespace Capstone.DAO
             return parkingSpots;
         }
 
-        public ParkingSpot Update(ParkingSpot parkingSpotToUpdate)
+        public ParkingSpot Update(int idToUpdate, ParkingSpot parkingSpotToUpdate)
         {
             try
             {
@@ -138,7 +138,9 @@ namespace Capstone.DAO
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand("UPDATE parking_spots " +
-                                                    "SET is_occupied = @isoccupied", conn);
+                                                    "SET is_occupied = @isoccupied" +
+                                                    "WHERE parking_spot_id = @parkingspotid", conn);
+                    cmd.Parameters.AddWithValue("@parkingspotid", parkingSpotToUpdate.ParkingSpotId);
                     cmd.Parameters.AddWithValue("@isoccupied", parkingSpotToUpdate.IsOccupied);
                     cmd.ExecuteNonQuery();
 

@@ -64,10 +64,10 @@ namespace Capstone.Controllers
             }
         }
 
-        [HttpPut]
-        public IActionResult Update(ParkingSpot parkingSpotToUpdate)
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, ParkingSpot parkingSpotToUpdate)
         {
-            ParkingSpot updatedParkingSpot = parkingSpotDAO.Update(parkingSpotToUpdate);
+            ParkingSpot updatedParkingSpot = parkingSpotDAO.Update(id, parkingSpotToUpdate);
             if (updatedParkingSpot == null)
             {
                 return BadRequest();
@@ -79,7 +79,7 @@ namespace Capstone.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(string id)
+        public IActionResult Delete(int id)
         {
             if (parkingSpotDAO.Delete(id))
             {
