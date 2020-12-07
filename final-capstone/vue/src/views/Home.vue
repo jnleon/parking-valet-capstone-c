@@ -29,7 +29,7 @@
         <parking-lot />
       </div>
       <div id="palceholderFunnyPhoto">
-        <img id="ganggang" src="../img/croppedGang.png" />
+        <img id="ganggang" src="../img/jjeb.png" />
       </div>
     </div>
 
