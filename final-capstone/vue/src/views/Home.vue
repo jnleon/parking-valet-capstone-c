@@ -33,6 +33,13 @@ export default {
 </script>
 
 <style >
+#lot-info{
+  padding: 2%;
+  background-color: white;
+  border-radius: 1rem;
+  border:solid 0.6vh white
+
+}
 
 .home{
 display:grid;
@@ -45,12 +52,17 @@ margin: 0px 40px;
 }
 
 #menu {
-  background-color: grey;
+  background-color: rgb(240, 240, 240);
   grid-area: menu;
+  padding: 4%;
+  border-radius: .5rem;
 }
 
 #map {
   grid-area: map;
+  padding: 0.5%;
+  background-color: orange;
+  border-radius: .5rem;
 
 }
 
