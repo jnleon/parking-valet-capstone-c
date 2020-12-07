@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Capstone.DAO
 {
@@ -79,8 +77,7 @@ namespace Capstone.DAO
 
                     SqlCommand cmd = new SqlCommand("SELECT parking_spot_id, is_occupied " +
                                                     "FROM parking_spots " +
-                                                    "WHERE parking_spot_id = @parkingspotid " +
-                                                    "ORDER BY parking_spot_id", conn);
+                                                    "WHERE parking_spot_id = @parkingspotid", conn);
                     cmd.Parameters.AddWithValue("@parkingspotid", id);
                     SqlDataReader reader = cmd.ExecuteReader();
 

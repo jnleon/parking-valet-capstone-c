@@ -3,6 +3,7 @@ using Capstone.DAO;
 using Capstone.Models;
 using Capstone.Security;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Capstone.Controllers
 {
@@ -17,6 +18,7 @@ namespace Capstone.Controllers
             parkingSpotDAO = _parkingSpotDAO;
         }
 
+        // https://localhost:44315/parkingspot/
         [HttpGet]
         public IActionResult List()
         {
@@ -33,6 +35,7 @@ namespace Capstone.Controllers
             }         
         }
 
+        // https://localhost:44315/parkingspot/1
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -50,7 +53,10 @@ namespace Capstone.Controllers
             }
         }
 
+        // https://localhost:44315/parkingspot/
+        
         [HttpPost]
+        [Authorize(Roles = "admin, patron")]
         public IActionResult Create(ParkingSpot parkingSpotToCreate)
         {
             ParkingSpot createdParkingSpot = parkingSpotDAO.Create(parkingSpotToCreate);
@@ -64,7 +70,9 @@ namespace Capstone.Controllers
             }
         }
 
+        // https://localhost:44315/parkingspot/1
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin, patron")]
         public IActionResult Update(int id, ParkingSpot parkingSpotToUpdate)
         {
             ParkingSpot updatedParkingSpot = parkingSpotDAO.Update(id, parkingSpotToUpdate);
@@ -78,7 +86,9 @@ namespace Capstone.Controllers
             }
         }
 
+        // https://localhost:44315/parkingspot/1
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin, patron")]
         public IActionResult Delete(int id)
         {
             if (parkingSpotDAO.Delete(id))
