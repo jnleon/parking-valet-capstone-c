@@ -32,6 +32,15 @@
   --a-color-hover:white;
 }
 
+ul li:hover {
+  transition: var(--transition-speed);
+  background-color: var(--li-color-hover);
+}
+
+ul li a:hover {
+  transition: var(--transition-speed);
+  color: var(--a-color-hover);
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 

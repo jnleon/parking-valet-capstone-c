@@ -11,89 +11,10 @@
         <b-collapse id="nav-collapse" is-nav>
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-            <b-dropdown
-              id="dropdown-form"
-              right
-              text="Register"
-              ref="dropdown"
-              class="m-2"
-            >
-              <b-dropdown-form>
-                <b-form-group
-                  label="Email"
-                  label-for="dropdown-form-email"
-                  @submit.stop.prevent
-                >
-                  <b-form-input
-                    id="dropdown-form-email"
-                    size="sm"
-                    placeholder="email@example.com"
-                  ></b-form-input>
-                </b-form-group>
+           
+            <registration-button/>
 
-                <b-form-group
-                  label="Password"
-                  label-for="dropdown-form-password"
-                >
-                  <b-form-input
-                    id="dropdown-form-password"
-                    type="password"
-                    size="sm"
-                    placeholder="Password"
-                  ></b-form-input>
-
-                  <b-form-input
-                    id="dropdown-form-confirmPassword"
-                    type="password"
-                    size="sm"
-                    placeholder="Confirm Password"
-                  ></b-form-input>
-                </b-form-group>
-
-                <b-button variant="primary" size="sm" @click="onClick"
-                  >Create Account</b-button
-                >
-              </b-dropdown-form>
-            </b-dropdown>
-
-            <b-dropdown
-              id="dropdown-form"
-              right
-              text="Login"
-              ref="dropdown"
-              class="m-2"
-            >
-              <b-dropdown-form size="lg">
-                <b-form-group
-                  label="Email"
-                  label-for="dropdown-form-email"
-                  @submit.stop.prevent
-                >
-                  <b-form-input
-                    id="dropdown-form-email"
-                    size="sm"
-                    placeholder="email@example.com"
-                  ></b-form-input>
-                </b-form-group>
-
-                <b-form-group
-                  label="Password"
-                  label-for="dropdown-form-password"
-                >
-                  <b-form-input
-                    id="dropdown-form-password"
-                    type="password"
-                    size="sm"
-                    placeholder="Password"
-                  ></b-form-input>
-                </b-form-group>
-
-                <b-button variant="primary" size="sm" @click="onClick"
-                  >Sign In</b-button
-                >
-              </b-dropdown-form>
-            </b-dropdown>
-
+           <login-button/>
             <!-- Using 'button-content' slot -->
           </b-navbar-nav>
         </b-collapse>
@@ -104,20 +25,32 @@
   </div>
 </template>
 
+<script>
+import RegistrationButton from "@/components/RegistrationButton.vue";
+import LoginButton from "@/components/LoginButton.vue";
+
+export default {
+ 
+  components: {
+    RegistrationButton, LoginButton
+  },
+};
+</script>
+
+
 <style >
+
 .navbar-light {
-  background-color: orange !important;
+  background-color: #ffa500 !important;
 }
 
 .dropdown-menu {
-  min-width: 12.2rem !important;
+  min-width: 12rem !important;
 }
 
 :root {
   --li-color: white;
-  --li-color-hover: rgb(255, 145, 0);
   --transition-speed: 0.6s;
-  --a-color: red;
   --a-color-hover: white;
 }
 
@@ -148,13 +81,4 @@
   display: inline-block;
 }
 
-ul li:hover {
-  transition: var(--transition-speed);
-  background-color: var(--li-color-hover);
-}
-
-ul li a:hover {
-  transition: var(--transition-speed);
-  color: var(--a-color-hover);
-}
 </style>
