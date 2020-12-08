@@ -6,8 +6,6 @@
     ref="dropdown"
     class="m-2"
   >
-      <b-alert show variant="success" v-if="registrationCorrect" >User Registered</b-alert>
-    <b-alert style="text-align:center;" show variant="danger" v-if="registrationErrors">{{registrationErrorMsg}}</b-alert>
     <b-dropdown-form @submit.prevent="register">
       <b-form-group label="Username" label-for="dropdown-form-username">
         <b-form-input
@@ -20,6 +18,8 @@
         ></b-form-input>
       </b-form-group>
 
+
+
       <b-form-group label="Password" label-for="dropdown-form-password">
         <b-form-input
           id="dropdown-form-password"
@@ -30,6 +30,7 @@
           required
         ></b-form-input>
 
+
         <b-form-input
           id="dropdown-form-confirmPassword"
           type="password"
@@ -39,6 +40,53 @@
           required
         ></b-form-input>
       </b-form-group>
+
+
+ <b-form-group label="First Name" label-for="dropdown-form-username">
+        <b-form-input
+          id="dropdown-form-username"
+          size="sm"
+          placeholder="firstname"
+          v-model="user.firstname"
+          required
+        ></b-form-input>
+      </b-form-group>
+
+       <b-form-group label="Last Name" label-for="dropdown-form-username">
+        <b-form-input
+          id="dropdown-form-username"
+          size="sm"
+          placeholder="lastname"
+          v-model="user.lastname"
+          required
+          autofocus
+        ></b-form-input>
+      </b-form-group>
+
+
+
+    <b-form-group label="Email" label-for="dropdown-form-username">
+        <b-form-input
+          id="dropdown-form-username"
+          size="sm"
+          placeholder="email@example.com"
+          v-model="user.email"
+          required
+          autofocus
+        ></b-form-input>
+      </b-form-group>
+
+  <b-form-group label="Phone Number" label-for="dropdown-form-username">
+        <b-form-input
+          id="dropdown-form-username"
+          size="sm"
+          placeholder="352-123-1234"
+          v-model="user.phonenumber"
+          required
+          autofocus
+        ></b-form-input>
+      </b-form-group>
+
 
       <b-button variant="primary" size="sm" type="submit"
         >Create Account</b-button
@@ -58,7 +106,11 @@ export default {
         username: "",
         password: "",
         confirmPassword: "",
-        role: "user",
+        firstname:"",
+        lastname:"",
+        email:"",
+        phonenumber:"",
+        role: "patron",
       },
       registrationErrors: false,
       registrationCorrect:false,

@@ -11,9 +11,9 @@
         <b-collapse id="nav-collapse" is-nav>
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-            <registration-button/>
+            <registration-button  v-if="($store.state.token === '')"/>
 
-            <login-button/>
+            <login-button  v-if="($store.state.token === '')"/>
             <!-- Using 'button-content' slot -->
 
             <b-dropdown
@@ -21,7 +21,7 @@
               text="Logout"
               id="logoutButtonDPD"  
               min-width="12rem"
-             v-if="(this.$store.state.user == {})"
+               v-if="($store.state.token !== '')"
             >
               <b-dropdown-header id="dropdown-header-label">
                 Are you sure?
