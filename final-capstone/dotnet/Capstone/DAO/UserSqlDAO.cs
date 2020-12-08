@@ -45,7 +45,7 @@ namespace Capstone.DAO
         }
 
 
-        public User AddUser(string username, string password, string role)
+        public User AddUser(string username, string password, string role, string firstName, string lastName, string phoneNumber, string emailAddress)
         {
             IPasswordHasher passwordHasher = new PasswordHasher();
             PasswordHash hash = passwordHasher.ComputeHash(password);
@@ -61,6 +61,18 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@password_hash", hash.Password);
                     cmd.Parameters.AddWithValue("@salt", hash.Salt);
                     cmd.Parameters.AddWithValue("@user_role", role);
+                    cmd.ExecuteNonQuery();
+
+                    cmd = new SqlCommand("SELECT @@IDENTITY", conn);
+                    int newId = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    cmd = new SqlCommand("INSERT INTO patrons (user_id, first_name, last_name, phone_number, email_address) " +
+                                         "VALUES (@user_id, @first_name, @last_name, @phone_number, @email_address)", conn);
+                    cmd.Parameters.AddWithValue("@user_id", newId);
+                    cmd.Parameters.AddWithValue("@first_name", firstName);
+                    cmd.Parameters.AddWithValue("@last_name", lastName);
+                    cmd.Parameters.AddWithValue("@phone_number", phoneNumber);
+                    cmd.Parameters.AddWithValue("@email_address", emailAddress);
                     cmd.ExecuteNonQuery();
                 }
             }
