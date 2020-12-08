@@ -25,9 +25,19 @@
           >
         </div>
       </div>
-      <div>
+
+      <div id="home-parking-lot-container">
+        <h3 class="container-text">Available Lots</h3>
         <parking-lot />
+        <div class="container-text">
+          <p>Legend</p>
+          <ul>
+            <li>Available <div id="available-box">&#9744;</div></li>
+            <li>Occupied <div id="occupied-box">&#9744;</div></li>
+          </ul>
+        </div>
       </div>
+
       <div id="palceholderFunnyPhoto">
         <img id="ganggang" src="../img/jjeb.png" />
       </div>
@@ -57,6 +67,27 @@ export default {
 </script>
 
 <style >
+.container-text {
+  margin-left: 10%;
+}
+.container-text li {
+  list-style: none;
+}
+#available-box {  
+  background-color: green;
+  color: green;
+  width: 20px;
+  
+}
+#occupied-box {
+  background-color: red;
+  color: red;
+  width: 20px;
+}
+#home-parking-lot-container{
+  color: white;
+  background-image: url("../img/p-lot-background.jpg"); 
+}
 marquee {
   font-family: "Jua";
   font-size: 6vh;
