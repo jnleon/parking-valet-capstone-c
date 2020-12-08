@@ -9,6 +9,7 @@ namespace Capstone.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize(Roles = "admin, valet, owner")]
     public class PatronController : ControllerBase
     {
         private readonly IPatronDAO patronDAO;
@@ -18,7 +19,7 @@ namespace Capstone.Controllers
             patronDAO = _patronDAO;
         }
 
-        // https://localhost:44315/parkingspot/1
+        // https://localhost:44315/patron/1
         [HttpGet("{id}")]
         public IActionResult GetByUserId(int id)
         {

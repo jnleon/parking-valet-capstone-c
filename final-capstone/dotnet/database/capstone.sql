@@ -47,7 +47,7 @@ CREATE TABLE [dbo].[patrons](
 	[user_id] [int] NOT NULL,
 	[first_name] [varchar](50) NOT NULL,
 	[last_name] [varchar](50) NOT NULL,
-	[phone_number] [varchar](10) NOT NULL,
+	[phone_number] [varchar](15) NOT NULL,
 	[email_address] [varchar](50) NOT NULL,
  CONSTRAINT [PK_patrons] PRIMARY KEY CLUSTERED 
 (
