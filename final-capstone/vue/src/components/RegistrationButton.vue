@@ -6,6 +6,8 @@
     ref="dropdown"
     class="m-2"
   >
+      <b-alert show variant="success" v-if="registrationCorrect" >User Registered</b-alert>
+    <b-alert style="text-align:center;" show variant="danger" v-if="registrationErrors">{{registrationErrorMsg}}</b-alert>
     <b-dropdown-form @submit.prevent="register">
       <b-form-group label="Username" label-for="dropdown-form-username">
         <b-form-input
@@ -59,6 +61,7 @@ export default {
         role: "user",
       },
       registrationErrors: false,
+      registrationCorrect:false,
       registrationErrorMsg: "There were problems registering this user.",
     };
   },
@@ -68,6 +71,7 @@ export default {
         this.registrationErrors = true;
         this.registrationErrorMsg = "Password & Confirm Password do not match.";
       } else {
+         
         authService
           .register(this.user)
           .then((response) => {
@@ -77,6 +81,8 @@ export default {
                 query: { registration: "success" },
               }); 
               this.user={};
+              this.registrationCorrect =true;
+              this.registrationErrors =false;
             }
           })
           .catch((error) => {

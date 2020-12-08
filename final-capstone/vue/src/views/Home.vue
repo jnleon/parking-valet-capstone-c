@@ -20,7 +20,7 @@
       <div id="pricingSection">
         <div>
           <marquee font style="bold" scrolldelay="0.4"
-            ><font size="5" face="Jua" family="Jua" /><font color="#BC8F8F" />$5
+            ><font size="5" face="Jua" family="Jua" /><font color="#BC8F8F" />$5 PARKING
             AN HOUR ALL DAY EVERY DAY!</marquee
           >
         </div>

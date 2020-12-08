@@ -11,11 +11,29 @@
         <b-collapse id="nav-collapse" is-nav>
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-           
             <registration-button/>
 
-           <login-button/>
+            <login-button/>
             <!-- Using 'button-content' slot -->
+
+            <b-dropdown
+              right
+              text="Logout"
+              id="logoutButtonDPD"  
+              min-width="12rem"
+             v-if="(this.$store.state.user == {})"
+            >
+              <b-dropdown-header id="dropdown-header-label">
+                Are you sure?
+              </b-dropdown-header>
+              <b-dropdown-divider></b-dropdown-divider>
+              <b-dropdown-item
+                v-bind:to="{ name: 'logout' }"
+                href="#"
+               
+                >Logout</b-dropdown-item
+              >
+            </b-dropdown>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
@@ -30,9 +48,9 @@ import RegistrationButton from "@/components/RegistrationButton.vue";
 import LoginButton from "@/components/LoginButton.vue";
 
 export default {
- 
   components: {
-    RegistrationButton, LoginButton
+    RegistrationButton,
+    LoginButton,
   },
 };
 </script>
@@ -80,5 +98,4 @@ export default {
   padding-left: 5%;
   display: inline-block;
 }
-
 </style>
