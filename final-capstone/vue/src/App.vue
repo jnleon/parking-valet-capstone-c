@@ -38,7 +38,6 @@
         </b-collapse>
       </b-navbar>
     </div>
-
     <router-view class="routerV" />
   </div>
 </template>
