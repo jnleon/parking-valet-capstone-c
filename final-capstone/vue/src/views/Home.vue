@@ -4,29 +4,7 @@
       <div id="simpleBar">
         <p>full service Valet</p>
       </div>
-      <div id="lotInfo">
-        <div class="svcBarName">
-          <h1>Tech Elevator</h1>
-          <h2>Cincinnati</h2>
-          <p>
-            1776 Mentor Ave Suite 355           
-          </p>
-          <p>   
-          <b-icon icon="geo-fill">
-            </b-icon>Cincinnati OH 45212 </p>
-        </div>
-        <div class="svcContacts">
-          <p>       
-            <p> <b-icon icon="envelope
-
-          "/>
-        hello@techelevator.com</p>
-          <p> <b-icon icon="telephone-fill
-          ">
-          </b-icon> (877) 606-3203</p>
-        </div>
-      </div>
-
+   <info-component/>
       <div id="pricingSection">
         <div>
           <marquee font style="bold" scrolldelay="0.4"
@@ -35,12 +13,8 @@
           >
         </div>
       </div>
-
       <div id="home-parking-lot-container">
-        
-        <h3 class="container-text">Available Spots</h3>
-        <parking-lot />
-       
+      <parking-lot />
       </div>
 
       <div id="palceholderFunnyPhoto">
@@ -64,11 +38,10 @@
 
 <script>
 import ParkingLot from "../components/ParkingLot.vue";
-
+import InfoComponent from '../components/InfoComponent.vue';
 export default {
-  components: { ParkingLot },
+  components: { ParkingLot, InfoComponent },
   name: "home",
-
   
 };
 </script>

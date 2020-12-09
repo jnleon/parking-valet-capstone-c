@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h3 class="container-text">Available Spots</h3>
       <b-alert id="alert-full" style="text-align:center;" show variant="danger" v-if="isFull">Parking Lot Full!</b-alert>
        <div v-if="!isFull">
         <div class="parking-lot-container">
