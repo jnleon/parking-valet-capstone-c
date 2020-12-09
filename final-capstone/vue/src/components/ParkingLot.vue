@@ -1,9 +1,21 @@
 <template>
   <div>
-      <b-alert style="text-align:center;" show variant="danger" v-if="isFull">Parking Lot Full!</b-alert>
-        <div v-if="!isFull" class="parking-lot-container">
+      <b-alert id="alert-full" style="text-align:center;" show variant="danger" v-if="isFull">Parking Lot Full!</b-alert>
+       <div v-if="!isFull">
+        <div class="parking-lot-container">
             <parking-spot v-for="parkingSpot in parkingSpots" :key="parkingSpot.parkingSpotId" 
                 v-bind:parking-spot="parkingSpot"/>         
+        </div>
+         <div class="container-text">
+          <ul>
+            <li> <span class="hr2">Available&nbsp;</span> 
+                <b-icon class="hr4" icon="circle-fill"/>
+              </li>
+            <li> <span class="hr2">&nbsp;&nbsp;Occupied&nbsp;</span> 
+                <b-icon class="hr5" icon="circle-fill"/> </li>
+                
+          </ul>
+        </div>
         </div>
     </div>
 </template>
@@ -42,6 +54,12 @@ export default {
 </script>
 
 <style>
+#alert-full{
+    font-size: 2.5rem !important;
+    font-weight:800 !important;
+    letter-spacing: 1px !important;
+    margin-bottom:4% ;
+}
 #p-lot-container-header {
     color: white;
     background-image: url("../img/p-lot-background.jpg");
@@ -56,7 +74,6 @@ export default {
     justify-content: space-evenly;
     flex-wrap: wrap;
     align-items: center;
-    
     
 }
 </style>

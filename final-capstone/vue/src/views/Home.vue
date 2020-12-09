@@ -8,12 +8,22 @@
         <div class="svcBarName">
           <h1>Tech Elevator</h1>
           <h2>Cincinnati</h2>
-          <p>1776 Mentor Ave Suite 355</p>
-          <p>Cincinnati OH 45212</p>
+          <p>
+            1776 Mentor Ave Suite 355           
+          </p>
+          <p>   
+          <b-icon icon="geo-fill">
+            </b-icon>Cincinnati OH 45212 </p>
         </div>
         <div class="svcContacts">
-          <p>✉ hello@techelevator.com</p>
-          <p><i class="fa">&#xf095;</i> (877) 606-3203</p>
+          <p>       
+            <p> <b-icon icon="envelope
+
+          "/>
+        hello@techelevator.com</p>
+          <p> <b-icon icon="telephone-fill
+          ">
+          </b-icon> (877) 606-3203</p>
         </div>
       </div>
 
@@ -28,15 +38,9 @@
 
       <div id="home-parking-lot-container">
         
-        <h3 class="container-text">Available Lots</h3>
+        <h3 class="container-text">Available Spots</h3>
         <parking-lot />
-        <div class="container-text">
-          <p>Legend</p>
-          <ul>
-            <li>Available <div id="available-box">&#9744;</div></li>
-            <li>Occupied <div id="occupied-box">&#9744;</div></li>
-          </ul>
-        </div>
+       
       </div>
 
       <div id="palceholderFunnyPhoto">
@@ -70,12 +74,21 @@ export default {
 </script>
 
 <style >
-.container-text {
-  margin-left: 10%;
+.hr4{
+  color:green;
 }
+
+.hr5{
+  color:red;
+}
+
 .container-text li {
   list-style: none;
-}
+  text-align: left;
+  font-size: 90%;
+  color:rgb(230, 230, 230);
+  padding-right: 50%;
+}s
 #available-box {  
   background-color: green;
   color: green;
@@ -90,6 +103,12 @@ export default {
 #home-parking-lot-container{
   color: white;
   background-image: url("../img/p-lot-background.jpg"); 
+  padding-top: 3%;
+  padding-bottom: 0.05%;
+  font-family: 'Jua';
+  text-transform: uppercase;
+  text-align: center;
+
 }
 marquee {
   font-family: "Jua";
@@ -111,12 +130,13 @@ marquee {
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "SvcBarInfo SvcBarContact";
   padding: 3%;
-  grid-gap: 5vh;
 }
 
 #palceholderFunnyPhoto {
   display: flex;
   padding: 4%;
+  background-color: rgb(236, 234, 234);
+/*rgb(46, 83, 46)*/
 }
 #ganggang {
   align-items: center;
@@ -194,14 +214,5 @@ div > iframe {
   max-height: 100%;
 }
 
-#spots {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-areas:
-    "spot-1 spot-2 spot-3 spot-4 spot-5"
-    "spot-6 spot-7 spot-8 spot-9 spot-10";
-  grid-gap: 60px;
-  height: fit-content;
-  margin: 0px 40px;
-}
+
 </style>

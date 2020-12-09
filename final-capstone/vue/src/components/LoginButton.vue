@@ -4,6 +4,7 @@
      
         <b-alert style="text-align:center;" show variant="danger" v-if="invalidCredentials">Invalid username and password!</b-alert>
       <b-form-group label="Username" label-for="dropdown-form-username">
+        
         <b-form-input
           id="dropdown-form-username"
           size="sm"
@@ -14,6 +15,7 @@
       </b-form-group>
 
       <b-form-group label="Password" label-for="dropdown-form-password">
+        
         <b-form-input
           id="dropdown-form-password"
           type="password"
