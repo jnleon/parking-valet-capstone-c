@@ -17,7 +17,11 @@
             </div>
       
 <div id="valetTopRightDiv">
-            <img id="ganggang" src="@/img/jjeb.png" />
+            <!--<img id="ganggang" src="@/img/jjeb.png" />-->
+            <div>
+              <check-in-car /> 
+            </div>
+            
 </div>
    
    <!-- <div id="valetBottomRightDiv">-->
@@ -32,9 +36,10 @@
 
 
 import ParkingLot from "../components/ParkingLot.vue";
+import CheckInCar from "../components/CheckInCar.vue";
 
 export default {
- components: { ParkingLot },
+ components: { ParkingLot, CheckInCar },
 }
 </script>
 
