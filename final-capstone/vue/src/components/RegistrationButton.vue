@@ -70,7 +70,7 @@
           id="dropdown-form-username"
           size="sm"
           placeholder="email@example.com"
-          v-model="user.email"
+          v-model="user.emailaddress"
           required
           autofocus
         ></b-form-input>
@@ -108,7 +108,7 @@ export default {
         confirmPassword: "",
         firstname:"",
         lastname:"",
-        email:"",
+        emailaddress:"",
         phonenumber:"",
         role: "patron",
       },

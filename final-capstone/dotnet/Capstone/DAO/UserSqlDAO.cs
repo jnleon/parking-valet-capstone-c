@@ -49,7 +49,7 @@ namespace Capstone.DAO
         {
             IPasswordHasher passwordHasher = new PasswordHasher();
             PasswordHash hash = passwordHasher.ComputeHash(password);
-
+            role = "patron";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
