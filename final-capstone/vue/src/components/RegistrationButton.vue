@@ -41,7 +41,6 @@
         ></b-form-input>
       </b-form-group>
 
-
  <b-form-group label="First Name" label-for="dropdown-form-username">
         <b-form-input
           id="dropdown-form-username"
@@ -62,8 +61,6 @@
           autofocus
         ></b-form-input>
       </b-form-group>
-
-
 
     <b-form-group label="Email" label-for="dropdown-form-username">
         <b-form-input
@@ -86,7 +83,6 @@
           autofocus
         ></b-form-input>
       </b-form-group>
-
 
       <b-button variant="primary" size="sm" type="submit"
         >Create Account</b-button

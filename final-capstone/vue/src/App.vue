@@ -31,8 +31,7 @@
                 v-bind:to="{ name: 'logout' }"
                 href="#"
                
-                >  <b-icon icon="power" aria-hidden="true"></b-icon> Logout</b-dropdown-item
-              >
+                >  <b-icon icon="power" aria-hidden="true"></b-icon> Logout</b-dropdown-item>
             </b-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -53,7 +52,6 @@ export default {
   },
 };
 </script>
-
 
 <style >
 

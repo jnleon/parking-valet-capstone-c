@@ -5,7 +5,7 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
-
+import Valet from '../views/ValetView.vue'
 Vue.use(Router)
 
 /**
@@ -49,6 +49,14 @@ const router = new Router({
       path: "/register",
       name: "register",
       component: Register,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/valet",
+      name: "valet",
+      component: Valet,
       meta: {
         requiresAuth: false
       }
