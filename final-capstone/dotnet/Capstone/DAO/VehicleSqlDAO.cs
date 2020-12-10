@@ -26,7 +26,7 @@ namespace Capstone.DAO
                     /*MISSING ANOTHER PARENTHESIS*/
 
                     SqlCommand cmd = new SqlCommand("INSERT INTO vehicles (vehicle_make, vehicle_model, vehicle_color, license_plate, patron_id) " +
-                                                    "VALUES (@vehicle_make, @vehicle_model, @vehicle_color, @license_plate, (SELECT user_id FROM patrons WHERE email_address like @email_address))", conn);
+                                                    "VALUES (@vehicle_make, @vehicle_model, @vehicle_color, @license_plate, (SELECT patron_id FROM patrons WHERE email_address like @email_address))", conn);
                     cmd.Parameters.AddWithValue("@vehicle_make", vehicle.VehicleMake);
                     cmd.Parameters.AddWithValue("@vehicle_model", vehicle.VehicleModel);
                     cmd.Parameters.AddWithValue("@vehicle_color", vehicle.VehicleColor);
