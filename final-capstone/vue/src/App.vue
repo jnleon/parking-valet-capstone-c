@@ -11,27 +11,25 @@
         <b-collapse id="nav-collapse" is-nav>
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-            <registration-button  v-if="($store.state.token === '')"/>
+            <registration-button v-if="$store.state.token === ''" />
 
-            <login-button  v-if="($store.state.token === '')"/>
+            <login-button v-if="$store.state.token === ''" />
             <!-- Using 'button-content' slot -->
-
             <b-dropdown
               right
               text="Logout"
-              id="logoutButtonDPD"  
+              id="logoutButtonDPD"
               min-width="12rem"
-               v-if="($store.state.token !== '')"
+              v-if="$store.state.token !== ''"
             >
               <b-dropdown-header id="dropdown-header-label">
                 Are you sure?
               </b-dropdown-header>
               <b-dropdown-divider></b-dropdown-divider>
-              <b-dropdown-item
-                v-bind:to="{ name: 'logout' }"
-                href="#"
-               
-                >  <b-icon icon="power" aria-hidden="true"></b-icon> Logout</b-dropdown-item>
+              <b-dropdown-item v-bind:to="{ name: 'logout' }" href="#">
+                <b-icon icon="power" aria-hidden="true"></b-icon>
+                Logout</b-dropdown-item
+              >
             </b-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -54,7 +52,6 @@ export default {
 </script>
 
 <style >
-
 .navbar-light {
   background-color: #ffa500 !important;
 }
