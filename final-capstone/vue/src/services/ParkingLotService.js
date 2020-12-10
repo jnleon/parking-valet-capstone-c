@@ -10,6 +10,6 @@ export default {
         return http.get('/parkingSpot');
     },
     getCheckedInCars() {
-        return http.get('/checkedInCars');
+        return http.get('/vehicle');
     }
 }

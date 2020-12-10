@@ -19,7 +19,7 @@
 <div id="valetTopRightDiv">
             <!--<img id="ganggang" src="@/img/jjeb.png" />-->
             <div>
-              <!--<check-in-car /> -->
+              <check-in-car />
               <list-of-cars />
             </div>
             
@@ -38,13 +38,13 @@
 
 
 import ParkingLot from "../components/ParkingLot.vue";
-//import CheckInCar from "../components/CheckInCar.vue";
+import CheckInCar from "../components/CheckInCar.vue";
 import ListOfCars from "../components/ListOfCars.vue";
 
 
 
 export default {
- components: { ParkingLot,  ListOfCars },
+ components: { ParkingLot, CheckInCar, ListOfCars },
 }
 </script>
 ,

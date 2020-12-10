@@ -1,6 +1,7 @@
 <template>
   <div>
-      <p>{{checkedInCars[0]}}</p>
+    <!--//need a for each statement to loop through each car in array-->
+      <p>{{this.$store.state.checkedInCars[1].licensePlate}}</p>
   </div>
 </template>
 

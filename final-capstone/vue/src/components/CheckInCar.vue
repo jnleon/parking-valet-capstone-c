@@ -98,7 +98,7 @@ export default {
           if (response.status == 201) {
             console.log("car entered")
             console.log(response.data)
-            this.$store.checkedInCars.Add(this.car)
+            
           }else{
             console.log("no worky!")
           }
