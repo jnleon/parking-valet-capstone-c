@@ -11,37 +11,39 @@ namespace Capstone.Controllers
     [ApiController]
     public class VehicleController : ControllerBase
     {
-        private readonly IVehicleDAO vehicleSqlDao;
+        private readonly IVehicleDAO vehicleDAO;
 
-        public VehicleController(IVehicleDAO _vehicleSpotDAO)
+        public VehicleController(IVehicleDAO _vehicleDAO)
         {
-            vehicleSqlDao = _vehicleSpotDAO;
+            vehicleDAO = _vehicleDAO;
         }
-        /*
+        
         // https://localhost:44315/vehicle
         [HttpGet]
+        //[Authorize(Roles = "admin, valet")]
         public IActionResult List()
         {
-            List<ParkingSpot> parkingSpots = parkingSpotDAO.List();
+            List<Vehicle> vehicles = vehicleDAO.List();
 
-            if (parkingSpots == null)
+            if (vehicles == null)
             {
                 return StatusCode(500);
             }
             else
             {
                 // Switch to 200 OK
-                return Ok(parkingSpots);
+                return Ok(vehicles); ;
             }         
         }
 
-        // https://localhost:44315/parkingspot/1
+        
+        // https://localhost:44315/vehicle/ABC123
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(string id)
         {
-            ParkingSpot ps = parkingSpotDAO.Get(id);
+            Vehicle v = vehicleDAO.Get(id);
 
-            if (ps == null)
+            if (v == null)
             {
                 //return StatusCode(500);
                 return NoContent();
@@ -49,43 +51,25 @@ namespace Capstone.Controllers
             else
             {
                 // Switch to 200 OK
-                return Ok(ps);
+                return Ok(v);
             }
         }
 
-        // https://localhost:44315/parkingspot/
-        */
+        // https://localhost:44315/vehicle
+        
         [HttpPost]
         //[Authorize(Roles = "admin, valet")]
-        public IActionResult Create(NewVehicle vehicle)
+        public IActionResult Create(NewVehicle vehicleToCreate)
         {
-            Vehicle car = vehicleSqlDao.AddVehicle(vehicle);
-            if (car == null)
+            Vehicle createdVehicle = vehicleDAO.Create(vehicleToCreate);
+            if (createdVehicle == null)
             {
                 return BadRequest();
             }
             else
             {
-                return Created("", car);
+                return Created("", createdVehicle);
             }
-        }
-
-        /*// https://localhost:44315/parkingspot/1
-        [HttpPut("{id}")]
-        [Authorize(Roles = "admin, owner, valet")]
-        public IActionResult Update(int id, ParkingSpot parkingSpotToUpdate)
-        {
-            ParkingSpot updatedParkingSpot = parkingSpotDAO.Update(id, parkingSpotToUpdate);
-            if (updatedParkingSpot == null)
-            {
-                return BadRequest();
-            }
-            else
-            {
-                return Ok(updatedParkingSpot);
-            }
-        }*/
-
-        
+        }        
     }
 }

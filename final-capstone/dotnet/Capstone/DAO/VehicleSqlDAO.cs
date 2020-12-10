@@ -2,8 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Data.SqlTypes;
 
 namespace Capstone.DAO
 {
@@ -14,7 +13,7 @@ namespace Capstone.DAO
         {
             connectionString = dbConnectionString;
         }
-        public Vehicle AddVehicle(NewVehicle vehicle)
+        public Vehicle Create(NewVehicle vehicleToCreate)
         {
 
             try
@@ -23,19 +22,29 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    /*MISSING ANOTHER PARENTHESIS*/
-
-                    SqlCommand cmd = new SqlCommand("INSERT INTO vehicles (vehicle_make, vehicle_model, vehicle_color, license_plate, patron_id) " +
-                                                    "VALUES (@vehicle_make, @vehicle_model, @vehicle_color, @license_plate, (SELECT patron_id FROM patrons WHERE email_address like @email_address))", conn);
-                    cmd.Parameters.AddWithValue("@vehicle_make", vehicle.VehicleMake);
-                    cmd.Parameters.AddWithValue("@vehicle_model", vehicle.VehicleModel);
-                    cmd.Parameters.AddWithValue("@vehicle_color", vehicle.VehicleColor);
-                    cmd.Parameters.AddWithValue("@license_plate", vehicle.LicensePlate);
-                    cmd.Parameters.AddWithValue("@email_address", vehicle.PatronEmail);
+                    SqlCommand cmd = new SqlCommand("INSERT INTO vehicles " +
+                                                    "(vehicle_make, vehicle_model, vehicle_color, license_plate, patron_id) " +
+                                                    "VALUES (@vehicle_make, @vehicle_model, @vehicle_color, @license_plate, " +
+                                                    "(SELECT patron_id FROM patrons WHERE email_address like @email_address))"
+                                                    , conn);
+                    cmd.Parameters.AddWithValue("@vehicle_make", vehicleToCreate.VehicleMake);
+                    cmd.Parameters.AddWithValue("@vehicle_model", vehicleToCreate.VehicleModel);
+                    cmd.Parameters.AddWithValue("@vehicle_color", vehicleToCreate.VehicleColor);
+                    cmd.Parameters.AddWithValue("@license_plate", vehicleToCreate.LicensePlate);
+                    cmd.Parameters.AddWithValue("@email_address", vehicleToCreate.PatronEmail);
                     cmd.ExecuteNonQuery();
 
+                    //cmd = new SqlCommand("INSERT INTO valet_slips " +
+                    //                     "(valet_id, license_plate, time_in, parking_status_id) " +
+                    //                     "VALUES (@valet_id, @license_plate, @time_in, " +
+                    //                     "(SELECT parking_status_id FROM parking_statuses WHERE parking_status='Spot Requested'))", conn);
+                    //cmd.Parameters.AddWithValue("@valet_id", );
+                    //cmd.Parameters.AddWithValue("@license_plate", vehicleToCreate.LicensePlate);
+                    ////cmd.Parameters.AddWithValue("@date", (SqlDateTime)DateTime.Now.Date);
+                    //cmd.Parameters.AddWithValue("@time_in", (SqlDateTime)DateTime.Now);
+                    //cmd.ExecuteNonQuery();
 
-                    return Get(vehicle.LicensePlate);
+                    return Get(vehicleToCreate.LicensePlate);
                 }
             }
             catch (SqlException)
@@ -47,11 +56,11 @@ namespace Capstone.DAO
         public Vehicle Get(string licensePlate)
         {
            /*CAR WAS SET TO NULL WE HAD TO ASSIGN EMPTY VALUES*/
-            Vehicle car = new Vehicle();
-            car.LicensePlate = "";
-            car.VehicleMake = "";
-            car.VehicleModel = "";
-            car.VehicleColor = "";
+            Vehicle v = new Vehicle();
+            //car.LicensePlate = "";
+            //car.VehicleMake = "";
+            //car.VehicleModel = "";
+            //car.VehicleColor = "";
       
             try
             {
@@ -59,7 +68,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT license_plate, vehicle_make, vehicle_model, vehicle_color " +
+                    SqlCommand cmd = new SqlCommand("SELECT license_plate, vehicle_make, vehicle_model, vehicle_color, patron_id " +
                                                     "FROM vehicles " +
                                                     "WHERE license_plate = @licensePlate", conn);
                     cmd.Parameters.AddWithValue("@licensePlate", licensePlate);
@@ -67,10 +76,7 @@ namespace Capstone.DAO
 
                     if (reader.HasRows && reader.Read())
                     {
-                        car.LicensePlate = Convert.ToString(reader["license_plate"]);
-                        car.VehicleMake = Convert.ToString(reader["vehicle_make"]);
-                        car.VehicleModel = Convert.ToString(reader["vehicle_model"]);
-                        car.VehicleColor = Convert.ToString(reader["vehicle_color"]);
+                        v = GetVehicleFromReader(reader);
                     }
                 }
             }
@@ -79,7 +85,51 @@ namespace Capstone.DAO
                 throw;
             }
 
-            return car;
+            return v;
+        }
+
+        public List<Vehicle> List()
+        {
+            List<Vehicle> vehicles = new List<Vehicle>();
+            Vehicle v = new Vehicle();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT license_plate, vehicle_make, vehicle_model, vehicle_color, patron_id " +
+                                                    "FROM vehicles", conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.HasRows && reader.Read())
+                    {
+                        v = GetVehicleFromReader(reader);
+                        vehicles.Add(v);
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+
+            return vehicles;
+        }
+
+        private Vehicle GetVehicleFromReader(SqlDataReader reader)
+        {
+            Vehicle v = new Vehicle()
+            {
+                LicensePlate = Convert.ToString(reader["license_plate"]),
+                VehicleMake = Convert.ToString(reader["vehicle_make"]),
+                VehicleModel = Convert.ToString(reader["vehicle_model"]),
+                VehicleColor = Convert.ToString(reader["vehicle_color"]),
+                PatronId = Convert.ToInt32(reader["patron_id"])
+            };
+
+            return v;
         }
     }
 }
