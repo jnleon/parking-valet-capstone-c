@@ -8,5 +8,8 @@ export default {
 
     getParkingSpots() {
         return http.get('/parkingSpot');
+    },
+    getCheckedInCars() {
+        return http.get('/checkedInCars');
     }
 }

@@ -55,6 +55,10 @@
 
       
 
+
+
+      
+
       
 
       <b-button type="submit" variant="primary">Submit</b-button>
@@ -70,6 +74,7 @@ import carDetailsService from "@/services/CarDetailsService.js";
 
 export default {
   name: "check-in-car",
+  //props: [checkedInCars],
   data() {
       return {
         car: {
@@ -78,11 +83,13 @@ export default {
           licensePlate: '',
           vehicleColor: '',
           patronEmail: '',
+          vehicleSpot: 0
         },
         
         show: true
       }
     },
+    
     methods: {
       onSubmit(evt) {
         
@@ -91,6 +98,7 @@ export default {
           if (response.status == 201) {
             console.log("car entered")
             console.log(response.data)
+            this.$store.checkedInCars.Add(this.car)
           }else{
             console.log("no worky!")
           }

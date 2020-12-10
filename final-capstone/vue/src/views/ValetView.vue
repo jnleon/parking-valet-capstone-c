@@ -19,7 +19,8 @@
 <div id="valetTopRightDiv">
             <!--<img id="ganggang" src="@/img/jjeb.png" />-->
             <div>
-              <check-in-car /> 
+              <!--<check-in-car /> -->
+              <list-of-cars />
             </div>
             
 </div>
@@ -27,6 +28,7 @@
    <!-- <div id="valetBottomRightDiv">-->
            <div id="home-parking-lot-container">
           <parking-lot />
+          
            </div>
    <!-- </div>-->
     </div>
@@ -36,13 +38,17 @@
 
 
 import ParkingLot from "../components/ParkingLot.vue";
-import CheckInCar from "../components/CheckInCar.vue";
+//import CheckInCar from "../components/CheckInCar.vue";
+import ListOfCars from "../components/ListOfCars.vue";
+
+
 
 export default {
- components: { ParkingLot, CheckInCar },
+ components: { ParkingLot,  ListOfCars },
 }
 </script>
-
+,
+  ListOfCars
 <style>
 #MenuButtons{
 margin:8%;

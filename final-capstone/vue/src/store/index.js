@@ -20,6 +20,8 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
+
+    checkedInCars: [],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -38,5 +40,9 @@ export default new Vuex.Store({
       state.user = {};
       axios.defaults.headers.common = {};
     },
+    LOAD_CAR_LIST(state, cars) {
+        state.checkedInCars = cars
+    }
+
   }
 })
