@@ -83,7 +83,6 @@ CREATE TABLE [dbo].[vehicles](
 	[patron_id] [int] NOT NULL,
 	[vehicle_make] [varchar](20) NOT NULL,
 	[vehicle_model] [varchar](20) NOT NULL,
-	[vehicle_vin] [varchar](30) NOT NULL,
 	[vehicle_color] [varchar](20) NOT NULL,
  CONSTRAINT [PK_vehicles] PRIMARY KEY CLUSTERED 
 (
