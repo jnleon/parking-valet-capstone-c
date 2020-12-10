@@ -6,6 +6,9 @@
     ref="dropdown"
     class="m-2"
   >
+
+   <b-alert :show="6"  class="alertsRegist" variant="success" v-if="registrationCorrect">User Registered</b-alert>
+    <b-alert :show="6" class="alertsRegist" variant="danger" v-if="registrationErrors">{{registrationErrorMsg}}</b-alert>
     <b-dropdown-form @submit.prevent="register">
       <b-form-group label="Username" label-for="dropdown-form-username">
         <b-form-input
@@ -122,20 +125,17 @@ export default {
          
         authService
           .register(this.user)
-          .then((response) => {
-            if (response.status == 201) {
-              this.$router.push({
-                path: "/valet",
-                query: { registration: "success" },
-              }); 
+          .then(() => {
               this.user={};
               this.registrationCorrect =true;
               this.registrationErrors =false;
-            }
           })
+          this.registrationCorrect =true;
+              this.registrationErrors =false
           .catch((error) => {
             const response = error.response;
             this.registrationErrors = true;
+            this.registrationErrors = false;
             if (response.status === 400) {
               this.registrationErrorMsg = "Bad Request: Validation Errors";
             }
@@ -151,4 +151,15 @@ export default {
 </script>
 
 <style>
+
+
+.alertsRegist{
+    font-size: 1rem !important;
+    font-weight:400 !important;
+    letter-spacing: 1px !important;
+    margin-bottom:4% ;
+    font-family: 'Jua', 'Times New Roman', Times, serif;
+    text-transform: uppercase;
+}
+
 </style>

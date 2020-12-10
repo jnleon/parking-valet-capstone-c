@@ -59,7 +59,7 @@ namespace Capstone.Models
         
         [Required]
         [MaxLength(50, ErrorMessage = "Max length for email address is 50.")]
-        public string EmailAddress { get; set; }
+        public string PatronEmail { get; set; }
         
     }
 }

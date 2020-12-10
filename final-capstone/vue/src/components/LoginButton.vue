@@ -2,7 +2,9 @@
   <b-dropdown id="dropdown-form" right text="Login" ref="dropdown" class="m-2">
     <b-dropdown-form size="lg" @submit.prevent="login">
      
-        <b-alert style="text-align:center;" show variant="danger" v-if="invalidCredentials">Invalid username and password!</b-alert>
+
+         <b-alert :show="6" class="alertsRegist" variant="danger" v-if="invalidCredentials">Invalid username and password!</b-alert>
+
       <b-form-group label="Username" label-for="dropdown-form-username">
         
         <b-form-input

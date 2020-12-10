@@ -23,16 +23,17 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
+                    /*MISSING ANOTHER PARENTHESIS*/
+
                     SqlCommand cmd = new SqlCommand("INSERT INTO vehicles (vehicle_make, vehicle_model, vehicle_color, license_plate, patron_id) " +
-                                                    "VALUES (@vehicle_make, @vehicle_model, @vehicle_color, @license_plate, (SELECT user_id FROM patrons WHERE email_address = @email_address)", conn);
+                                                    "VALUES (@vehicle_make, @vehicle_model, @vehicle_color, @license_plate, (SELECT user_id FROM patrons WHERE email_address like @email_address))", conn);
                     cmd.Parameters.AddWithValue("@vehicle_make", vehicle.VehicleMake);
                     cmd.Parameters.AddWithValue("@vehicle_model", vehicle.VehicleModel);
                     cmd.Parameters.AddWithValue("@vehicle_color", vehicle.VehicleColor);
                     cmd.Parameters.AddWithValue("@license_plate", vehicle.LicensePlate);
-                    cmd.Parameters.AddWithValue("@email_address", vehicle.EmailAddress);
+                    cmd.Parameters.AddWithValue("@email_address", vehicle.PatronEmail);
                     cmd.ExecuteNonQuery();
 
-                    
 
                     return Get(vehicle.LicensePlate);
                 }
@@ -45,8 +46,13 @@ namespace Capstone.DAO
 
         public Vehicle Get(string licensePlate)
         {
-            Vehicle car = null;
-
+           /*CAR WAS SET TO NULL WE HAD TO ASSIGN EMPTY VALUES*/
+            Vehicle car = new Vehicle();
+            car.LicensePlate = "";
+            car.VehicleMake = "";
+            car.VehicleModel = "";
+            car.VehicleColor = "";
+      
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
