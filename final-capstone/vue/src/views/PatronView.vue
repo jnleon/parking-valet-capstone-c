@@ -6,7 +6,7 @@
       </div>
 
       <div id="MenuButtons">
-        <b-button block variant="light">Balance</b-button>
+        <b-button @click="onSubmitBalanceRequest" block variant="light">Balance</b-button>
         <b-button block variant="light">Request Pickup</b-button>
         
       </div>
@@ -26,15 +26,18 @@
     </div>
     </div>
     
-    <div id="valetTopRightDiv">
+    <div id="valetTopRightDiv" >
       <!--<img id="ganggang" src="@/img/jjeb.png" />-->
-      <div id="componentsValet">
+      <div id="componentsValet" v-if="showValetSlip">
         <valet-slip />
       </div>
+      <div id="home-parking-lot-container" v-if="!showValetSlip">
+      <parking-lot />
+    </div>
     </div>
 
     <!-- <div id="valetBottomRightDiv">-->
-   <div id="valetTopBottomDiv">
+   <div id="valetTopBottomDiv" v-if="showValetSlip">
     <div id="home-parking-lot-container">
       <parking-lot />
     </div>
@@ -50,7 +53,20 @@ import ParkingLot from "../components/ParkingLot.vue";
 import ValetSlip from "../components/ValetSlip.vue";
 
 export default {
+  
+  data() {
+    return {
+      showValetSlip: false,
+    }    
+    
+  },
   components: { ParkingLot, ValetSlip },
+  methods: {
+    onSubmitBalanceRequest() {
+      //alert("hello")
+      this.showValetSlip=! this.showValetSlip;
+    }
+  }
 };
 </script>
 
