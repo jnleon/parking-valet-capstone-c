@@ -35,9 +35,9 @@ namespace Capstone.DAO
                     cmd.ExecuteNonQuery();
 
                     cmd = new SqlCommand("INSERT INTO valet_slips " +
-                                         "(valet_id, license_plate, time_in, time_out, amount_owed, " +
+                                         "(valet_id, license_plate, date, time_in, time_out, amount_owed, " +
                                          "parking_spot_id, parking_status_id) " +
-                                         "VALUES (@valet_id, @license_plate, GETDATE(), '1753-1-1', 0, NULL, " +
+                                         "VALUES (@valet_id, @license_plate, GETDATE(), GETDATE(), '1753-1-1', 0, NULL, " +
                                          "(SELECT parking_status_id FROM parking_statuses WHERE parking_status='Spot Requested'))", conn);
                     cmd.Parameters.AddWithValue("@valet_id", valetId);
                     cmd.Parameters.AddWithValue("@license_plate", vehicleToCreate.LicensePlate);

@@ -101,8 +101,8 @@ CREATE TABLE [dbo].[valet_slips](
 	[license_plate] [varchar](10) NOT NULL,
 	[parking_spot_id] [int] NULL,
 	[date] [date] NULL,
-	[time_in] [date] NULL,
-	[time_out] [date] NULL,
+	[time_in] [datetime] NULL,
+	[time_out] [datetime] NULL,
 	[amount_owed] [money] NULL,
 	[parking_status_id] [int] NOT NULL,
  CONSTRAINT [PK_valet_slip] PRIMARY KEY CLUSTERED 
