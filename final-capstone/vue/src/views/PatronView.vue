@@ -47,8 +47,6 @@
 
 <script>
 import ParkingLot from "../components/ParkingLot.vue";
-
-
 import ValetSlip from "../components/ValetSlip.vue";
 
 export default {
