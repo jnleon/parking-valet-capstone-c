@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <div id="headerBar">
-      <b-navbar toggleable="lg" type="light" variant="infoBar">
+    <div id="headerBar" position= "sticky" fixed="top" >
+      <b-navbar toggleable="lg" type="light" variant="infoBar" >
         <router-link v-bind:to="{ name: 'home' }"
           ><img id="headerlogo" src="@/img/jjebTitle.png" alt="Kitten"
         /></router-link>
@@ -37,16 +37,17 @@
     </div>
     <router-view class="routerV" />
   </div>
+  
 </template>
 
 <script>
-import RegistrationButton from "@/components/RegistrationButton.vue";
-import LoginButton from "@/components/LoginButton.vue";
+import RegistrationButton from "@/components/topbarFooter/RegistrationButton.vue";
+import LoginButton from "@/components/topbarFooter/LoginButton.vue";
 
 export default {
   components: {
     RegistrationButton,
-    LoginButton,
+    LoginButton
   },
 };
 </script>
@@ -71,6 +72,8 @@ export default {
 #headerBar {
   grid-area: header;
   display: inline-block;
+  position: sticky
+  
 }
 
 #app {

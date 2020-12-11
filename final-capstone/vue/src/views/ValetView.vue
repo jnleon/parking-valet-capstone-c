@@ -17,7 +17,7 @@
 
     <div id="valetTopRightDiv">
       <!--<img id="ganggang" src="@/img/jjeb.png" />-->
-      <div>
+      <div id="componentsValet">
         <check-in-car />
         <list-of-cars />
         <valet-slip />
@@ -25,9 +25,11 @@
     </div>
 
     <!-- <div id="valetBottomRightDiv">-->
+   <div id="valetTopBottomDiv">
     <div id="home-parking-lot-container">
       <parking-lot />
     </div>
+   </div>
     <!-- </div>-->
   </div>
 </template>
@@ -83,16 +85,29 @@ export default {
 }
 
 #valetMenu {
-  background-color: rgb(197, 197, 197);
+  background-color: rgb(226, 226, 226);
   grid-area: valetMenu;
 }
 
 #valetTopRightDiv {
   grid-area: valetTopRight;
+  background-color: orange;
+  padding: 0.5%;
+  border-radius: 0.5rem;
 }
 
-#valetBottomRightDiv {
+#valetTopBottomDiv {
   grid-area: valetBottomRight;
-  grid-area: green;
+    background-color: orange;
+  padding: 0.5%;
+  border-radius: 0.5rem;
+  margin-bottom: 2%;
+}
+
+#componentsValet{
+  background-color:  rgb(245, 245, 245);
+  padding: 0.5%;
+  border-radius: 0.5rem;
+
 }
 </style>

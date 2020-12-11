@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="formCheckInCar">
       
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-group
@@ -52,14 +52,6 @@
           placeholder="Patron Email"
         ></b-form-input>
       </b-form-group>
-
-      
-
-
-
-      
-
-      
 
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
@@ -126,5 +118,13 @@ export default {
 </script>
 
 <style>
+
+#formCheckInCar{
+   font-weight: 500;
+  font-family: "Jua";
+  text-transform: uppercase;
+  border-color: white !important;
+  padding: 2vh !important;
+}
 
 </style>
