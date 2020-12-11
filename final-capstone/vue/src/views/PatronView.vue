@@ -2,46 +2,55 @@
   <div id="valetMain">
     <div id="valetMenu">
       <div id="simpleBar">
-        <h4>Valet Options</h4>
+        <h4>Patron Options</h4>
       </div>
 
       <div id="MenuButtons">
-        <b-button block variant="light">Check-In</b-button>
-        <b-button block variant="light">Check-Out</b-button>
-        <b-button block variant="light">View All Cars</b-button>
-        <b-button block variant="light">Request Car Pickup</b-button>
-        <b-button block variant="light">View Pickup Requests</b-button>
-        <b-button block variant="light">Rate Calculator</b-button>
+        <b-button block variant="light">Balance</b-button>
+        <b-button block variant="light">Request Pickup</b-button>
+        
       </div>
+      <div>
+      <div id="map">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8516.561050240627!2d-84.46975296246113!3d39.15195057631328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8841b2f72057d245%3A0x27bc76f0bdcb7dfd!2sTech%20Elevator%20Cincinnati!5e1!3m2!1sen!2sus!4v1607456474306!5m2!1sen!2sus" 
+      width="2000" 
+      height="500"
+      
+      frameborder="0" 
+      style="border:0;" 
+      allowfullscreen="" 
+      aria-hidden="false" 
+      tabindex="0">
+      </iframe>
+    </div>
+    </div>
     </div>
 
     <div id="valetTopRightDiv">
+        
       <!--<img id="ganggang" src="@/img/jjeb.png" />-->
+      <div id="home-parking-lot-container">
+      <parking-lot />
+    </div>
       <div id="componentsValet">
-        <check-in-car />
-        <list-of-cars />
+        
         <valet-slip />
+        
       </div>
     </div>
 
-    <!-- <div id="valetBottomRightDiv">-->
-   <div id="valetTopBottomDiv">
-    <div id="home-parking-lot-container">
-      <parking-lot />
-    </div>
-   </div>
-    <!-- </div>-->
+    
   </div>
 </template>
 
 <script>
 import ParkingLot from "../components/ParkingLot.vue";
-import CheckInCar from "../components/CheckInCar.vue";
-import ListOfCars from "../components/ListOfCars.vue";
+
+
 import ValetSlip from "../components/ValetSlip.vue";
 
 export default {
-  components: { ParkingLot, CheckInCar, ListOfCars, ValetSlip },
+  components: { ParkingLot, ValetSlip },
 };
 </script>
 

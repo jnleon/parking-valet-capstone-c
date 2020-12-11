@@ -6,6 +6,7 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import Valet from '../views/ValetView.vue'
+import Patron from '../views/PatronView.vue'
 Vue.use(Router)
 
 /**
@@ -61,6 +62,14 @@ const router = new Router({
         requiresAuth: false
       }
     },
+    {
+      path: "/patron",
+      name: "patron",
+      component: Patron,
+      meta: {
+        requiresAuth: false
+      }
+    }
   ]
 })
 
