@@ -14,7 +14,7 @@ namespace Capstone.Models
         public string LicensePlate { get; set; }
         [Required]
         [MaxLength(10, ErrorMessage = "Max length for parking spot is 10.")]
-        public string ParkingSpotId { get; set; }
+        public int ParkingSpotId { get; set; }
         [Required]
         public DateTime Date { get; set; }
         [Required]
@@ -30,7 +30,7 @@ namespace Capstone.Models
 
         }
 
-        public ValetSlip(int ticketId, int valetId, string licensePlate, string parkingSpotId, DateTime date, DateTime timeIn, DateTime timeOut, decimal amountOwed, string parkingStatus)
+        public ValetSlip(int ticketId, int valetId, string licensePlate, int parkingSpotId, DateTime date, DateTime timeIn, DateTime timeOut, decimal amountOwed, string parkingStatus)
         {
             TicketId = ticketId;
             ValetId = valetId;
