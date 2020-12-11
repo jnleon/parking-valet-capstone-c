@@ -9,6 +9,7 @@ namespace Capstone.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    //[Authorize(Roles = "admin, valet")]  //REMOVE COMMENT TO ENABLE AUTHORIZATION!!!
     public class VehicleController : ControllerBase
     {
         private readonly IVehicleDAO vehicleDAO;
@@ -22,7 +23,6 @@ namespace Capstone.Controllers
         
         // https://localhost:44315/vehicle
         [HttpGet]
-        //[Authorize(Roles = "admin, valet")]
         public IActionResult List()
         {
             List<Vehicle> vehicles = vehicleDAO.List();
@@ -59,7 +59,6 @@ namespace Capstone.Controllers
 
         // https://localhost:44315/vehicle
         [HttpPost]
-        //[Authorize(Roles = "admin, valet")]
         public IActionResult Create(NewVehicle vehicleToCreate)
         {
             Valet currentValet = valetDAO.GetByUserId((int)GetCurrentUserId());

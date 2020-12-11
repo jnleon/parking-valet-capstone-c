@@ -53,8 +53,7 @@ namespace Capstone.Controllers
             }
         }
 
-        // https://localhost:44315/parkingspot/
-        
+        // https://localhost:44315/parkingspot/        
         [HttpPost]
         [Authorize(Roles = "admin, owner")]
         public IActionResult Create(ParkingSpot parkingSpotToCreate)
