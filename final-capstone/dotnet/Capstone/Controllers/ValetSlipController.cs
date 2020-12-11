@@ -20,8 +20,8 @@ namespace Capstone.Controllers
         }
         
         // get by ticket id
-        // https://localhost:44315/valetslip/t/1
-        [HttpGet("t/{ticketid}")]
+        // https://localhost:44315/valetslip/ticket/1
+        [HttpGet("ticket/{ticketid}")]
         public IActionResult Get(int ticketid)
         {
             ValetSlip vs = valetSlipDAO.Get(ticketid);
@@ -39,13 +39,13 @@ namespace Capstone.Controllers
         }
 
         // get by valet id
-        // https://localhost:44315/valetslip/v/1
-        [HttpGet("v/{valetid}")]
+        // https://localhost:44315/valetslip/valet/1
+        [HttpGet("valet/{valetid}")]
         public IActionResult GetByValetId(int valetid)
         {
-            ValetSlip vs = valetSlipDAO.GetByValetId(valetid);
+            List<ValetSlip> valetSlips = valetSlipDAO.GetByValetId(valetid);
 
-            if (vs == null)
+            if (valetSlips == null)
             {
                 //return StatusCode(500);
                 return NoContent();
@@ -53,13 +53,13 @@ namespace Capstone.Controllers
             else
             {
                 // Switch to 200 OK
-                return Ok(vs);
+                return Ok(valetSlips);
             }
         }
 
         // get by license plate
-        // https://localhost:44315/valetslip/l/ABC123
-        [HttpGet("l/{licensePlate}")]
+        // https://localhost:44315/valetslip/licenseplate/ABC123
+        [HttpGet("licenseplate/{licensePlate}")]
         public IActionResult GetByLicensePlate(string licensePlate)
         {
             ValetSlip vs = valetSlipDAO.GetByLicensePlate(licensePlate);
@@ -75,14 +75,5 @@ namespace Capstone.Controllers
                 return Ok(vs);
             }
         }
-
-
-        //private int? GetCurrentUserId()
-        //{
-        //    string userId = User.FindFirst("sub")?.Value;
-        //    if (string.IsNullOrWhiteSpace(userId)) return null;
-        //    int.TryParse(userId, out int userIdInt);
-        //    return userIdInt;
-        //}
     }
 }

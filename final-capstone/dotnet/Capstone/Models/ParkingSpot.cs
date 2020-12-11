@@ -5,6 +5,7 @@ namespace Capstone.Models
     public class ParkingSpot
     {
         public int ParkingSpotId { get; set; }
+        
         [Required]
         public bool IsOccupied { get; set; }
 

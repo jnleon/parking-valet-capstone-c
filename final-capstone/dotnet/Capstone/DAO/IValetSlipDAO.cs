@@ -8,6 +8,6 @@ namespace Capstone.DAO
     {
         ValetSlip Get(int ticketId);
         ValetSlip GetByLicensePlate(string licensePlate);
-        ValetSlip GetByValetId(int valetId);
+        List<ValetSlip> GetByValetId(int valetId);
     }
 }

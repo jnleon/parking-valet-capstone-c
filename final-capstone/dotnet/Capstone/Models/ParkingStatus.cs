@@ -6,6 +6,7 @@ namespace Capstone.Models
     {
         [Required]
         public int ParkingStatusId { get; set; }
+        
         [Required]
         [MaxLength(30, ErrorMessage = "Max length for parking status name is 30.")]
         public string ParkingStatusName { get; set; }

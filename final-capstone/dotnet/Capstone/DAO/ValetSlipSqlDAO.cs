@@ -77,8 +77,9 @@ namespace Capstone.DAO
             return vs;
         }
 
-        public ValetSlip GetByValetId(int valetId)
+        public List<ValetSlip> GetByValetId(int valetId)
         {
+            List<ValetSlip> valetSlips = new List<ValetSlip>();
             ValetSlip vs = null;
 
             try
@@ -95,9 +96,10 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@valet_id", valetId);
                     SqlDataReader reader = cmd.ExecuteReader();
 
-                    if (reader.HasRows && reader.Read())
+                    while (reader.HasRows && reader.Read())
                     {
                         vs = GetValetSlipFromReader(reader);
+                        valetSlips.Add(vs);
                     }
                 }
             }
@@ -106,7 +108,7 @@ namespace Capstone.DAO
                 throw;
             }
 
-            return vs;
+            return valetSlips;
         }
 
         private ValetSlip GetValetSlipFromReader(SqlDataReader reader)
@@ -119,10 +121,18 @@ namespace Capstone.DAO
                 LicensePlate = Convert.ToString(reader["license_plate"]),
                 //ParkingSpotId = Convert.ToInt32(reader["parking_spot_id"]),
                 TimeIn = Convert.ToDateTime(reader["time_in"]),
-                //TimeOut = Convert.ToDateTime(reader["time_out"]),
-                //AmountOwed = Convert.ToDecimal(reader["amount_owed"]),
+                TimeOut = Convert.ToDateTime(reader["time_out"]),
+                AmountOwed = Convert.ToDecimal(reader["amount_owed"]),
                 ParkingStatus = Convert.ToString(reader["parking_status"])
             };
+            if (reader["parking_spot_id"] == DBNull.Value)
+            {
+                vs.ParkingSpotId = 0;
+            }
+            else
+            {
+                vs.ParkingSpotId = Convert.ToInt32(reader["parking_spot_id"]);
+            }
 
             return vs;
         }
