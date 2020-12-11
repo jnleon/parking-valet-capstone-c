@@ -6,8 +6,8 @@
       </div>
 
       <div id="MenuButtons">
-        <b-button @click="onSubmitBalanceRequest" block variant="light">Balance</b-button>
-        <b-button block variant="light">Request Pickup</b-button>
+        <b-button @click="onSubmitBalanceRequest" block variant="light">View Balance/Car Details</b-button>
+        <b-button @click="requestPickup" block variant="light">Request Pickup</b-button>
         
       </div>
       <div>
@@ -29,7 +29,7 @@
     <div id="valetTopRightDiv" >
       <!--<img id="ganggang" src="@/img/jjeb.png" />-->
       <div id="componentsValet" v-if="showValetSlip">
-        <valet-slip />
+        <valet-slip v-bind:patronSelection='patronSelection'/>
       </div>
       <div id="home-parking-lot-container" v-if="!showValetSlip">
       <parking-lot />
@@ -54,16 +54,32 @@ import ValetSlip from "../components/ValetSlip.vue";
 
 export default {
   
+  
   data() {
     return {
       showValetSlip: false,
+      patronSelection: '',
     }    
     
   },
   components: { ParkingLot, ValetSlip },
   methods: {
+
+    currentTime() {
+      var today = new Date();
+      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      var dateTime = date+' '+time;
+      return dateTime;
+    },
+
     onSubmitBalanceRequest() {
-      //alert("hello")
+      this.showValetSlip=! this.showValetSlip;
+      this.patronSelection = 'showBalance';
+      alert(this.currentTime())
+    },
+    requestPickup() {
+      this.patronSelection = 'pickupCar';
       this.showValetSlip=! this.showValetSlip;
     }
   }

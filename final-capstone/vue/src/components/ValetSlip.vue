@@ -6,26 +6,33 @@
         id="input-group-1"
         label="Enter Valet Number:"
         label-for="input-1"
-        description="We'll never share your email with anyone else."
+        description="Please enter your valet slip number."
       >
         <b-form-input
           id="input-1"
-          v-model="form.valetNumber"
-          type="email"
+          v-model="form.valetSlipNumber"
+          type="text"
           required
-          placeholder="Valet Number"
+          placeholder="Valet Slip Number"
         ></b-form-input>
       </b-form-group>
 
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
+    <h3 v-if="showValetCall">The valet will arrive shortly with your car.</h3>
+  <div>
+    <h3 v-if="showPatronCar" v-bind:slipId='slipId'>Car Details will appear here</h3>
+  </div>
   </div>
 
 </template>
 
 <script>
+
   export default {
+    slipId: '',
+    props: ['patronSelection'],
     data() {
       return {
         form: {
@@ -33,13 +40,27 @@
           name: '',
           checked: []
         },
-        show: true
+        show: true,
+        showValetCall: false,
+        showPatronCar: false,
       }
     },
     methods: {
       onSubmit(evt) {
         evt.preventDefault()
-        alert(JSON.stringify(this.form))
+        if (this.patronSelection == 'showBalance') {
+          this.showPatronCar=! this.showPatronCar;
+          this.show = false;
+          this.slipId = this.form.valetSlipNumber;
+        }
+        else if (this.patronSelection == 'pickupCar') {
+          this.showValetCall=! this.showValetCall;
+          this.show = false;
+          //verify that the Valet Slip ID exists***
+        }
+      },
+      onSubmitPatronRequest() {
+        this.show = false;
       },
       onReset(evt) {
         evt.preventDefault()
