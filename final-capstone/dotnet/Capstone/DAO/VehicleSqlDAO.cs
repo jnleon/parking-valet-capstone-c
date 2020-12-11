@@ -13,7 +13,7 @@ namespace Capstone.DAO
         {
             connectionString = dbConnectionString;
         }
-        public Vehicle Create(NewVehicle vehicleToCreate)
+        public Vehicle Create(NewVehicle vehicleToCreate, int valetId)
         {
 
             try
@@ -34,15 +34,13 @@ namespace Capstone.DAO
                     cmd.Parameters.AddWithValue("@email_address", vehicleToCreate.PatronEmail);
                     cmd.ExecuteNonQuery();
 
-                    //cmd = new SqlCommand("INSERT INTO valet_slips " +
-                    //                     "(valet_id, license_plate, time_in, parking_status_id) " +
-                    //                     "VALUES (@valet_id, @license_plate, @time_in, " +
-                    //                     "(SELECT parking_status_id FROM parking_statuses WHERE parking_status='Spot Requested'))", conn);
-                    //cmd.Parameters.AddWithValue("@valet_id", );
-                    //cmd.Parameters.AddWithValue("@license_plate", vehicleToCreate.LicensePlate);
-                    ////cmd.Parameters.AddWithValue("@date", (SqlDateTime)DateTime.Now.Date);
-                    //cmd.Parameters.AddWithValue("@time_in", (SqlDateTime)DateTime.Now);
-                    //cmd.ExecuteNonQuery();
+                    cmd = new SqlCommand("INSERT INTO valet_slips " +
+                                         "(valet_id, license_plate, time_in, parking_status_id) " +
+                                         "VALUES (@valet_id, @license_plate, GETDATE(), " +
+                                         "(SELECT parking_status_id FROM parking_statuses WHERE parking_status='Spot Requested'))", conn);
+                    cmd.Parameters.AddWithValue("@valet_id", valetId);
+                    cmd.Parameters.AddWithValue("@license_plate", vehicleToCreate.LicensePlate);
+                    cmd.ExecuteNonQuery();
 
                     return Get(vehicleToCreate.LicensePlate);
                 }
@@ -55,12 +53,7 @@ namespace Capstone.DAO
 
         public Vehicle Get(string licensePlate)
         {
-           /*CAR WAS SET TO NULL WE HAD TO ASSIGN EMPTY VALUES*/
             Vehicle v = new Vehicle();
-            //car.LicensePlate = "";
-            //car.VehicleMake = "";
-            //car.VehicleModel = "";
-            //car.VehicleColor = "";
       
             try
             {

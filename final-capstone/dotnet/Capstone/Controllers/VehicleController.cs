@@ -12,10 +12,12 @@ namespace Capstone.Controllers
     public class VehicleController : ControllerBase
     {
         private readonly IVehicleDAO vehicleDAO;
+        private readonly IValetDAO valetDAO;
 
-        public VehicleController(IVehicleDAO _vehicleDAO)
+        public VehicleController(IVehicleDAO _vehicleDAO, IValetDAO _valetDAO)
         {
             vehicleDAO = _vehicleDAO;
+            valetDAO = _valetDAO;
         }
         
         // https://localhost:44315/vehicle
@@ -56,12 +58,12 @@ namespace Capstone.Controllers
         }
 
         // https://localhost:44315/vehicle
-        
         [HttpPost]
         //[Authorize(Roles = "admin, valet")]
         public IActionResult Create(NewVehicle vehicleToCreate)
         {
-            Vehicle createdVehicle = vehicleDAO.Create(vehicleToCreate);
+            Valet currentValet = valetDAO.GetByUserId((int)GetCurrentUserId());
+            Vehicle createdVehicle = vehicleDAO.Create(vehicleToCreate, currentValet.ValetId);
             if (createdVehicle == null)
             {
                 return BadRequest();
@@ -70,6 +72,14 @@ namespace Capstone.Controllers
             {
                 return Created("", createdVehicle);
             }
-        }        
+        }
+
+        private int? GetCurrentUserId()
+        {
+            string userId = User.FindFirst("sub")?.Value;
+            if (string.IsNullOrWhiteSpace(userId)) return null;
+            int.TryParse(userId, out int userIdInt);
+            return userIdInt;
+        }
     }
 }

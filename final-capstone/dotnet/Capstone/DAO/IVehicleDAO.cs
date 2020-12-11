@@ -6,7 +6,7 @@ namespace Capstone.DAO
 {
     public interface IVehicleDAO
     {
-        Vehicle Create(NewVehicle vehicleToCreate);
+        Vehicle Create(NewVehicle vehicleToCreate, int valetId);
         List<Vehicle> List();
         Vehicle Get(string licensePlate);
     }
