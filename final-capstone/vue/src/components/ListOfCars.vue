@@ -66,41 +66,33 @@
               <h5>
                 LICENSE PLATE :
                 <p style="display: inline" contenteditable="true"></p>
-                <input
-                  style="display: inline"
-                  v-model="row.item.licensePlate"
-                />
+             {{row.item.licensePlate}}
               </h5>
 
               <h5>
                 PATRON ID :
                 <p style="display: inline"></p>
-                <input style="display: inline" v-model="row.item.patronId" />
+              {{row.item.patronId}}
               </h5>
 
               <h5>
                 VEHICLE MAKE :
                 <p style="display: inline"></p>
-                <input style="display: inline" v-model="row.item.vehicleMake" />
+                 {{row.item.vehicleMake}}
               </h5>
 
               <h5>
                 VEHICLE MODEL :
                 <p style="display: inline"></p>
-                <input
-                  style="display: inline"
-                  v-model="row.item.vehicleModel"
-                />
+               {{row.item.vehicleModel}}
               </h5>
 
               <h5>
                 VEHICLE COLOR :
                 <p style="display: inline"></p>
-                <input
-                  style="display: inline"
-                  v-model="row.item.vehicleColor"
-                />
+                 {{row.item.vehicleColor}}
               </h5>
+
             </div>
           </b-card>
         </template>
@@ -128,9 +120,6 @@ export default {
           vehicleColor: "",
         },
         changePatronId: "",
-        changeVehicleMake: "",
-        changeVehicleModel: "",
-        changeVehicleColor: "",
       },
       fields: [
         { key: "vehicleMake", sortable: true, sortDirection: "desc" },
