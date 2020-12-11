@@ -1,7 +1,7 @@
 <template>
   
   <div>
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+    <b-form @submit="PatronCarDetailsSubmit" @reset="onReset" v-if="show">
       <b-form-group
         id="input-group-1"
         label="Enter Valet Number:"
@@ -21,14 +21,14 @@
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
     <h3 v-if="showValetCall">The valet will arrive shortly with your car.</h3>
-  <div>
-    <h3 v-if="showPatronCar" v-bind:slipId='slipId'>Car Details will appear here</h3>
-  </div>
+    <patron-car-details v-if="showPatronCar" v-bind:slipId='slipId'/>
   </div>
 
 </template>
 
 <script>
+
+import PatronCarDetails from "@/components/PatronCarDetails.vue";
 
   export default {
     slipId: '',
@@ -45,8 +45,10 @@
         showPatronCar: false,
       }
     },
+    components: { PatronCarDetails },
     methods: {
-      onSubmit(evt) {
+
+        PatronCarDetailsSubmit(evt) {
         evt.preventDefault()
         if (this.patronSelection == 'showBalance') {
           this.showPatronCar=! this.showPatronCar;

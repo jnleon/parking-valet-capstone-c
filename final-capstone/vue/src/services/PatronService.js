@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default {
-    getValetSlip(valetSlip) {
-        return axios.get('valetslip/ticket/{id}', valetSlip)
+    getValetSlip(slipId) {
+        return axios.get("valetslip/ticket/"+ slipId)
     }
 }
