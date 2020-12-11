@@ -25,21 +25,23 @@
     </div>
     </div>
     </div>
-
+    
     <div id="valetTopRightDiv">
-        
       <!--<img id="ganggang" src="@/img/jjeb.png" />-->
-      <div id="home-parking-lot-container">
-      <parking-lot />
-    </div>
       <div id="componentsValet">
-        
         <valet-slip />
-        
       </div>
     </div>
 
-    
+    <!-- <div id="valetBottomRightDiv">-->
+   <div id="valetTopBottomDiv">
+    <div id="home-parking-lot-container">
+      <parking-lot />
+    </div>
+   </div>
+    <!-- </div>-->
+
+
   </div>
 </template>
 

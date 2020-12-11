@@ -1,42 +1,60 @@
 <template>
   
   <div>
-    <h3>Details of patron vehicle goes here</h3>
-    <div id="formCheckInCar">
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-group
-        id="enterSlipNumber"
-        label="Enter Velet Slip Number:"
-        label-for="Enter Slip Number"
-        description="Please enter the number on your valet slip."
+        id="input-group-1"
+        label="Enter Valet Number:"
+        label-for="input-1"
+        description="We'll never share your email with anyone else."
       >
         <b-form-input
-          id="patronValetSlip"
-          v-model="valetSlip.Id"
-          
+          id="input-1"
+          v-model="form.valetNumber"
+          type="email"
           required
-          placeholder="EnterValetSlip"
+          placeholder="Valet Number"
         ></b-form-input>
       </b-form-group>
-      <b-button type="valetSlipSubmit" variant="primary">Submit</b-button>
+
+      <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
-    </div>
-    
   </div>
 
-
-
-  
 </template>
 
 <script>
-export default {
-  name: "valet-slip",
-  //props: [checkedInCars],
-  
-    
-    
+  export default {
+    data() {
+      return {
+        form: {
+          valetNumber: '',
+          name: '',
+          checked: []
+        },
+        show: true
+      }
+    },
+    methods: {
+      onSubmit(evt) {
+        evt.preventDefault()
+        alert(JSON.stringify(this.form))
+      },
+      onReset(evt) {
+        evt.preventDefault()
+        // Reset our form values
+        this.form.email = ''
+        this.form.name = ''
+        this.form.food = null
+        this.form.checked = []
+        // Trick to reset/clear native browser form validation state
+        this.show = false
+        this.$nextTick(() => {
+          this.show = true
+        })
+      }
+    }
   }
 </script>
 
