@@ -142,7 +142,7 @@ export default {
         },*/
       totalRows: 1,
       currentPage: 1,
-      perPage: 5,
+      perPage: 1000,  // this is the max number of cars displayed in the list
       pageOptions: [5, 10, 15, { value: 100, text: "Show a lot" }],
       sortBy: "",
       sortDesc: false,

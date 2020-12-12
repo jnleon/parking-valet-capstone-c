@@ -1,6 +1,6 @@
 <template>
 <div>
- <h3>Hello</h3>
+ <h3>Current balance: ${{this.calculateCurrentBalance()}}</h3> 
 </div>
 </template>
 
@@ -21,9 +21,10 @@ export default {
     created() {
         PatronService.getValetSlip(this.slipId).then((response) => {
             this.valetSlip=response.data;
-            alert(this.valetSlip)
+            //alert(this.calculateCurrentBalance());
         });
         //currentBalance = valetSlip.timeIn
+        
     },
     methods: {
         currentTime() {
@@ -33,6 +34,29 @@ export default {
         var dateTime = date+' '+time;
         return dateTime;
       },
+      calculateHoursParked() {
+          var timeIn = new Date(this.valetSlip.timeIn);
+          var timeInHours = timeIn.getHours();
+          
+          var c = new Date(this.currentTime());
+          var cHours = c.getHours();
+
+          return cHours - timeInHours;
+
+      }, 
+      calculateMinutesParked() {
+           var timeIn = new Date(this.valetSlip.timeIn);
+          var timeInMinutes = timeIn.getMinutes();
+
+            var c = new Date(this.currentTime());
+            var cMinutes = c.getMinutes();
+            return Math.floor(Math.abs(cMinutes - timeInMinutes));
+      },
+      calculateCurrentBalance() {
+          let hoursCharges = this.calculateHoursParked() * 5;
+          let minuteCharges = (this.calculateMinutesParked()/60) * 5
+          return (hoursCharges + minuteCharges).toFixed(2);
+      }
     },
 }
 </script>

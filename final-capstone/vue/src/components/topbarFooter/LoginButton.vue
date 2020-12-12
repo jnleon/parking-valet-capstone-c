@@ -57,7 +57,11 @@ export default {
             this.$store.commit("SET_USER", response.data.user);
 
               if(response.data.user.role === "patron"){
-                 this.$router.push("/hello");
+                 this.$router.push("/patron");
+              }
+
+              if(response.data.user.role === "valet"){
+                 this.$router.push("/valet");
               }
 
                 if(response.data.user.role === "admin"){

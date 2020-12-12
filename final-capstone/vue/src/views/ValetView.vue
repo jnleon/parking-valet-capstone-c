@@ -6,26 +6,29 @@
       </div>
 
       <div id="MenuButtons">
-        <b-button block variant="light">Check-In</b-button>
-        <b-button block variant="light">Check-Out</b-button>
-        <b-button block variant="light">View All Cars</b-button>
-        <b-button block variant="light">Request Car Pickup</b-button>
-        <b-button block variant="light">View Pickup Requests</b-button>
-        <b-button block variant="light">Rate Calculator</b-button>
+        <b-button block variant="light" @click="onCheckIn">Check-In</b-button>
+        <b-button block variant="light" @click="onCheckOut">Check-Out</b-button>
+        <b-button block variant="light" @click="onViewAllCars">View All Cars</b-button>
+        <b-button block variant="light" @click="onRequestCarPickup">Request Car Pickup</b-button>
+        <b-button block variant="light" @click="onViewPickupRequest">View Pickup Requests</b-button>
+        <b-button block variant="light" @click="RateCalculator">Rate Calculator</b-button>
       </div>
     </div>
 
     <div id="valetTopRightDiv">
       <!--<img id="ganggang" src="@/img/jjeb.png" />-->
       <div id="componentsValet">
-        <check-in-car />
-        <list-of-cars />
+        <check-in-car v-if="showCheckInForm" v-bind:showCheckInForm='showCheckInForm'/>
+        <list-of-cars v-if="showListOfCars"/>
         <valet-slip />
+        <div id="home-parking-lot-container" v-if="showLotTop">
+      <parking-lot/>
+    </div>
       </div>
     </div>
 
     <!-- <div id="valetBottomRightDiv">-->
-   <div id="valetTopBottomDiv">
+   <div id="valetTopBottomDiv" v-if="!showLotTop">
     <div id="home-parking-lot-container">
       <parking-lot />
     </div>
@@ -42,6 +45,40 @@ import ValetSlip from "../components/ValetSlip.vue";
 
 export default {
   components: { ParkingLot, CheckInCar, ListOfCars, ValetSlip },
+  data() {
+    return {
+      showCheckInForm: false,
+      showListOfCars: false,
+      showLotTop: true,
+
+    }
+  },
+  methods: {
+    onCheckIn() {
+      this.showCheckInForm = !this.showCheckInForm;
+      this.showLotTop = !this.showLotTop;
+    },
+    onCheckOut() {
+      console.log("under construction");
+      //this.showLotTop = !this.showLotTop;
+    },
+    onViewAllCars() {
+      this.showListOfCars = !this.showListOfCars;
+      this.showLotTop = !this.showLotTop;
+    },
+    onRequestCarPickup() {
+      console.log("under construction");
+      //this.showLotTop = !this.showLotTop;
+    },
+    onViewPickupRequest() {
+      console.log("under construction");
+      //this.showLotTop = !this.showLotTop;
+    },
+    RateCalculator() {
+      console.log("under construction");
+      //this.showLotTop = !this.showLotTop;
+    }
+  }
 };
 </script>
 

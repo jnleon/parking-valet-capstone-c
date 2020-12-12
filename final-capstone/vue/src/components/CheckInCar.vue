@@ -67,6 +67,7 @@ import carDetailsService from "@/services/CarDetailsService.js";
 export default {
   name: "check-in-car",
   //props: [checkedInCars],
+  props: ['showCheckInForm'],
   data() {
       return {
         car: {
@@ -88,15 +89,20 @@ export default {
         console.log("hello")
         carDetailsService.checkInCar(this.car).then((response) => {
           if (response.status == 201) {
-            console.log("car entered")
-            console.log(response.data)
-            
-          }else{
-            console.log("no worky!")
+            //this.showCheckInForm = !this.showCheckInForm;
+            location.reload();
+          }
+          else{
+            console.log("Car not created.")
           }
 
         })
+        
         evt.preventDefault()
+        //this.$router.push({
+              //path: '/valet'
+            //});
+            
       },
       onReset(evt) {
         evt.preventDefault()

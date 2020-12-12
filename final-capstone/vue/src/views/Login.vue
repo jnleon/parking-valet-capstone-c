@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import authService from "../services/AuthService";
+//import authService from "../services/AuthService";
 
 export default {
   name: "login",
@@ -52,7 +52,7 @@ export default {
       invalidCredentials: false
     };
   },
-  methods: {
+  /*methods: {
     login() {
       authService
         .login(this.user)
@@ -60,8 +60,9 @@ export default {
           if (response.status == 200) {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             this.$store.commit("SET_USER", response.data.user);
-            this.$router.push("/");
+            this.$router.push("/patron");
           }
+          
         })
         .catch(error => {
           const response = error.response;
@@ -70,7 +71,8 @@ export default {
             this.invalidCredentials = true;
           }
         });
+        console.log("HEY!");
     }
-  }
+  } */
 };
 </script>
