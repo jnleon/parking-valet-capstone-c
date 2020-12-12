@@ -40,4 +40,16 @@ INSERT INTO parking_statuses (parking_status) VALUES ('Spot Request Canceled');
 INSERT INTO parking_statuses (parking_status) VALUES ('Pickup Requested');
 INSERT INTO parking_statuses (parking_status) VALUES ('Picked Up');
 
+-- add cars to DB for testing
+INSERT INTO vehicles (license_plate, patron_id, vehicle_make, vehicle_model, vehicle_color) Values ('ABC123','100','Chevy','Camaro SS','red');
+INSERT INTO vehicles (license_plate, patron_id, vehicle_make, vehicle_model, vehicle_color) Values ('BBC223','101','Pontiac','GTO','black');
+INSERT INTO vehicles (license_plate, patron_id, vehicle_make, vehicle_model, vehicle_color) Values ('CBC323','102','Ford','Shelby Cobra','green');
+INSERT INTO vehicles (license_plate, patron_id, vehicle_make, vehicle_model, vehicle_color) Values ('DBC423','103','Chevy','Corvette','powder blue');
+INSERT INTO vehicles (license_plate, patron_id, vehicle_make, vehicle_model, vehicle_color) Values ('EBC523','104','Cadillac','El Dorado','black');
+INSERT INTO vehicles (license_plate, patron_id, vehicle_make, vehicle_model, vehicle_color) Values ('FBC623','105','Pontiac','Trans Am','orange');
+INSERT INTO vehicles (license_plate, patron_id, vehicle_make, vehicle_model, vehicle_color) Values ('GBC723','106','Chevy','Chevelle','red');
+INSERT INTO vehicles (license_plate, patron_id, vehicle_make, vehicle_model, vehicle_color) Values ('HBC823','107','Oldsmobile','442','cherry red');
+INSERT INTO vehicles (license_plate, patron_id, vehicle_make, vehicle_model, vehicle_color) Values ('IBC923','108','Plymouth','Super Bird','orange');
+INSERT INTO vehicles (license_plate, patron_id, vehicle_make, vehicle_model, vehicle_color) Values ('JBC023','109','AMC','AMX','green');
+
 COMMIT TRANSACTION;
