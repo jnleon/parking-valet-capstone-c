@@ -44,6 +44,37 @@ namespace Capstone.DAO
             return p;
         }
 
+        public Patron Get(int patronId)
+        {
+            Patron p = null;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT patron_id, user_id, " +
+                                                    "first_name, last_name, phone_number, email_address " +
+                                                    "FROM patrons " +
+                                                    "WHERE patron_id = @patron_id", conn);
+                    cmd.Parameters.AddWithValue("@patron_id", patronId);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows && reader.Read())
+                    {
+                        p = GetPatronFromReader(reader);
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+
+            return p;
+        }
+
         private Patron GetPatronFromReader(SqlDataReader reader)
         {
             Patron p = new Patron()

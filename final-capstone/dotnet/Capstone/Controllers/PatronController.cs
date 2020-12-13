@@ -19,8 +19,8 @@ namespace Capstone.Controllers
             patronDAO = _patronDAO;
         }
 
-        // https://localhost:44315/patron/1
-        [HttpGet("{id}")]
+        // https://localhost:44315/patron/user/1
+        [HttpGet("user/{id}")]
         public IActionResult GetByUserId(int id)
         {
             Patron p = patronDAO.GetByUserId(id);
@@ -36,5 +36,25 @@ namespace Capstone.Controllers
                 return Ok(p);
             }
         }
+
+        // https://localhost:44315/patron/1
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            Patron p = patronDAO.Get(id);
+
+            if (p == null)
+            {
+                //return StatusCode(500);
+                return NoContent();
+            }
+            else
+            {
+                // Switch to 200 OK
+                return Ok(p);
+            }
+        }
+
+
     }
 }

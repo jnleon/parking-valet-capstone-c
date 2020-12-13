@@ -13,10 +13,12 @@ namespace Capstone.Controllers
     public class ValetSlipController : ControllerBase
     {
         private readonly IValetSlipDAO valetSlipDAO;
+        private readonly IVehicleValetSlipPatronDAO vehicleValetSlipPatronDAO;
 
-        public ValetSlipController(IValetSlipDAO _valetSlipDAO)
+        public ValetSlipController(IValetSlipDAO _valetSlipDAO, IVehicleValetSlipPatronDAO _vehicleValetSlipPatronDAO)
         {
             valetSlipDAO = _valetSlipDAO;
+            vehicleValetSlipPatronDAO = _vehicleValetSlipPatronDAO;
         }
         
         // get by ticket id
@@ -73,6 +75,20 @@ namespace Capstone.Controllers
             {
                 // Switch to 200 OK
                 return Ok(vs);
+            }
+        }
+        // https://localhost:44315/valetslip/alldata/
+        [HttpGet("alldata")]
+        public IActionResult GetAllDataByLicensePlate()
+        {
+            List<VehicleValetSlipPatron> v = vehicleValetSlipPatronDAO.List();
+            if (v == null)
+            {
+                return NoContent();
+            }
+            else
+            {
+                return Ok(v);
             }
         }
     }
