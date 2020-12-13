@@ -63,18 +63,20 @@
               <!-- <li v-for="(value, key) in row.item" :key="key">
                 {{ key }}: {{ value }}
               </li>-->
+                    <h5>
+                PATRON ID :
+                <p style="display: inline"></p>
+              {{row.item.patronId}}
+              </h5>
+
+              
               <h5>
                 LICENSE PLATE :
                 <p style="display: inline" contenteditable="true"></p>
              {{row.item.licensePlate}}
               </h5>
 
-              <h5>
-                PATRON ID :
-                <p style="display: inline"></p>
-              {{row.item.patronId}}
-              </h5>
-
+        
               <h5>
                 VEHICLE MAKE :
                 <p style="display: inline"></p>
@@ -88,10 +90,36 @@
               </h5>
 
               <h5>
-                VEHICLE COLOR :
+                PATRON NAME :
                 <p style="display: inline"></p>
-                 {{row.item.vehicleColor}}
+                 {{row.item.firstName}}   {{row.item.lastName}}
               </h5>
+
+                <h5>
+                PATRON PHONE NUMBER :
+                <p style="display: inline"></p>
+                 {{row.item.phoneNumber}}
+              </h5>
+
+                <h5>
+                PATRON EMAIL :
+                <p style="display: inline"></p>
+                 {{row.item.emailAddress}}
+              </h5>
+
+                <h5>
+               TIME IN :
+                <p style="display: inline"></p>
+                 {{row.item.timeIn}}
+              </h5>
+
+              <h5>
+               AMOUNT OWED :
+                <p style="display: inline"></p>
+                 {{row.item.amountOwed}}
+              </h5>
+
+
 
             </div>
           </b-card>
@@ -102,14 +130,15 @@
 </template>
 
 <script>
-import ParkingLotService from "@/services/ParkingLotService.js";
+import ValetService from "@/services/ValetService.js";
 
 export default {
   name: "list-of-cars",
 
   created() {
-    ParkingLotService.getCheckedInCars().then((response) => {
+    ValetService.getAllTheInfo().then((response) => {
       this.$store.commit("LOAD_CAR_LIST", response.data);
+      console.log('hello');
     });
   },
   data() {

@@ -1,6 +1,8 @@
 <template>
 <div>
  <h3>Current balance: ${{this.calculateCurrentBalance()}}</h3> 
+
+ 
 </div>
 </template>
 
