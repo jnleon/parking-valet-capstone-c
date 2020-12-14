@@ -155,10 +155,13 @@ namespace Capstone.DAO
 
                     SqlCommand cmd = new SqlCommand("UPDATE valet_slips " +
                                                     "SET parking_spot_id=@parking_spot_id, " +
-                                                    "parking_status_id=(SELECT parking_status_id FROM parking_statuses WHERE parking_status='Picked Up') " +
+                                                    "parking_status_id=(SELECT parking_status_id FROM parking_statuses WHERE parking_status='Picked Up'), " +
+                                                    "amount_owed=@amount_owed, " +
+                                                    "time_out=GETDATE() " +
                                                     "WHERE ticket_id=@ticket_id", conn);
                     cmd.Parameters.AddWithValue("@parking_spot_id", DBNull.Value);
                     cmd.Parameters.AddWithValue("@ticket_id", valetSlipForVehicleToPickup.TicketId);
+                    cmd.Parameters.AddWithValue("@amount_owed", (SqlMoney)valetSlipForVehicleToPickup.AmountOwed);
                     cmd.ExecuteNonQuery();
 
                     cmd = new SqlCommand("UPDATE parking_spots " +
