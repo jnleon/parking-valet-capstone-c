@@ -123,10 +123,10 @@
                 <h5>
                   AMOUNT OWED :
                   <p style="display: inline" class="attributesList">
-                    {{ row.item.amountOwed }}
+                  ${{calcTime(row.item.timeIn)}}
                   </p>
                 </h5>
-              </div>
+              </div> 
             </div>
           </b-card>
         </template>
@@ -137,6 +137,7 @@
 
 <script>
 import ValetService from "@/services/ValetService.js";
+import moment from 'moment';
 
 export default {
   name: "list-of-cars",
@@ -149,6 +150,7 @@ export default {
   },
   data() {
     return {
+   
       fields: [
         { key: "vehicleMake", sortable: true, sortDirection: "desc" },
         { key: "vehicleModel", sortable: true, class: "text-center" },
@@ -179,25 +181,70 @@ export default {
           return { text: f.label, value: f.key };
         });
     },
+   
   },
-  mounted() {
+  /*mounted() {
     // Set the initial number of items
     this.totalRows = this.items.length;
-  },
+  },*/
   methods: {
     info(item, index, button) {
       this.infoModal.title = `Row index: ${index}`;
       this.infoModal.content = JSON.stringify(item, null, 2);
       this.$root.$emit("bv::show::modal", this.infoModal.id, button);
     },
+        calcTime(date) {
+        var now = moment(new Date())
+        var end = moment(date)
+        var duration = moment.duration(now.diff(end))
+        var minutes = duration.asMinutes()
+       var calc = ((minutes) / 60) * 5;
+       return calc.toFixed(2);
+    },
+        
 
     onFiltered(filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
     },
+    currentTime() {
+      var today = new Date();
+      var date =
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate();
+      var time =
+        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      var dateTime = date + " " + time;
+      return dateTime;
+    },
+    calculateHoursParked(time) {
+      var timeIn = new Date(time);
+      var timeInHours = timeIn.getHours();
+
+      var c = new Date(this.currentTime());
+      var cHours = c.getHours();
+
+      return cHours - timeInHours;
+    },
+    calculateMinutesParked(time) {
+      var timeIn = new Date(time);
+      var timeInMinutes = timeIn.getMinutes();
+
+      var c = new Date(this.currentTime());
+      var cMinutes = c.getMinutes();
+      return Math.floor(Math.abs(cMinutes - timeInMinutes));
+    },
+    calculateCurrentBalance(time) {
+      let hoursCharges = this.calculateHoursParked(time) * 5;
+      let minuteCharges = (this.calculateMinutesParked(time) / 60) * 5;
+      return (hoursCharges + minuteCharges).toFixed(2);
+    },
   },
-};
+}
 </script>
 
 <style>
