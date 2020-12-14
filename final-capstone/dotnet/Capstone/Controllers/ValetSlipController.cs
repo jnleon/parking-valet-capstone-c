@@ -91,5 +91,53 @@ namespace Capstone.Controllers
                 return Ok(v);
             }
         }
+
+        // park vehicle
+        // https://localhost:44315/valetslip/parkvehicle/1
+        [HttpPut("parkvehicle/{id}")]
+        public IActionResult ParkVehicle(int id, ValetSlip ValetSlipToUpdate)
+        {
+            ValetSlip updatedValetSlip = valetSlipDAO.ParkVehicle(id, ValetSlipToUpdate);
+            if (updatedValetSlip == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return Ok(updatedValetSlip);
+            }
+        }
+
+        // request vehicle pick up
+        // https://localhost:44315/valetslip/pickupvehicle/1
+        [HttpPut("pickupvehicle/{id}")]
+        public IActionResult PickupVehicle(int id, ValetSlip ValetSlipToUpdate)
+        {
+            ValetSlip updatedValetSlip = valetSlipDAO.PickupVehicle(id, ValetSlipToUpdate);
+            if (updatedValetSlip == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return Ok(updatedValetSlip);
+            }
+        }
+
+        // pick up vehicle
+        // https://localhost:44315/valetslip/requestpickupvehicle/1
+        [HttpPut("requestpickupvehicle/{id}")]
+        public IActionResult RequestPickupVehicle(int id, ValetSlip ValetSlipToUpdate)
+        {
+            ValetSlip updatedValetSlip = valetSlipDAO.RequestPickupVehicle(id, ValetSlipToUpdate);
+            if (updatedValetSlip == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return Ok(updatedValetSlip);
+            }
+        }
     }
 }
