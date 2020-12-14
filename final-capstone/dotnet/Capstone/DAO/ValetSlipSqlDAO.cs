@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 
 namespace Capstone.DAO
 {
@@ -109,6 +110,95 @@ namespace Capstone.DAO
             }
 
             return valetSlips;
+        }
+
+        public ValetSlip ParkVehicle(int idToUpdate, ValetSlip valetSlipForVehicleToPark)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("UPDATE valet_slips " +
+                                                    "SET parking_spot_id=@parking_spot_id, " +
+                                                    "parking_status_id=(SELECT parking_status_id FROM parking_statuses WHERE parking_status='Parked') " +
+                                                    "WHERE ticket_id=@ticket_id", conn);
+                    cmd.Parameters.AddWithValue("@parking_spot_id", valetSlipForVehicleToPark.ParkingSpotId);
+                    cmd.Parameters.AddWithValue("@ticket_id", valetSlipForVehicleToPark.TicketId);
+                    cmd.ExecuteNonQuery();
+
+                    cmd = new SqlCommand("UPDATE parking_spots " +
+                                         "SET is_occupied=@is_occupied " +
+                                         "WHERE parking_spot_id=@parking_spot_id", conn);
+                    cmd.Parameters.AddWithValue("@parking_spot_id", valetSlipForVehicleToPark.ParkingSpotId);
+                    cmd.Parameters.AddWithValue("@is_occupied", (SqlBoolean)true);
+
+                    cmd.ExecuteNonQuery();
+
+                    return Get(valetSlipForVehicleToPark.TicketId);
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+        }
+
+        public ValetSlip PickupVehicle(int idToUpdate, ValetSlip valetSlipForVehicleToPickup)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("UPDATE valet_slips " +
+                                                    "SET parking_spot_id=@parking_spot_id, " +
+                                                    "parking_status_id=(SELECT parking_status_id FROM parking_statuses WHERE parking_status='Picked Up') " +
+                                                    "WHERE ticket_id=@ticket_id", conn);
+                    cmd.Parameters.AddWithValue("@parking_spot_id", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ticket_id", valetSlipForVehicleToPickup.TicketId);
+                    cmd.ExecuteNonQuery();
+
+                    cmd = new SqlCommand("UPDATE parking_spots " +
+                                         "SET is_occupied=@is_occupied " +
+                                         "WHERE parking_spot_id=@parking_spot_id", conn);
+                    cmd.Parameters.AddWithValue("@parking_spot_id", valetSlipForVehicleToPickup.ParkingSpotId);
+                    cmd.Parameters.AddWithValue("@is_occupied", (SqlBoolean)false);
+
+                    cmd.ExecuteNonQuery();
+
+                    return Get(valetSlipForVehicleToPickup.TicketId);
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+        }
+
+        public ValetSlip RequestPickupVehicle(int idToUpdate, ValetSlip valetSlipForVehicleToRequestPickup)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("UPDATE valet_slips " +
+                                                    "SET parking_status_id=(SELECT parking_status_id FROM parking_statuses WHERE parking_status='Pickup Requested') " +
+                                                    "WHERE ticket_id=@ticket_id", conn);
+                    cmd.Parameters.AddWithValue("@ticket_id", valetSlipForVehicleToRequestPickup.TicketId);
+                    cmd.ExecuteNonQuery();
+
+                    return Get(valetSlipForVehicleToRequestPickup.TicketId);
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
         }
 
         private ValetSlip GetValetSlipFromReader(SqlDataReader reader)

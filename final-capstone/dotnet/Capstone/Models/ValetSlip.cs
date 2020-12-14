@@ -16,7 +16,6 @@ namespace Capstone.Models
         public string LicensePlate { get; set; }
         
         [Required]
-        [MaxLength(10, ErrorMessage = "Max length for parking spot is 10.")]
         public int ParkingSpotId { get; set; }
         
         //[Required]
