@@ -38,7 +38,6 @@
         stacked="md"
         :items="this.$store.state.checkedInCars"
         :fields="fields"
-        :current-page="currentPage"
         :per-page="perPage"
         :filter="filter"
         :filter-included-fields="filterOn"
@@ -60,67 +59,74 @@
         <template #row-details="row">
           <b-card>
             <div id="listStuffModal">
-              <!-- <li v-for="(value, key) in row.item" :key="key">
-                {{ key }}: {{ value }}
-              </li>-->
-                    <h5>
-                PATRON ID :
-                <p style="display: inline"></p>
-              {{row.item.patronId}}
-              </h5>
-
-              
-              <h5>
-                LICENSE PLATE :
-                <p style="display: inline" contenteditable="true"></p>
-             {{row.item.licensePlate}}
-              </h5>
-
-        
-              <h5>
-                VEHICLE MAKE :
-                <p style="display: inline"></p>
-                 {{row.item.vehicleMake}}
-              </h5>
-
-              <h5>
-                VEHICLE MODEL :
-                <p style="display: inline"></p>
-               {{row.item.vehicleModel}}
-              </h5>
-
-              <h5>
-                PATRON NAME :
-                <p style="display: inline"></p>
-                 {{row.item.firstName}}   {{row.item.lastName}}
-              </h5>
+              <div id="displayPatronList">
+                <h5>
+                  PATRON ID :
+                  <p style="display: inline" class="attributesList">
+                    {{ row.item.patronId }}
+                  </p>
+                </h5>
 
                 <h5>
-                PATRON PHONE NUMBER :
-                <p style="display: inline"></p>
-                 {{row.item.phoneNumber}}
-              </h5>
+                  PATRON NAME :
+                  <p style="display: inline" class="attributesList">
+                    {{ row.item.firstName }} {{ row.item.lastName }}
+                  </p>
+                </h5>
 
                 <h5>
-                PATRON EMAIL :
-                <p style="display: inline"></p>
-                 {{row.item.emailAddress}}
-              </h5>
+                  PATRON PHONE NUMBER :
+                  <p style="display: inline" class="attributesList">
+                    {{ row.item.phoneNumber }}
+                  </p>
+                </h5>
 
                 <h5>
-               TIME IN :
-                <p style="display: inline"></p>
-                 {{row.item.timeIn}}
-              </h5>
+                  PATRON EMAIL :
+                  <p style="display: inline" class="attributesList">
+                    {{ row.item.emailAddress }}
+                  </p>
+                </h5>
+              </div>
+              <div id="displayCarList">
+                <h5>
+                  LICENSE PLATE :
+                  <p style="display: inline" class="attributesList">
+                    {{ row.item.licensePlate }}
+                  </p>
+                </h5>
 
-              <h5>
-               AMOUNT OWED :
-                <p style="display: inline"></p>
-                 {{row.item.amountOwed}}
-              </h5>
+                <h5>
+                  VEHICLE MAKE :
+                  <p style="display: inline" class="attributesList">
+                    {{ row.item.vehicleMake }}
+                  </p>
+                </h5>
 
+                <h5>
+                  VEHICLE MODEL :
+                  <p style="display: inline" class="attributesList">
+                    {{ row.item.vehicleModel }}
+                  </p>
+                </h5>
 
+                <h5>
+                  TIME IN :
+                  <p style="display: inline" class="attributesList">
+                    {{ row.item.timeIn.substring(0, 10) }}
+                    <b-icon icon="calendar2-date" aria-hidden="true"></b-icon
+                    >&nbsp; {{ row.item.timeIn.substring(11, 19) }}
+                    <b-icon icon="clock" aria-hidden="true"></b-icon>
+                  </p>
+                </h5>
 
+                <h5>
+                  AMOUNT OWED :
+                  <p style="display: inline" class="attributesList">
+                    {{ row.item.amountOwed }}
+                  </p>
+                </h5>
+              </div>
             </div>
           </b-card>
         </template>
@@ -138,18 +144,11 @@ export default {
   created() {
     ValetService.getAllTheInfo().then((response) => {
       this.$store.commit("LOAD_CAR_LIST", response.data);
-      console.log('hello');
+      console.log("hello");
     });
   },
   data() {
     return {
-      row: {
-        item: {
-          vehicleModel: "",
-          vehicleColor: "",
-        },
-        changePatronId: "",
-      },
       fields: [
         { key: "vehicleMake", sortable: true, sortDirection: "desc" },
         { key: "vehicleModel", sortable: true, class: "text-center" },
@@ -163,26 +162,12 @@ export default {
         },
         { key: "actions", label: "Actions" },
       ],
-      /* names:{
-          1:"License Plate",
-            2:LicensePlate,
-              3:LicensePlate,
-                4:LicensePlate,
-        },*/
-      totalRows: 1,
-      currentPage: 1,
-      perPage: 1000,  // this is the max number of cars displayed in the list
-      pageOptions: [5, 10, 15, { value: 100, text: "Show a lot" }],
+      perPage: 1000, // this is the max number of cars displayed in the list
       sortBy: "",
       sortDesc: false,
       sortDirection: "asc",
       filter: null,
       filterOn: [],
-      infoModal: {
-        id: "info-modal",
-        title: "",
-        content: "",
-      },
     };
   },
   computed: {
@@ -216,6 +201,23 @@ export default {
 </script>
 
 <style>
+.attributesList {
+  color: rgb(80, 80, 80);
+}
+
+#displayPatronList {
+  background-color: rgb(238, 238, 238);
+  padding: 1%;
+  border-radius: 0.5rem;
+}
+
+#displayCarList {
+  background-color: rgb(250, 250, 250);
+  padding: 1%;
+  border-radius: 0.5rem;
+  margin-top: 1%;
+}
+
 #listStuffModal {
   list-style: none;
 }

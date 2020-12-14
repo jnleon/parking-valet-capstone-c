@@ -1,6 +1,5 @@
 <template>
   <div id="formCheckInCar">
-      
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-form-group
         id="makeLabel"
@@ -11,7 +10,6 @@
         <b-form-input
           id="makeInput"
           v-model="car.vehicleMake"
-          
           required
           placeholder="Make"
         ></b-form-input>
@@ -26,7 +24,11 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="licensePlateLabel" label="License Plate:" label-for="licensePlate">
+      <b-form-group
+        id="licensePlateLabel"
+        label="License Plate:"
+        label-for="licensePlate"
+      >
         <b-form-input
           id="licensePlate"
           v-model="car.licensePlate"
@@ -44,7 +46,11 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="emailLabel" label="Patron Email:" label-for="patronEmail">
+      <b-form-group
+        id="emailLabel"
+        label="Patron Email:"
+        label-for="patronEmail"
+      >
         <b-form-input
           id="patronEmail"
           v-model="car.patronEmail"
@@ -56,8 +62,6 @@
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
-   
-  
   </div>
 </template>
 
@@ -67,70 +71,64 @@ import carDetailsService from "@/services/CarDetailsService.js";
 export default {
   name: "check-in-car",
   //props: [checkedInCars],
-  props: ['showCheckInForm'],
+  props: ["showCheckInForm"],
   data() {
-      return {
-        car: {
-          vehicleMake: '',
-          vehicleModel: '',
-          licensePlate: '',
-          vehicleColor: '',
-          patronEmail: '',
-          vehicleSpot: 0
-        },
-        
-        show: true
-      }
-    },
-    
-    methods: {
-      onSubmit(evt) {
-        
-        console.log("hello")
-        carDetailsService.checkInCar(this.car).then((response) => {
-          if (response.status == 201) {
-            //this.showCheckInForm = !this.showCheckInForm;
-            location.reload();
-          }
-          else{
-            console.log("Car not created.")
-          }
-
-        })
-        
-        evt.preventDefault()
-        //this.$router.push({
-              //path: '/valet'
-            //});
-            
+    return {
+      car: {
+        vehicleMake: "",
+        vehicleModel: "",
+        licensePlate: "",
+        vehicleColor: "",
+        patronEmail: "",
+        vehicleSpot: 0,
       },
-      onReset(evt) {
-        evt.preventDefault()
-        // Reset our form values
-        this.car.vehicleMake = ''
-        this.car.vehicleModel = ''
-        this.car.licensePlate = ''
-        this.car.vehicleColor = ''
-        this.car.patronEmail = ''
-        
-        // Trick to reset/clear native browser form validation state
-        this.show = false
-        this.$nextTick(() => {
-          this.show = true
-        })
-      }
-    }
-}
+
+      show: true,
+    };
+  },
+
+  methods: {
+    onSubmit(evt) {
+      console.log("hello");
+      carDetailsService.checkInCar(this.car).then((response) => {
+        if (response.status == 201) {
+          //this.showCheckInForm = !this.showCheckInForm;
+          location.reload();
+        } else {
+          console.log("Car not created.");
+        }
+      });
+
+      evt.preventDefault();
+      //this.$router.push({
+      //path: '/valet'
+      //});
+    },
+    onReset(evt) {
+      evt.preventDefault();
+      // Reset our form values
+      this.car.vehicleMake = "";
+      this.car.vehicleModel = "";
+      this.car.licensePlate = "";
+      this.car.vehicleColor = "";
+      this.car.patronEmail = "";
+
+      // Trick to reset/clear native browser form validation state
+      this.show = false;
+      this.$nextTick(() => {
+        this.show = true;
+      });
+    },
+  },
+};
 </script>
 
 <style>
-
-#formCheckInCar{
-   font-weight: 500;
+#formCheckInCar {
+  font-weight: 500;
   font-family: "Jua";
   text-transform: uppercase;
   border-color: white !important;
   padding: 2vh !important;
 }
-
 </style>

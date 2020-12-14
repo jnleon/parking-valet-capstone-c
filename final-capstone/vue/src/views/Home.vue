@@ -4,17 +4,17 @@
       <div id="simpleBar">
         <p>full service Valet</p>
       </div>
-   <info-component/>
+      <info-component />
       <div id="pricingSection">
         <div>
           <marquee font style="bold" scrolldelay="0.4"
-            ><font size="5" face="Jua" family="Jua" /><font color="#BC8F8F" />$5 PARKING
-            AN HOUR ALL DAY EVERY DAY!</marquee
+            ><font size="5" face="Jua" family="Jua" /><font color="#BC8F8F" />$5
+            PARKING AN HOUR ALL DAY EVERY DAY!</marquee
           >
         </div>
       </div>
       <div id="home-parking-lot-container">
-      <parking-lot />
+        <parking-lot />
       </div>
 
       <div id="palceholderFunnyPhoto">
@@ -22,15 +22,14 @@
       </div>
     </div>
 
-    <div id="map">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8516.561050240627!2d-84.46975296246113!3d39.15195057631328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8841b2f72057d245%3A0x27bc76f0bdcb7dfd!2sTech%20Elevator%20Cincinnati!5e1!3m2!1sen!2sus!4v1607456474306!5m2!1sen!2sus" 
-      width="2000" 
-      height="1100" 
-      frameborder="0" 
-      style="border:0;" 
-      allowfullscreen="" 
-      aria-hidden="false" 
-      tabindex="0">
+    <div class="mapHome">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8516.561050240627!2d-84.46975296246113!3d39.15195057631328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8841b2f72057d245%3A0x27bc76f0bdcb7dfd!2sTech%20Elevator%20Cincinnati!5e1!3m2!1sen!2sus!4v1607456474306!5m2!1sen!2sus"
+        width="2000"
+        height="100%"
+        frameborder="0"
+        aria-hidden="false"
+      >
       </iframe>
     </div>
   </div>
@@ -38,50 +37,55 @@
 
 <script>
 import ParkingLot from "../components/ParkingLot.vue";
-import InfoComponent from '../components/InfoComponent.vue';
+import InfoComponent from "../components/InfoComponent.vue";
 export default {
   components: { ParkingLot, InfoComponent },
   name: "home",
-  
 };
 </script>
 
 <style >
-.hr4{
-  color:green;
+.mapHome {
+  display: flex;
+  grid-area: map;
+  padding: 0.8%;
+  background-color: orange;
+  border-radius: 0.5rem;
 }
 
-.hr5{
-  color:red;
+.hr4 {
+  color: green;
+}
+
+.hr5 {
+  color: red;
 }
 
 .container-text li {
   list-style: none;
   text-align: left;
   font-size: 90%;
-  color:rgb(230, 230, 230);
+  color: rgb(230, 230, 230);
   padding-right: 50%;
-}s
-#available-box {  
+}
+s #available-box {
   background-color: green;
   color: green;
   width: 20px;
-  
 }
 #occupied-box {
   background-color: red;
   color: red;
   width: 20px;
 }
-#home-parking-lot-container{
+#home-parking-lot-container {
   color: white;
-  background-image: url("../img/p-lot-background.jpg"); 
+  background-image: url("../img/p-lot-background.jpg");
   padding-top: 3%;
   padding-bottom: 0.05%;
-  font-family: 'Jua';
+  font-family: "Jua";
   text-transform: uppercase;
   text-align: center;
-
 }
 marquee {
   font-family: "Jua";
@@ -109,7 +113,7 @@ marquee {
   display: flex;
   padding: 4%;
   background-color: rgb(236, 234, 234);
-/*rgb(46, 83, 46)*/
+  /*rgb(46, 83, 46)*/
 }
 #ganggang {
   align-items: center;
@@ -174,18 +178,8 @@ h2 {
   background-color: rgb(236, 234, 234);
 }
 
-#map {
-  display: flex;
-  grid-area: map;
-  padding: 0.5%;
-  background-color: orange;
-  border-radius: 0.5rem;
-}
-
 div > iframe {
   max-width: 100%;
   max-height: 100%;
 }
-
-
 </style>

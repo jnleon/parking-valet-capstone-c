@@ -6,45 +6,59 @@
       </div>
 
       <div id="MenuButtons">
-        <b-button @click="onSubmitBalanceRequest" block variant="light">View Balance/Car Details</b-button>
-        <b-button @click="requestPickup" block variant="light">Request Pickup</b-button>
-        
+        <b-button
+          @click="onSubmitBalanceRequest"
+          block
+          variant="light"
+          v-bind:class="{
+            notpressed: !showValetSlip,
+            pressed: showValetSlip,
+          }"
+          >View Balance/Car Details</b-button
+        >
+        <b-button
+          @click="requestPickup"
+          block
+          variant="light"
+          v-bind:class="{
+            notpressed: !showValetSlip,
+            pressed: showValetSlip,
+          }"
+          >Request Pickup</b-button
+        >
       </div>
-      <div>
-      <div id="map">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8516.561050240627!2d-84.46975296246113!3d39.15195057631328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8841b2f72057d245%3A0x27bc76f0bdcb7dfd!2sTech%20Elevator%20Cincinnati!5e1!3m2!1sen!2sus!4v1607456474306!5m2!1sen!2sus" 
-      width="2000" 
-      height="500"
-      
-      frameborder="0" 
-      style="border:0;" 
-      allowfullscreen="" 
-      aria-hidden="false" 
-      tabindex="0">
-      </iframe>
+      <div class="mapViews">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8516.561050240627!2d-84.46975296246113!3d39.15195057631328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8841b2f72057d245%3A0x27bc76f0bdcb7dfd!2sTech%20Elevator%20Cincinnati!5e1!3m2!1sen!2sus!4v1607456474306!5m2!1sen!2sus"
+          width="2000"
+          frameborder="0"
+          style="border: 0"
+          allowfullscreen=""
+          aria-hidden="false"
+          tabindex="0"
+          height="100%"
+        >
+        </iframe>
+      </div>
     </div>
-    </div>
-    </div>
-    
-    <div id="valetTopRightDiv" >
+
+    <div id="valetTopRightDiv">
       <!--<img id="ganggang" src="@/img/jjeb.png" />-->
       <div id="componentsValet" v-if="showValetSlip">
-        <valet-slip v-bind:patronSelection='patronSelection'/>
+        <valet-slip v-bind:patronSelection="patronSelection" />
       </div>
       <div id="home-parking-lot-container" v-if="!showValetSlip">
-      <parking-lot />
-    </div>
+        <parking-lot />
+      </div>
     </div>
 
     <!-- <div id="valetBottomRightDiv">-->
-   <div id="valetTopBottomDiv" v-if="showValetSlip">
-    <div id="home-parking-lot-container">
-      <parking-lot />
+    <div id="valetTopBottomDiv" v-if="showValetSlip">
+      <div id="home-parking-lot-container">
+        <parking-lot />
+      </div>
     </div>
-   </div>
     <!-- </div>-->
-
-
   </div>
 </template>
 
@@ -53,50 +67,38 @@ import ParkingLot from "../components/ParkingLot.vue";
 import ValetSlip from "../components/ValetSlip.vue";
 
 export default {
-  
-  
   data() {
     return {
       showValetSlip: false,
-      patronSelection: '',
-    }    
-    
+      patronSelection: "",
+    };
   },
   components: { ParkingLot, ValetSlip },
   methods: {
-
     onSubmitBalanceRequest() {
-      this.showValetSlip=! this.showValetSlip;
-      this.patronSelection = 'showBalance';
+      this.showValetSlip = !this.showValetSlip;
+      this.patronSelection = "showBalance";
     },
     requestPickup() {
-      this.patronSelection = 'pickupCar';
-      this.showValetSlip=! this.showValetSlip;
-    }
-  }
+      this.patronSelection = "pickupCar";
+      this.showValetSlip = !this.showValetSlip;
+    },
+  },
 };
 </script>
 
 <style>
-#MenuButtons {
+.mapViews {
+  display: flex;
+  grid-area: map;
+  padding: 0.8%;
+  background-color: orange;
+  border-radius: 0.5rem;
   margin: 8%;
 }
-.btn-block:hover {
-  transition: var(--transition-speed) !important;
-  background-color: var(--li-color-hover) !important;
-  color: var(--a-color-hover) !important;
-}
 
-.btn-block {
-  background-color: rgb(241, 241, 241) !important;
-  color: black !important;
-  border: rgb(255, 255, 255) 4fr !important;
-  font-weight: 500;
-  font-family: "Jua";
-  text-transform: uppercase;
-  border-color: white !important;
-  margin-bottom: 3.5vh;
-  padding: 2vh !important;
+#MenuButtons {
+  margin: 8%;
 }
 
 #MenuButtons .btn-secondary {
@@ -129,16 +131,15 @@ export default {
 
 #valetTopBottomDiv {
   grid-area: valetBottomRight;
-    background-color: orange;
+  background-color: orange;
   padding: 0.5%;
   border-radius: 0.5rem;
   margin-bottom: 2%;
 }
 
-#componentsValet{
-  background-color:  rgb(245, 245, 245);
+#componentsValet {
+  background-color: rgb(245, 245, 245);
   padding: 0.5%;
   border-radius: 0.5rem;
-
 }
 </style>

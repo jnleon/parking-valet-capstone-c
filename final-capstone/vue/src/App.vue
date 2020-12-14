@@ -61,11 +61,7 @@ export default {
   min-width: 12rem !important;
 }
 
-:root {
-  --li-color: white;
-  --transition-speed: 0.6s;
-  --a-color-hover: white;
-}
+
 
 @import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
 
@@ -84,6 +80,8 @@ export default {
     "content content content content content";
   grid-gap: 10px;
   height: fit-content;
+  padding-bottom: 1%;
+  background-color: rgb(246, 246, 246);
 }
 .routerV {
   grid-area: content;

@@ -6,9 +6,20 @@
     ref="dropdown"
     class="m-2"
   >
-
-   <b-alert :show="6"  class="alertsRegist" variant="success" v-if="registrationCorrect">User Registered</b-alert>
-    <b-alert :show="6" class="alertsRegist" variant="danger" v-if="registrationErrors">{{registrationErrorMsg}}</b-alert>
+    <b-alert
+      :show="6"
+      class="alertsRegist"
+      variant="success"
+      v-if="registrationCorrect"
+      >User Registered</b-alert
+    >
+    <b-alert
+      :show="6"
+      class="alertsRegist"
+      variant="danger"
+      v-if="registrationErrors"
+      >{{ registrationErrorMsg }}</b-alert
+    >
     <b-dropdown-form @submit.prevent="register">
       <b-form-group label="Username" label-for="dropdown-form-username">
         <b-form-input
@@ -21,8 +32,6 @@
         ></b-form-input>
       </b-form-group>
 
-
-
       <b-form-group label="Password" label-for="dropdown-form-password">
         <b-form-input
           id="dropdown-form-password"
@@ -32,7 +41,6 @@
           v-model="user.password"
           required
         ></b-form-input>
-
 
         <b-form-input
           id="dropdown-form-confirmPassword"
@@ -44,9 +52,9 @@
         ></b-form-input>
       </b-form-group>
 
- <b-form-group label="First Name" label-for="dropdown-form-username">
+      <b-form-group label="First Name" label-for="dropdown-form-firstname">
         <b-form-input
-          id="dropdown-form-username"
+          id="dropdown-form-firstname"
           size="sm"
           placeholder="firstname"
           v-model="user.firstname"
@@ -54,9 +62,9 @@
         ></b-form-input>
       </b-form-group>
 
-       <b-form-group label="Last Name" label-for="dropdown-form-username">
+      <b-form-group label="Last Name" label-for="dropdown-form-lastname">
         <b-form-input
-          id="dropdown-form-username"
+          id="dropdown-form-lastname"
           size="sm"
           placeholder="lastname"
           v-model="user.lastname"
@@ -65,9 +73,9 @@
         ></b-form-input>
       </b-form-group>
 
-    <b-form-group label="Email" label-for="dropdown-form-username">
+      <b-form-group label="Email" label-for="dropdown-form-email">
         <b-form-input
-          id="dropdown-form-username"
+          id="dropdown-form-email"
           size="sm"
           placeholder="email@example.com"
           v-model="user.emailaddress"
@@ -76,9 +84,9 @@
         ></b-form-input>
       </b-form-group>
 
-  <b-form-group label="Phone Number" label-for="dropdown-form-username">
+      <b-form-group label="Phone Number" label-for="dropdown-form-phonenumber">
         <b-form-input
-          id="dropdown-form-username"
+          id="dropdown-form-phonenumber"
           size="sm"
           placeholder="352-123-1234"
           v-model="user.phonenumber"
@@ -105,14 +113,14 @@ export default {
         username: "",
         password: "",
         confirmPassword: "",
-        firstname:"",
-        lastname:"",
-        emailaddress:"",
-        phonenumber:"",
+        firstname: "",
+        lastname: "",
+        emailaddress: "",
+        phonenumber: "",
         role: "patron",
       },
       registrationErrors: false,
-      registrationCorrect:false,
+      registrationCorrect: false,
       registrationErrorMsg: "There were problems registering this user.",
     };
   },
@@ -122,24 +130,20 @@ export default {
         this.registrationErrors = true;
         this.registrationErrorMsg = "Password & Confirm Password do not match.";
       } else {
-         
-        authService
-          .register(this.user)
-          .then(() => {
-              this.user={};
-              this.registrationCorrect =true;
-              this.registrationErrors =false;
-          })
-          this.registrationCorrect =true;
-              this.registrationErrors =false
-          .catch((error) => {
-            const response = error.response;
-            this.registrationErrors = true;
-            this.registrationErrors = false;
-            if (response.status === 400) {
-              this.registrationErrorMsg = "Bad Request: Validation Errors";
-            }
-          });
+        authService.register(this.user).then(() => {
+          this.user = {};
+          this.registrationCorrect = true;
+          this.registrationErrors = false;
+        });
+        this.registrationCorrect = true;
+        this.registrationErrors = false.catch((error) => {
+          const response = error.response;
+          this.registrationErrors = true;
+          this.registrationErrors = false;
+          if (response.status === 400) {
+            this.registrationErrorMsg = "Bad Request: Validation Errors";
+          }
+        });
       }
     },
     clearErrors() {
@@ -151,15 +155,12 @@ export default {
 </script>
 
 <style>
-
-
-.alertsRegist{
-    font-size: 1rem !important;
-    font-weight:400 !important;
-    letter-spacing: 1px !important;
-    margin-bottom:4% ;
-    font-family: 'Jua', 'Times New Roman', Times, serif;
-    text-transform: uppercase;
+.alertsRegist {
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 1px !important;
+  margin-bottom: 4%;
+  font-family: "Jua", "Times New Roman", Times, serif;
+  text-transform: uppercase;
 }
-
 </style>
