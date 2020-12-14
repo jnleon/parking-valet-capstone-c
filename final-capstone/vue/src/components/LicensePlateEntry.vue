@@ -1,0 +1,93 @@
+<template>
+  <div>
+    <b-form @submit="LicensePlateSubmit" @reset="onReset" v-if="show">
+      <b-form-group
+        id="license-plate-entry-label"
+        label="License Plate:"
+        label-for="license-plate-entry"
+        description="Please enter the car's license plate."
+      >
+        <b-form-input
+          id="license-plate-input"
+          v-model="form.licensePlate"
+          type="text"
+          required
+          placeholder="License Plate"
+        ></b-form-input>
+      </b-form-group>
+
+      <b-button type="submit" variant="primary">Submit</b-button>
+      <b-button type="reset" variant="danger">Reset</b-button>
+    </b-form>
+    <check-in-car v-if="showCheckInForm" />
+    <h3 v-if="confirmCarAddedMessage">Valet Slip has been created for car</h3>
+    
+    
+  </div>
+</template>
+<script>
+//import PatronCarDetails from "@/components/PatronCarDetails.vue";
+import ValetService from "@/services/ValetService.js";
+import CheckInCar from '../components/CheckInCar.vue';
+
+export default {
+  carExists: "",
+  name: "license-plate-entry",
+  props: [],
+  data() {
+    return {
+      form: {
+        licensePlate: "",
+        
+      },
+      show: true,
+      showCheckInForm: false,
+      confirmCarAddedMessage: false,
+      
+    };
+  },
+  components: {CheckInCar },
+  methods: {
+    LicensePlateSubmit(evt) {
+      evt.preventDefault();
+      //alert(this.form.valetSlipNumber)
+      ValetService.checkLicensePlate(this.form.licensePlate).then ((response) => {
+        if (response.data.licensePlate != null) { //as long as car exists, do this . . 
+            //if license plate exists in car details table then add car to valet slip table
+            
+            this.show = !this.show;
+            this.showCheckInForm =false;
+            this.confirmCarAddedMessage = true;
+            
+        } else { //if car doesn't exist/entered incorrectly do this
+            //if license plate is new then show form to add car (check in car component)
+            this.showCheckInForm = !this.showCheckInForm;
+            this.show = !this.show;
+        }
+        
+      })
+      
+      
+    },
+    onSubmitPatronRequest() {
+      this.show = false;
+    },
+    onReset(evt) {
+      evt.preventDefault();
+      // Reset our form values
+      this.form.email = "";
+      this.form.name = "";
+      this.form.food = null;
+      this.form.checked = [];
+      // Trick to reset/clear native browser form validation state
+      this.show = false;
+      this.$nextTick(() => {
+        this.show = true;
+      });
+    },
+  },
+};
+</script>
+
+<style>
+</style>

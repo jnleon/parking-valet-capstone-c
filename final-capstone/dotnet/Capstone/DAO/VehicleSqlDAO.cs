@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Data.SqlTypes;
 
 namespace Capstone.DAO
@@ -46,9 +47,33 @@ namespace Capstone.DAO
                     return Get(vehicleToCreate.LicensePlate);
                 }
             }
-            catch (SqlException)
+            catch (SqlException e)
             {
-                throw;
+            
+            if (e.Number== 2627)//if vehicle exists then create valet slip below
+                {
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    {
+                        conn.Open();
+
+                        SqlCommand cmd = new SqlCommand("INSERT INTO valet_slips " +
+                                             "(valet_id, license_plate, date, time_in, time_out, amount_owed, " +
+                                             "parking_spot_id, parking_status_id) " +
+                                             "VALUES (@valet_id, @license_plate, GETDATE(), GETDATE(), '1753-1-1', 0, NULL, " +
+                                             "(SELECT parking_status_id FROM parking_statuses WHERE parking_status='Spot Requested'))", conn);
+                        cmd.Parameters.AddWithValue("@valet_id", valetId);
+                        cmd.Parameters.AddWithValue("@license_plate", vehicleToCreate.LicensePlate);
+                        cmd.ExecuteNonQuery();
+
+                        return Get(vehicleToCreate.LicensePlate);
+                    }
+
+            } else
+                {
+                    throw;
+                }
+
+                
             }
         }
 

@@ -55,10 +55,11 @@
     <div id="valetTopRightDiv">
       <!--<img id="ganggang" src="@/img/jjeb.png" />-->
       <div id="componentsValet">
-        <check-in-car
+        <license-plate-entry v-if="showLicensePlateEntry" />
+        <!--<check-in-car
           v-if="showCheckInForm"
           v-bind:showCheckInForm="showCheckInForm"
-        />
+        />-->
         <list-of-cars v-if="showListOfCars" />
         <valet-slip v-if="showValetSlipIdForm" v-bind:valetSelection="valetSelection" />
         <div id="home-parking-lot-container" v-if="showLotTop">
@@ -79,13 +80,14 @@
 
 <script>
 import ParkingLot from "../components/ParkingLot.vue";
-import CheckInCar from "../components/CheckInCar.vue";
+//import CheckInCar from "../components/CheckInCar.vue";
 import ListOfCars from "../components/ListOfCars.vue";
 import ValetSlip from "../components/ValetSlip.vue";
+import LicensePlateEntry from '../components/LicensePlateEntry.vue';
 
 
 export default {
-  components: { ParkingLot, CheckInCar, ListOfCars, ValetSlip },
+  components: { ParkingLot, ListOfCars, ValetSlip, LicensePlateEntry },
   data() {
     return {
       showCheckInForm: false,
@@ -93,10 +95,15 @@ export default {
       showValetSlipIdForm: false,
       showLotTop: true,
       valetSelection: "",
+      showLicensePlateEntry: false,
     };
   },
   methods: {
     onCheckIn() {
+      //show license plate enter component
+      this.showLicensePlateEntry = !this.showLicensePlateEntry;
+      //if license plate exists in car details table then add car to valet slip table
+      //if license plate is new then show form to add car (check in car component)
       this.showCheckInForm = !this.showCheckInForm;
       this.showLotTop = !this.showLotTop;
     },

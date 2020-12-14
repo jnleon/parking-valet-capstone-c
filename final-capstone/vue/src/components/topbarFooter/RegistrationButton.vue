@@ -1,16 +1,20 @@
 <template>
   <b-dropdown
     id="dropdown-form"
+    
     right
     text="Register"
     ref="dropdown"
     class="m-2"
+    
+
   >
     <b-alert
       :show="6"
       class="alertsRegist"
       variant="success"
       v-if="registrationCorrect"
+      
       >User Registered</b-alert
     >
     <b-alert
@@ -20,7 +24,7 @@
       v-if="registrationErrors"
       >{{ registrationErrorMsg }}</b-alert
     >
-    <b-dropdown-form @submit.prevent="register">
+    <b-dropdown-form @submit.prevent="register" v-if="showRegistrationForm" v-on:click="unhideRegistrationForm">
       <b-form-group label="Username" label-for="dropdown-form-username">
         <b-form-input
           id="dropdown-form-username"
@@ -119,6 +123,7 @@ export default {
         phonenumber: "",
         role: "patron",
       },
+      showRegistrationForm: true,
       registrationErrors: false,
       registrationCorrect: false,
       registrationErrorMsg: "There were problems registering this user.",
@@ -134,6 +139,7 @@ export default {
           this.user = {};
           this.registrationCorrect = true;
           this.registrationErrors = false;
+          this.showRegistrationForm = !this.showRegistrationForm;
         });
         this.registrationCorrect = true;
         this.registrationErrors = false.catch((error) => {
@@ -150,6 +156,10 @@ export default {
       this.registrationErrors = false;
       this.registrationErrorMsg = "There were problems registering this user.";
     },
+    unhideRegistrationForm() {
+      this.showRegistrationForm = true;
+      alert("hello!")
+    }
   },
 };
 </script>
