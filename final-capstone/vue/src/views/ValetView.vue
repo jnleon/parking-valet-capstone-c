@@ -83,6 +83,7 @@ import CheckInCar from "../components/CheckInCar.vue";
 import ListOfCars from "../components/ListOfCars.vue";
 import ValetSlip from "../components/ValetSlip.vue";
 
+
 export default {
   components: { ParkingLot, CheckInCar, ListOfCars, ValetSlip },
   data() {
@@ -117,6 +118,7 @@ export default {
       console.log("under construction");
       //this.showLotTop = !this.showLotTop;
     },
+    
   },
 };
 </script>
