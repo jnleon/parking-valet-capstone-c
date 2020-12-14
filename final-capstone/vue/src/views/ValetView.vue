@@ -60,7 +60,7 @@
           v-bind:showCheckInForm="showCheckInForm"
         />
         <list-of-cars v-if="showListOfCars" />
-        <valet-slip />
+        <valet-slip v-if="showValetSlipIdForm" v-bind:valetSelection="valetSelection" />
         <div id="home-parking-lot-container" v-if="showLotTop">
           <parking-lot />
         </div>
@@ -90,7 +90,9 @@ export default {
     return {
       showCheckInForm: false,
       showListOfCars: false,
+      showValetSlipIdForm: false,
       showLotTop: true,
+      valetSelection: "",
     };
   },
   methods: {
@@ -108,6 +110,9 @@ export default {
     },
     onRequestCarPickup() {
       console.log("under construction");
+      this.showValetSlipIdForm = !this.showValetSlipIdForm
+      this.showLotTop = !this.showLotTop;
+      this.valetSelection = "pickupCar";
       //this.showLotTop = !this.showLotTop;
     },
     onViewPickupRequest() {

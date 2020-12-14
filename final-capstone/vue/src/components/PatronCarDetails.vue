@@ -1,11 +1,12 @@
 <template>
   <div>
-    <h3>Current balance: ${{ this.calculateCurrentBalance() }}</h3>
+    <h3>Current balance: ${{ calcTime(this.valetSlip.timeIn) }}</h3>
   </div>
 </template>
 
 <script>
 import PatronService from "@/services/PatronService.js";
+import moment from 'moment';
 
 export default {
   name: "patron-car-details",
@@ -25,6 +26,14 @@ export default {
     //currentBalance = valetSlip.timeIn
   },
   methods: {
+    calcTime(date) {
+        var now = moment(new Date())
+        var end = moment(date)
+        var duration = moment.duration(now.diff(end))
+        var minutes = duration.asMinutes()
+       var calc = ((minutes) / 60) * 5;
+       return calc.toFixed(2);
+    },
     currentTime() {
       var today = new Date();
       var date =

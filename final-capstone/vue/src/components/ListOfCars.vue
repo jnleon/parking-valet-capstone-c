@@ -208,41 +208,7 @@ export default {
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
     },
-    currentTime() {
-      var today = new Date();
-      var date =
-        today.getFullYear() +
-        "-" +
-        (today.getMonth() + 1) +
-        "-" +
-        today.getDate();
-      var time =
-        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      var dateTime = date + " " + time;
-      return dateTime;
-    },
-    calculateHoursParked(time) {
-      var timeIn = new Date(time);
-      var timeInHours = timeIn.getHours();
-
-      var c = new Date(this.currentTime());
-      var cHours = c.getHours();
-
-      return cHours - timeInHours;
-    },
-    calculateMinutesParked(time) {
-      var timeIn = new Date(time);
-      var timeInMinutes = timeIn.getMinutes();
-
-      var c = new Date(this.currentTime());
-      var cMinutes = c.getMinutes();
-      return Math.floor(Math.abs(cMinutes - timeInMinutes));
-    },
-    calculateCurrentBalance(time) {
-      let hoursCharges = this.calculateHoursParked(time) * 5;
-      let minuteCharges = (this.calculateMinutesParked(time) / 60) * 5;
-      return (hoursCharges + minuteCharges).toFixed(2);
-    },
+    
   },
 }
 </script>
