@@ -181,7 +181,7 @@ namespace Capstone.DAO
             }
         }
 
-        public ValetSlip RequestPickupVehicle(int idToUpdate, ValetSlip valetSlipForVehicleToRequestPickup)
+        public ValetSlip RequestPickupVehicle(int ticketIdToUpdate)
         {
             try
             {
@@ -192,10 +192,10 @@ namespace Capstone.DAO
                     SqlCommand cmd = new SqlCommand("UPDATE valet_slips " +
                                                     "SET parking_status_id=(SELECT parking_status_id FROM parking_statuses WHERE parking_status='Pickup Requested') " +
                                                     "WHERE ticket_id=@ticket_id", conn);
-                    cmd.Parameters.AddWithValue("@ticket_id", valetSlipForVehicleToRequestPickup.TicketId);
+                    cmd.Parameters.AddWithValue("@ticket_id", ticketIdToUpdate);
                     cmd.ExecuteNonQuery();
 
-                    return Get(valetSlipForVehicleToRequestPickup.TicketId);
+                    return Get(ticketIdToUpdate);
                 }
             }
             catch (SqlException)
