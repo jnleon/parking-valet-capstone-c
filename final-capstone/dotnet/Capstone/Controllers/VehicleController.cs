@@ -22,7 +22,7 @@ namespace Capstone.Controllers
         
         // https://localhost:44315/vehicle
         [HttpGet]
-        [Authorize(Roles = "admin, valet, patron")]
+        [Authorize(Roles = "admin, valet, owner")]
         public IActionResult List()
         {
             List<Vehicle> vehicles = vehicleDAO.List();
@@ -41,7 +41,7 @@ namespace Capstone.Controllers
         
         // https://localhost:44315/vehicle/ABC123
         [HttpGet("{id}")]
-        [Authorize(Roles = "admin, valet, patron")]
+        [Authorize(Roles = "admin, valet, owner")]
         public IActionResult Get(string id)
         {
             Vehicle v = vehicleDAO.Get(id);
@@ -60,7 +60,7 @@ namespace Capstone.Controllers
 
         // https://localhost:44315/vehicle
         [HttpPost]
-        [Authorize(Roles = "admin, valet")]
+        [Authorize(Roles = "admin, valet, owner")]
         public IActionResult Create(NewVehicle vehicleToCreate)
         {
             Valet currentValet = valetDAO.GetByUserId((int)GetCurrentUserId());
