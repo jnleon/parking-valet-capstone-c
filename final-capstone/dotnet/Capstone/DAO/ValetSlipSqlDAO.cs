@@ -8,6 +8,8 @@ namespace Capstone.DAO
 {
     public class ValetSlipSqlDAO : IValetSlipDAO
     {
+        private const decimal HOURLY_RATE = 5.00M;
+
         private readonly string connectionString;
         public ValetSlipSqlDAO(string dbConnectionString)
         {
@@ -145,10 +147,13 @@ namespace Capstone.DAO
             }
         }
 
-        public ValetSlip PickupVehicle(int idToUpdate, ValetSlip valetSlipForVehicleToPickup)
+        public ValetSlip PickupVehicle(int ticketIdToUpdate)
         {
             try
             {
+                DateTime timeIn = GetTimeInFromValetSlip(ticketIdToUpdate);
+                int parkingSpotId = GetParkingSpotIdFromValetSlip(ticketIdToUpdate);
+
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
@@ -160,19 +165,19 @@ namespace Capstone.DAO
                                                     "time_out=GETDATE() " +
                                                     "WHERE ticket_id=@ticket_id", conn);
                     cmd.Parameters.AddWithValue("@parking_spot_id", DBNull.Value);
-                    cmd.Parameters.AddWithValue("@ticket_id", valetSlipForVehicleToPickup.TicketId);
-                    cmd.Parameters.AddWithValue("@amount_owed", (SqlMoney)valetSlipForVehicleToPickup.AmountOwed);
+                    cmd.Parameters.AddWithValue("@ticket_id", ticketIdToUpdate);
+                    cmd.Parameters.AddWithValue("@amount_owed", (SqlMoney)CalculateAmountOwed(timeIn));
                     cmd.ExecuteNonQuery();
 
                     cmd = new SqlCommand("UPDATE parking_spots " +
                                          "SET is_occupied=@is_occupied " +
                                          "WHERE parking_spot_id=@parking_spot_id", conn);
-                    cmd.Parameters.AddWithValue("@parking_spot_id", valetSlipForVehicleToPickup.ParkingSpotId);
+                    cmd.Parameters.AddWithValue("@parking_spot_id", parkingSpotId);
                     cmd.Parameters.AddWithValue("@is_occupied", (SqlBoolean)false);
 
                     cmd.ExecuteNonQuery();
 
-                    return Get(valetSlipForVehicleToPickup.TicketId);
+                    return Get(ticketIdToUpdate);
                 }
             }
             catch (SqlException)
@@ -206,7 +211,7 @@ namespace Capstone.DAO
 
         private ValetSlip GetValetSlipFromReader(SqlDataReader reader)
         {
-            
+
             ValetSlip vs = new ValetSlip()
             {
                 TicketId = Convert.ToInt32(reader["ticket_id"]),
@@ -228,6 +233,70 @@ namespace Capstone.DAO
             }
 
             return vs;
+        }
+
+        private decimal CalculateAmountOwed(DateTime timeIn)
+        {
+            decimal totalHours = (decimal)(DateTime.Now - timeIn).TotalHours;
+            decimal amountOwed = totalHours * HOURLY_RATE;
+            return amountOwed;
+        }
+
+        private int GetParkingSpotIdFromValetSlip(int ticketId)
+        {
+            int parkingSpotId = -1;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT parking_spot_id FROM valet_slips WHERE ticket_id=@ticket_id", conn);
+                    cmd.Parameters.AddWithValue("@ticket_id", ticketId);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows && reader.Read())
+                    {
+                        parkingSpotId = Convert.ToInt32(reader["parking_spot_id"]);
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+
+            return parkingSpotId;
+
+        }
+
+        private DateTime GetTimeInFromValetSlip(int ticketId)
+        {
+            DateTime timeIn = DateTime.MinValue;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT time_in FROM valet_slips WHERE ticket_id=@ticket_id", conn);
+                    cmd.Parameters.AddWithValue("@ticket_id", ticketId);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows && reader.Read())
+                    {
+                        timeIn = Convert.ToDateTime(reader["time_in"]);
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+
+            return timeIn;
         }
     }
 }

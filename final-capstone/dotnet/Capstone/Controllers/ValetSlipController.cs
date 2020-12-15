@@ -133,9 +133,9 @@ namespace Capstone.Controllers
         // https://localhost:44315/valetslip/pickupvehicle/1
         [HttpPut("pickupvehicle/{id}")]
         [Authorize(Roles = "admin, valet, owner")]
-        public IActionResult PickupVehicle(int id, ValetSlip ValetSlipToUpdate)
+        public IActionResult PickupVehicle(int id)
         {
-            ValetSlip updatedValetSlip = valetSlipDAO.PickupVehicle(id, ValetSlipToUpdate);
+            ValetSlip updatedValetSlip = valetSlipDAO.PickupVehicle(id);
             if (updatedValetSlip == null)
             {
                 return BadRequest();

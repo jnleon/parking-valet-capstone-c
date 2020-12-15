@@ -10,7 +10,7 @@ namespace Capstone.DAO
         ValetSlip GetByLicensePlate(string licensePlate);
         List<ValetSlip> GetByValetId(int valetId);
         ValetSlip ParkVehicle(int ticketIdToUpdate, int parkingSpotId);
-        ValetSlip PickupVehicle(int idToUpdate, ValetSlip valetSlipForVehicleToPickup);
+        ValetSlip PickupVehicle(int ticketIdToUpdate);
         ValetSlip RequestPickupVehicle(int ticketIdToUpdate);
     }
 }
