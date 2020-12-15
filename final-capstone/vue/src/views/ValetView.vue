@@ -16,7 +16,10 @@
           }"
           >Check-In</b-button
         >
-        <b-button block variant="light" @click="onCheckOut">Check-Out</b-button>
+        <b-button block variant="light" @click="onCheckOut"   v-bind:class="{
+            notpressed: !checkoutButton,
+            pressed: checkoutButton,
+          }">Check-Out</b-button>
         <b-button
           block
           variant="light"
@@ -28,10 +31,16 @@
           >View All Cars</b-button
         >
         <b-button block variant="light" @click="onRequestCarPickup"
-          >Request Car Pickup</b-button
+           v-bind:class="{
+            notpressed: !pickupButton,
+            pressed: pickupButton,
+          }" >Request Car Pickup</b-button
         >
         <b-button block variant="light" @click="onViewPickupRequest"
-          >View Pickup Requests</b-button
+          v-bind:class="{
+            notpressed: !showRequestedCars,
+            pressed: showRequestedCars,
+          }" >View Pickup Requests</b-button
         >
         <b-button block variant="light" @click="RateCalculator"
           >Rate Calculator</b-button
@@ -101,6 +110,8 @@ export default {
       valetSelection: "",
       showLicensePlateEntry: false,
       showRequestedCars: false,
+      checkoutButton:false,
+      pickupButton:false,
     };
   },
   methods: {
@@ -113,7 +124,11 @@ export default {
       this.showLotTop = !this.showLotTop;
     },
     onCheckOut() {
-      console.log("under construction");
+      this.showValetSlipIdForm = !this.showValetSlipIdForm
+      this.showLotTop = !this.showLotTop;
+      this.valetSelection = "checkoutCar";
+
+        this.checkoutButton = !this.checkoutButton;     
       //this.showLotTop = !this.showLotTop;
     },
     onViewAllCars() {
@@ -125,10 +140,12 @@ export default {
       this.showValetSlipIdForm = !this.showValetSlipIdForm
       this.showLotTop = !this.showLotTop;
       this.valetSelection = "pickupCar";
+
+      this.pickupButton = !this.pickupButton;
       //this.showLotTop = !this.showLotTop;
     },
     onViewPickupRequest() {
-      
+
       this.showRequestedCars = !this.showRequestedCars
       //this.showLotTop = !this.showLotTop;
     },

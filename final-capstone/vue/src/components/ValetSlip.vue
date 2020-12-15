@@ -20,10 +20,10 @@
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
     <h3 v-if="showValetCall">The valet will arrive shortly with your car.</h3>
-    <h3 v-if="showValetRequestMessage"> Pickup request from Valet received </h3>
+    <h3 v-if="showValetRequestMessage">Pickup request from Valet received</h3>
     <patron-car-details v-if="showPatronCar" v-bind:slipId="slipId" />
   </div>
-</template>
+</template>   
 
 <script>
 import PatronCarDetails from "@/components/PatronCarDetails.vue";
@@ -51,32 +51,43 @@ export default {
     PatronCarDetailsSubmit(evt) {
       evt.preventDefault();
       //alert(this.form.valetSlipNumber)
-      PatronService.getValetSlip(this.form.valetSlipNumber).then ((response) => {
-        if (response.data != '') { //as long as ID exists, do this . . 
-            if (this.patronSelection == "showBalance") {
-              this.showPatronCar = !this.showPatronCar;
-              this.show = false;
-              this.slipId = this.form.valetSlipNumber;
-            } else if (this.patronSelection == "pickupCar") {
-              this.showValetCall = !this.showValetCall;
-              this.show = false;
-              CarDetailsService.changeParkingSpotStatus(this.form.valetSlipNumber).then ((response) => {
-                  console.log(response.status);
-              })
-              //verify that the Valet Slip ID exists***
-            } else if (this.valetSelection == "pickupCar") {
-              
-              CarDetailsService.changeParkingSpotStatus(this.form.valetSlipNumber)
-              this.showValetRequestMessage = !this.showValetRequestMessage;
-              this.show=false;
-            }
-        } else { //if id doesn't exist/entered incorrectly do this
-          alert("Please enter a valid slip number")
+      PatronService.getValetSlip(this.form.valetSlipNumber).then((response) => {
+        if (response.data != "") {
+          //as long as ID exists, do this . .
+          if (this.patronSelection == "showBalance") {
+            this.showPatronCar = !this.showPatronCar;
+            this.show = false;
+            this.slipId = this.form.valetSlipNumber;
+          } else if (this.patronSelection == "pickupCar") {
+            this.showValetCall = !this.showValetCall;
+            this.show = false;
+            CarDetailsService.changeParkingSpotStatus(
+              this.form.valetSlipNumber
+            ).then((response) => {
+              console.log(response.status);
+            });
+            //verify that the Valet Slip ID exists***
+          } else if (this.valetSelection == "pickupCar") {
+            CarDetailsService.changeParkingSpotStatus(
+              this.form.valetSlipNumber
+            );
+            this.showValetRequestMessage = !this.showValetRequestMessage;
+            this.show = false;
+          } else if (this.valetSelection == "checkoutCar") {
+            CarDetailsService.checkoutCar(this.form.valetSlipNumber).then(
+              (response) => {
+                  alert(response.data.amountOwed)
+                  alert("asdasdsadas");
+              }
+            );
+
+            alert("hello, car checked was reached heheheh");
+          }
+        } else {
+          //if id doesn't exist/entered incorrectly do this
+          alert("Please enter a valid slip number");
         }
-        
-      })
-      
-      
+      });
     },
     onSubmitPatronRequest() {
       this.show = false;

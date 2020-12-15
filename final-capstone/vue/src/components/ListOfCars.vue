@@ -60,6 +60,8 @@
           <b-card>
             <div id="listStuffModal">
               <div id="displayPatronList">
+               
+               
                 <h5>
                   PATRON ID :
                   <p style="display: inline" class="attributesList">
@@ -109,6 +111,15 @@
                     {{ row.item.vehicleModel }}
                   </p>
                 </h5>
+
+            
+                <h5>
+                  VEHICLE COLOR :
+                  <p style="display: inline" class="attributesList">
+                    {{ row.item.vehicleColor }}
+                  </p>
+                </h5>
+
                 <h5>
                   PARKING SPOT :
                   <p style="display: inline" class="attributesList">
@@ -132,6 +143,9 @@
                   ${{calcTime(row.item.timeIn)}}
                   </p>
                 </h5>
+
+         
+
               </div> 
             </div>
           </b-card>
@@ -160,9 +174,9 @@ export default {
     return {
    
       fields: [
-        { key: "vehicleMake", sortable: true, sortDirection: "desc" },
+        { key: "ticketId", sortable: true, class: "text-center" },
+        { key: "vehicleMake", sortable: true, class: "text-center" },
         { key: "vehicleModel", sortable: true, class: "text-center" },
-        { key: "vehicleColor", sortable: true, class: "text-center" },
         { key: "licensePlate", sortable: true, class: "text-center" },
 
         {

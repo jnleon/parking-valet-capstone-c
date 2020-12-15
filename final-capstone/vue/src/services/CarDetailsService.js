@@ -6,5 +6,8 @@ export default {
     },
     changeParkingSpotStatus(slipId) {
         return axios.put(`/valetslip/requestPickupVehicle/${slipId}`)
+    },
+    checkoutCar(slipId){
+        return axios.put(`/valetslip/pickupvehicle/${slipId}`)
     }
 }

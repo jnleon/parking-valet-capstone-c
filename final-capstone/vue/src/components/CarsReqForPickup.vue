@@ -1,4 +1,5 @@
 <template>
+
   <div id="dodge">
     <b-container fluid>
       <!-- User Interface controls -->
@@ -54,12 +55,24 @@
           <b-button size="sm" @click="row.toggleDetails">
             {{ row.detailsShowing ? "Hide" : "Show" }} Details
           </b-button>
+            <b-button size="sm" @click="checkOutCar">
+            CHECKOUT CAR
+          </b-button>
         </template>
 
         <template #row-details="row">
           <b-card>
             <div id="listStuffModal">
               <div id="displayPatronList">
+                 
+                        
+                <h5>
+                  PATRON ID :
+                  <p style="display: inline" class="attributesList">
+                    {{ row.item.patronId }}
+                  </p>
+                </h5>
+
                   <h5>
                       SPOT NUMBER:
                       <p style="display: inline" class="attributesList">
@@ -110,6 +123,8 @@
 <script>
 import ValetService from "@/services/ValetService.js";
 import moment from 'moment';
+import CarDetailsService from "@/services/CarDetailsService.js";
+
 
 export default {
   name: "cars-req-for-pickup",
@@ -117,24 +132,24 @@ export default {
   created() {
     ValetService.getListOfRequestedCars().then((response) => {
       this.$store.commit("LOAD_REQUESTED_CAR_LIST", response.data);
-      //console.log("hello");
-    });
+        });
   },
   data() {
     return {
    
       fields: [
-        { key: "parkingSpotId", sortable: true, sortDirection: "desc" },
+        { key: "ticketId", sortable: true, class: "text-center" },
+        { key: "parkingSpotId", sortable: true, class: "text-center" },
         { key: "firstName", sortable: true, class: "text-center" },
         { key: "lastName", sortable: true, class: "text-center" },
-        { key: "licensePlate", sortable: true, class: "text-center" },
+        { key: "licensePlate", sortable: true, class: "text-center" },  
 
         {
           sortable: true,
           sortByFormatted: true,
           filterByFormatted: true,
         },
-        { key: "actions", label: "Actions" },
+        { key: "actions", label: "Actions", class: "text-center" },
       ],
       perPage: 1000, // this is the max number of cars displayed in the list
       sortBy: "",
@@ -155,11 +170,15 @@ export default {
     },
    
   },
-  /*mounted() {
-    // Set the initial number of items
-    this.totalRows = this.items.length;
-  },*/
+ 
   methods: {
+    checkOutCar(){
+      CarDetailsService.checkoutCar(this.form.valetSlipNumber).then(
+      (response) => {
+          alert(response.data.amountOwed)
+
+      })
+    },
     info(item, index, button) {
       this.infoModal.title = `Row index: ${index}`;
       this.infoModal.content = JSON.stringify(item, null, 2);
