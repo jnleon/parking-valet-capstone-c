@@ -33,7 +33,7 @@
         <b-button block variant="light" @click="onRequestCarPickup"
            v-bind:class="{
             notpressed: !pickupButton,
-            pressed: pickupButton,
+            pressed: showRequestedCars,
           }" >Request Car Pickup</b-button
         >
         <b-button block variant="light" @click="onViewPickupRequest"
@@ -61,30 +61,32 @@
       </div>
     </div>
 
-    <div id="valetTopRightDiv">
-      <!--<img id="ganggang" src="@/img/jjeb.png" />-->
-      <div id="componentsValet">
-        <license-plate-entry v-if="showLicensePlateEntry" />
-        <!--<check-in-car
-          v-if="showCheckInForm"
-          v-bind:showCheckInForm="showCheckInForm"
-        />-->
-        <list-of-cars v-if="showListOfCars" />
+   <div class="valetTopRightDiv">
+      <div class="componentsValet"  v-if="showLicensePlateEntry">
+        <license-plate-entry />
+        </div>
+
+  <div class="componentsValet" v-if="showListOfCars">
+
+        <list-of-cars  />
+          </div>
+          <div class="componentsValet" v-if="showRequestedCars" >
         <cars-req-for-pickup v-if="showRequestedCars" />
-        <valet-slip v-if="showValetSlipIdForm" v-bind:valetSelection="valetSelection" />
+          </div>
+          <div class="componentsValet" v-if="showValetSlipIdForm">
+
+        <valet-slip  v-bind:valetSelection="valetSelection" />
+          </div>
         <div id="home-parking-lot-container" v-if="showLotTop">
           <parking-lot />
-        </div>
       </div>
     </div>
 
-    <!-- <div id="valetBottomRightDiv">-->
     <div id="valetTopBottomDiv" v-if="!showLotTop">
       <div id="home-parking-lot-container">
         <parking-lot />
       </div>
     </div>
-    <!-- </div>-->
   </div>
 </template>
 
@@ -159,6 +161,11 @@ export default {
 </script>
 
 <style>
+
+#home-parking-lot-container{
+ border: 0.8vh solid orange;
+ border-radius: 0.5rem;
+}
 .notpressed {
   background-color: rgb(246, 246, 246) !important;
   color: black !important;
@@ -167,7 +174,6 @@ export default {
   font-family: "Jua";
   text-transform: uppercase;
   border-color: white !important;
-  margin-bottom: 3.5vh;
   padding: 2vh !important;
 }
 
@@ -225,7 +231,7 @@ export default {
   background-color: rgb(226, 226, 226);
   grid-area: valetMenu;
 }
-
+/*
 #valetTopRightDiv {
   grid-area: valetTopRight;
   background-color: orange;
@@ -245,5 +251,5 @@ export default {
   background-color: rgb(245, 245, 245);
   padding: 0.5%;
   border-radius: 0.5rem;
-}
+}*/
 </style>

@@ -4,16 +4,13 @@
     <b-container fluid>
       <!-- User Interface controls -->
       <b-row>
-        <b-col lg="6" class="my-1"> </b-col>
-
-        <b-col lg="6" class="my-1">
-          <b-form-group
+        <b-col lg="4" class="my-1">         <b-form-group
             label="Filter"
             label-cols-sm="3"
             label-align-sm="right"
             label-size="sm"
             label-for="filterInput"
-            class="mb-0"
+            class="mb-2"
             id="filterCarDeets"
           >
             <b-input-group size="sm">
@@ -29,7 +26,10 @@
                 >
               </b-input-group-append>
             </b-input-group>
-          </b-form-group>
+          </b-form-group></b-col>
+
+        <b-col lg="6" class="my-1">
+  
         </b-col>
       </b-row>
 

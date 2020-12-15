@@ -19,7 +19,9 @@
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
+    
     <h3 v-if="showValetCall">The valet will arrive shortly with your car.</h3>
+    <h3 v-if="showAmountOwed">AMOUNT OWED {{this.finalAmountOwed}}</h3>
     <h3 v-if="showValetRequestMessage">Pickup request from Valet received</h3>
     <patron-car-details v-if="showPatronCar" v-bind:slipId="slipId" />
   </div>
@@ -43,6 +45,8 @@ export default {
       show: true,
       showValetCall: false,
       showPatronCar: false,
+      finalAmountOwed: "",
+      showAmountOwed:false,
       showValetRequestMessage: false,
     };
   },
@@ -76,8 +80,10 @@ export default {
           } else if (this.valetSelection == "checkoutCar") {
             CarDetailsService.checkoutCar(this.form.valetSlipNumber).then(
               (response) => {
-                  alert(response.data.amountOwed)
-                  alert("asdasdsadas");
+                  alert("$" + response.data.amountOwed.toFixed(2))
+                   this.finalAmountOwed   ="$" + response.data.amountOwed.toFixed(2)
+                  this.show =false,
+                  this.showAmountOwed = true
               }
             );
 

@@ -42,9 +42,9 @@
       </div>
     </div>
 
-    <div id="valetTopRightDiv">
+    <div class="valetTopRightDiv">
       <!--<img id="ganggang" src="@/img/jjeb.png" />-->
-      <div id="componentsValet" v-if="showValetSlip">
+      <div class="componentsValet" v-if="showValetSlip">
         <valet-slip v-bind:patronSelection="patronSelection" />
       </div>
       <div id="home-parking-lot-container" v-if="!showValetSlip">
@@ -53,7 +53,7 @@
     </div>
 
     <!-- <div id="valetBottomRightDiv">-->
-    <div id="valetTopBottomDiv" v-if="showValetSlip">
+    <div class="valetTopBottomDiv" v-if="showValetSlip">
       <div id="home-parking-lot-container">
         <parking-lot />
       </div>
@@ -105,41 +105,23 @@ export default {
   max-width: 1000px;
 }
 
-#valetMain {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  grid-template-areas:
-    "valetMenu valetTopRight"
-    "valetMenu valetBottomRight";
 
-  grid-gap: 40px;
-  height: fit-content;
-  margin: 0px 40px;
-}
-
-#valetMenu {
-  background-color: rgb(226, 226, 226);
-  grid-area: valetMenu;
-}
-
-#valetTopRightDiv {
-  grid-area: valetTopRight;
-  background-color: orange;
-  padding: 0.5%;
-  border-radius: 0.5rem;
-}
-
-#valetTopBottomDiv {
+.valetTopBottomDiv {
   grid-area: valetBottomRight;
-  background-color: orange;
   padding: 0.5%;
   border-radius: 0.5rem;
-  margin-bottom: 2%;
 }
 
-#componentsValet {
+.valetTopRightDiv {
+  grid-area: valetTopRight;
+
+}
+
+.componentsValet {
   background-color: rgb(245, 245, 245);
   padding: 0.5%;
   border-radius: 0.5rem;
+  margin-bottom: 0.5%;
+  border: 0.8vh solid orange;
 }
 </style>
