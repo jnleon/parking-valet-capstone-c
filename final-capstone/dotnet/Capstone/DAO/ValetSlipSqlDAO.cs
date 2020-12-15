@@ -112,7 +112,7 @@ namespace Capstone.DAO
             return valetSlips;
         }
 
-        public ValetSlip ParkVehicle(int idToUpdate, ValetSlip valetSlipForVehicleToPark)
+        public ValetSlip ParkVehicle(int ticketIdToUpdate, int parkingSpotId)
         {
             try
             {
@@ -124,19 +124,19 @@ namespace Capstone.DAO
                                                     "SET parking_spot_id=@parking_spot_id, " +
                                                     "parking_status_id=(SELECT parking_status_id FROM parking_statuses WHERE parking_status='Parked') " +
                                                     "WHERE ticket_id=@ticket_id", conn);
-                    cmd.Parameters.AddWithValue("@parking_spot_id", valetSlipForVehicleToPark.ParkingSpotId);
-                    cmd.Parameters.AddWithValue("@ticket_id", valetSlipForVehicleToPark.TicketId);
+                    cmd.Parameters.AddWithValue("@parking_spot_id", parkingSpotId);
+                    cmd.Parameters.AddWithValue("@ticket_id", ticketIdToUpdate);
                     cmd.ExecuteNonQuery();
 
                     cmd = new SqlCommand("UPDATE parking_spots " +
                                          "SET is_occupied=@is_occupied " +
                                          "WHERE parking_spot_id=@parking_spot_id", conn);
-                    cmd.Parameters.AddWithValue("@parking_spot_id", valetSlipForVehicleToPark.ParkingSpotId);
+                    cmd.Parameters.AddWithValue("@parking_spot_id", parkingSpotId);
                     cmd.Parameters.AddWithValue("@is_occupied", (SqlBoolean)true);
 
                     cmd.ExecuteNonQuery();
 
-                    return Get(valetSlipForVehicleToPark.TicketId);
+                    return Get(ticketIdToUpdate);
                 }
             }
             catch (SqlException)

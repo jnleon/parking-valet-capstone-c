@@ -113,12 +113,12 @@ namespace Capstone.Controllers
         }
 
         // park vehicle
-        // https://localhost:44315/valetslip/parkvehicle/1
-        [HttpPut("parkvehicle/{id}")]
+        // https://localhost:44315/valetslip/parkvehicle/ticket/1/spot/1
+        [HttpPut("parkvehicle/ticket/{ticketid}/spot/{spotid}")]
         [Authorize(Roles = "admin, valet, owner")]
-        public IActionResult ParkVehicle(int id, ValetSlip ValetSlipToUpdate)
+        public IActionResult ParkVehicle(int ticketid, int spotid)
         {
-            ValetSlip updatedValetSlip = valetSlipDAO.ParkVehicle(id, ValetSlipToUpdate);
+            ValetSlip updatedValetSlip = valetSlipDAO.ParkVehicle(ticketid, spotid);
             if (updatedValetSlip == null)
             {
                 return BadRequest();

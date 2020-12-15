@@ -135,7 +135,7 @@ namespace Capstone.DAO
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand("UPDATE parking_spots " +
-                                                    "SET is_occupied = @isoccupied" +
+                                                    "SET is_occupied = @isoccupied " +
                                                     "WHERE parking_spot_id = @parkingspotid", conn);
                     cmd.Parameters.AddWithValue("@parkingspotid", parkingSpotToUpdate.ParkingSpotId);
                     cmd.Parameters.AddWithValue("@isoccupied", parkingSpotToUpdate.IsOccupied);
