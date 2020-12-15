@@ -49,8 +49,8 @@ namespace Capstone.DAO
             }
             catch (SqlException e)
             {
-            
-            if (e.Number== 2627)//if vehicle exists then create valet slip below
+
+                if (e.Number == 2627)    //PK violation - if vehicle exists then create valet slip below
                 {
                     using (SqlConnection conn = new SqlConnection(connectionString))
                     {
@@ -68,19 +68,18 @@ namespace Capstone.DAO
                         return Get(vehicleToCreate.LicensePlate);
                     }
 
-            } else
+                }
+                else
                 {
                     throw;
                 }
-
-                
             }
         }
 
         public Vehicle Get(string licensePlate)
         {
             Vehicle v = new Vehicle();
-      
+
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
