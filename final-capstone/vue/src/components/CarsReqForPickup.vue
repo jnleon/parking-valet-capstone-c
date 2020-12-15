@@ -36,7 +36,7 @@
         show-empty
         small
         stacked="md"
-        :items="this.$store.state.checkedInCars"
+        :items="this.$store.state.requestedCars"
         :fields="fields"
         :per-page="perPage"
         :filter="filter"
@@ -60,6 +60,12 @@
           <b-card>
             <div id="listStuffModal">
               <div id="displayPatronList">
+                  <h5>
+                      SPOT NUMBER:
+                      <p style="display: inline" class="attributesList">
+                    {{ row.item.parkingSpotId }}
+                  </p>
+                </h5>
                 <h5>
                   PATRON ID :
                   <p style="display: inline" class="attributesList">
@@ -74,19 +80,7 @@
                   </p>
                 </h5>
 
-                <h5>
-                  PATRON PHONE NUMBER :
-                  <p style="display: inline" class="attributesList">
-                    {{ row.item.phoneNumber }}
-                  </p>
-                </h5>
-
-                <h5>
-                  PATRON EMAIL :
-                  <p style="display: inline" class="attributesList">
-                    {{ row.item.emailAddress }}
-                  </p>
-                </h5>
+                
               </div>
               <div id="displayCarList">
                 <h5>
@@ -94,37 +88,9 @@
                   <p style="display: inline" class="attributesList">
                     {{ row.item.licensePlate }}
                   </p>
-                </h5>
+                </h5>               
 
-                <h5>
-                  VEHICLE MAKE :
-                  <p style="display: inline" class="attributesList">
-                    {{ row.item.vehicleMake }}
-                  </p>
-                </h5>
-
-                <h5>
-                  VEHICLE MODEL :
-                  <p style="display: inline" class="attributesList">
-                    {{ row.item.vehicleModel }}
-                  </p>
-                </h5>
-                <h5>
-                  PARKING SPOT :
-                  <p style="display: inline" class="attributesList">
-                    {{ row.item.parkingSpotId }} 
-                  </p><p><button @click="showParkingSpotForm(row.item.ticketId)">update parking spot</button>
-                  <update-spot-id v-if="ParkingSpotForm" v-bind:ticketId="ticketId" /></p>
-                </h5>
-                <h5>
-                  TIME IN :
-                  <p style="display: inline" class="attributesList">
-                    {{ row.item.timeIn.substring(0, 10) }}
-                    <b-icon icon="calendar2-date" aria-hidden="true"></b-icon
-                    >&nbsp; {{ row.item.timeIn.substring(11, 19) }}
-                    <b-icon icon="clock" aria-hidden="true"></b-icon>
-                  </p>
-                </h5>
+                
 
                 <h5>
                   AMOUNT OWED :
@@ -144,25 +110,23 @@
 <script>
 import ValetService from "@/services/ValetService.js";
 import moment from 'moment';
-import UpdateSpotId from "@/components/UpdateSpotId.vue";
 
 export default {
-  name: "list-of-cars",
-  
-  components: {UpdateSpotId},
+  name: "cars-req-for-pickup",
+
   created() {
-    ValetService.getAllTheInfo().then((response) => {
-      this.$store.commit("LOAD_CAR_LIST", response.data);
-      console.log("hello");
+    ValetService.getListOfRequestedCars().then((response) => {
+      this.$store.commit("LOAD_REQUESTED_CAR_LIST", response.data);
+      //console.log("hello");
     });
   },
   data() {
     return {
    
       fields: [
-        { key: "vehicleMake", sortable: true, sortDirection: "desc" },
-        { key: "vehicleModel", sortable: true, class: "text-center" },
-        { key: "vehicleColor", sortable: true, class: "text-center" },
+        { key: "parkingSpotId", sortable: true, sortDirection: "desc" },
+        { key: "firstName", sortable: true, class: "text-center" },
+        { key: "lastName", sortable: true, class: "text-center" },
         { key: "licensePlate", sortable: true, class: "text-center" },
 
         {
@@ -178,8 +142,6 @@ export default {
       sortDirection: "asc",
       filter: null,
       filterOn: [],
-      ParkingSpotForm: false,
-      ticketId: '',
     };
   },
   computed: {
@@ -218,48 +180,7 @@ export default {
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
     },
-    showParkingSpotForm(ticketId) {
-      this.ticketId = ticketId;
-      this.ParkingSpotForm = !this.ParkingSpotForm;
-      
-    }
     
   },
 }
 </script>
-
-<style>
-.attributesList {
-  color: rgb(80, 80, 80);
-}
-
-#displayPatronList {
-  background-color: rgb(238, 238, 238);
-  padding: 1%;
-  border-radius: 0.5rem;
-}
-
-#displayCarList {
-  background-color: rgb(250, 250, 250);
-  padding: 1%;
-  border-radius: 0.5rem;
-  margin-top: 1%;
-}
-
-#listStuffModal {
-  list-style: none;
-}
-
-#filterCarDeets {
-  font-size: 4vh !important;
-}
-
-#dodge {
-  font-family: "Jua", "Times New Roman", Times, serif !important;
-  font-size: 2.5vh;
-}
-
-tr:only-child {
-  text-transform: uppercase;
-}
-</style>

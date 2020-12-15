@@ -158,7 +158,7 @@ export default {
     },
     unhideRegistrationForm() {
       this.showRegistrationForm = true;
-      alert("hello!")
+      
     }
   },
 };

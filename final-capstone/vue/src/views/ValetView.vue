@@ -61,6 +61,7 @@
           v-bind:showCheckInForm="showCheckInForm"
         />-->
         <list-of-cars v-if="showListOfCars" />
+        <cars-req-for-pickup v-if="showRequestedCars" />
         <valet-slip v-if="showValetSlipIdForm" v-bind:valetSelection="valetSelection" />
         <div id="home-parking-lot-container" v-if="showLotTop">
           <parking-lot />
@@ -84,10 +85,13 @@ import ParkingLot from "../components/ParkingLot.vue";
 import ListOfCars from "../components/ListOfCars.vue";
 import ValetSlip from "../components/ValetSlip.vue";
 import LicensePlateEntry from '../components/LicensePlateEntry.vue';
+import CarsReqForPickup from '../components/CarsReqForPickup.vue';
+
+
 
 
 export default {
-  components: { ParkingLot, ListOfCars, ValetSlip, LicensePlateEntry },
+  components: { ParkingLot, ListOfCars, ValetSlip, LicensePlateEntry, CarsReqForPickup },
   data() {
     return {
       showCheckInForm: false,
@@ -96,6 +100,7 @@ export default {
       showLotTop: true,
       valetSelection: "",
       showLicensePlateEntry: false,
+      showRequestedCars: false,
     };
   },
   methods: {
@@ -116,14 +121,15 @@ export default {
       this.showLotTop = !this.showLotTop;
     },
     onRequestCarPickup() {
-      console.log("under construction");
+      
       this.showValetSlipIdForm = !this.showValetSlipIdForm
       this.showLotTop = !this.showLotTop;
       this.valetSelection = "pickupCar";
       //this.showLotTop = !this.showLotTop;
     },
     onViewPickupRequest() {
-      console.log("under construction");
+      
+      this.showRequestedCars = !this.showRequestedCars
       //this.showLotTop = !this.showLotTop;
     },
     RateCalculator() {

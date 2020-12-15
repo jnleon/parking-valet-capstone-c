@@ -28,6 +28,7 @@
 <script>
 import PatronCarDetails from "@/components/PatronCarDetails.vue";
 import PatronService from "@/services/PatronService.js";
+import CarDetailsService from "@/services/CarDetailsService.js";
 
 export default {
   slipId: "",
@@ -59,9 +60,13 @@ export default {
             } else if (this.patronSelection == "pickupCar") {
               this.showValetCall = !this.showValetCall;
               this.show = false;
+              CarDetailsService.changeParkingSpotStatus(this.form.valetSlipNumber).then ((response) => {
+                  console.log(response.status);
+              })
               //verify that the Valet Slip ID exists***
             } else if (this.valetSelection == "pickupCar") {
               
+              CarDetailsService.changeParkingSpotStatus(this.form.valetSlipNumber)
               this.showValetRequestMessage = !this.showValetRequestMessage;
               this.show=false;
             }
