@@ -80,7 +80,7 @@ namespace Capstone.Controllers
             }
         }
 
-        // https://localhost:44315/valetslip/alldata/
+        // https://localhost:44315/valetslip/alldata
         [HttpGet("alldata")]
         [Authorize(Roles = "admin, valet")]
         public IActionResult GetAllData()
@@ -96,7 +96,7 @@ namespace Capstone.Controllers
             }
         }
 
-        // https://localhost:44315/valetslip/alldatapickuprequested/
+        // https://localhost:44315/valetslip/alldatapickuprequested
         [HttpGet("alldatapickuprequested")]
         [Authorize(Roles = "admin, valet")]
         public IActionResult GetAllDataPickupRequested()
