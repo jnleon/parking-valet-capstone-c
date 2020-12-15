@@ -30,9 +30,11 @@ INSERT INTO vehicles (license_plate, patron_id, vehicle_make, vehicle_model, veh
 INSERT INTO vehicles (license_plate, patron_id, vehicle_make, vehicle_model, vehicle_color) Values ('GBC723',(SELECT patron_id FROM patrons WHERE email_address = 'jdoe@aol.com'),'Chevy','Chevelle','red');
 INSERT INTO vehicles (license_plate, patron_id, vehicle_make, vehicle_model, vehicle_color) Values ('IBC923',(SELECT patron_id FROM patrons WHERE email_address = 'jaltuve@aol.com'),'Plymouth','Super Bird','orange');
 
-INSERT INTO valet_slips (valet_id, license_plate, parking_spot_id, date, time_in, time_out, amount_owed, parking_status_id) VALUES (1, 'FBC623', 1, GETDATE(), (SELECT DATEADD(minute, -30, GETDATE())), '1753-1-1', 0, 1);
-INSERT INTO valet_slips (valet_id, license_plate, parking_spot_id, date, time_in, time_out, amount_owed, parking_status_id) VALUES (1, 'GBC723',2, GETDATE(), (SELECT DATEADD(minute, -45, GETDATE())), '1753-1-1', 0, 1);
-INSERT INTO valet_slips (valet_id, license_plate, parking_spot_id, date, time_in, time_out, amount_owed, parking_status_id) VALUES (1, 'IBC923', 3, GETDATE(), (SELECT DATEADD(minute, -15, GETDATE())), '1753-1-1', 0, 1);
+INSERT INTO valet_slips (valet_id, license_plate, parking_spot_id, date, time_in, time_out, amount_owed, parking_status_id) VALUES (1, 'FBC623', 1, GETDATE(), (SELECT DATEADD(minute, -30, GETDATE())), '1753-1-1', 0, 2);
+INSERT INTO valet_slips (valet_id, license_plate, parking_spot_id, date, time_in, time_out, amount_owed, parking_status_id) VALUES (1, 'GBC723', 2, GETDATE(), (SELECT DATEADD(minute, -45, GETDATE())), '1753-1-1', 0, 2);
+INSERT INTO valet_slips (valet_id, license_plate, parking_spot_id, date, time_in, time_out, amount_owed, parking_status_id) VALUES (1, 'IBC923', 3, GETDATE(), (SELECT DATEADD(minute, -15, GETDATE())), '1753-1-1', 0, 2);
+
+UPDATE parking_spots SET is_occupied=1 WHERE parking_spot_id=1 OR parking_spot_id=2 OR parking_spot_id=3;
 
 -- add cars to DB for testing
 --INSERT INTO vehicles (license_plate, patron_id, vehicle_make, vehicle_model, vehicle_color) Values ('ABC123','100','Chevy','Camaro SS','red');
