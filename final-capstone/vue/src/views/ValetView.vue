@@ -16,10 +16,16 @@
           }"
           >Check-In</b-button
         >
-        <b-button block variant="light" @click="onCheckOut"   v-bind:class="{
+        <b-button
+          block
+          variant="light"
+          @click="onCheckOut"
+          v-bind:class="{
             notpressed: !checkoutButton,
             pressed: checkoutButton,
-          }">Check-Out</b-button>
+          }"
+          >Check-Out</b-button
+        >
         <b-button
           block
           variant="light"
@@ -30,17 +36,25 @@
           }"
           >View All Cars</b-button
         >
-        <b-button block variant="light" @click="onRequestCarPickup"
-           v-bind:class="{
+        <b-button
+          block
+          variant="light"
+          @click="onRequestCarPickup"
+          v-bind:class="{
             notpressed: !pickupButton,
             pressed: showRequestedCars,
-          }" >Request Car Pickup</b-button
+          }"
+          >Request Car Pickup</b-button
         >
-        <b-button block variant="light" @click="onViewPickupRequest"
+        <b-button
+          block
+          variant="light"
+          @click="onViewPickupRequest"
           v-bind:class="{
             notpressed: !showRequestedCars,
             pressed: showRequestedCars,
-          }" >View Pickup Requests</b-button
+          }"
+          >View Pickup Requests</b-button
         >
         <b-button block variant="light" @click="RateCalculator"
           >Rate Calculator</b-button
@@ -61,30 +75,30 @@
       </div>
     </div>
 
-   <div class="valetTopRightDiv">
-      <div class="componentsValet"  v-if="showLicensePlateEntry">
+    <div class="valetTopRightDiv">
+      
+      <div class="componentsValet" v-if="showLicensePlateEntry">
         <license-plate-entry />
-        </div>
+      </div>
 
-  <div class="componentsValet" v-if="showListOfCars">
-
-        <list-of-cars  />
-          </div>
-          <div class="componentsValet" v-if="showRequestedCars" >
+      <div class="componentsValet" v-if="showListOfCars">
+        <list-of-cars />
+      </div>
+      <div class="componentsValet" v-if="showRequestedCars">
         <cars-req-for-pickup v-if="showRequestedCars" />
-          </div>
-          <div class="componentsValet" v-if="showValetSlipIdForm">
-
-        <valet-slip  v-bind:valetSelection="valetSelection" />
-          </div>
-        <div id="home-parking-lot-container" v-if="showLotTop">
-          <parking-lot />
+      </div>
+      <div class="componentsValet" v-if="showValetSlipIdForm">
+        
+        <valet-slip v-bind:valetSelection="valetSelection" />
+      </div>
+      <div id="home-parking-lot-container" v-if="showLotTop">
+        <parking-lot />
       </div>
     </div>
 
     <div id="valetTopBottomDiv" v-if="!showLotTop">
-      <div id="home-parking-lot-container">
-        <parking-lot />
+      <div >
+        <parking-lot  id="home-parking-lot-container"/>
       </div>
     </div>
   </div>
@@ -95,14 +109,17 @@ import ParkingLot from "../components/ParkingLot.vue";
 //import CheckInCar from "../components/CheckInCar.vue";
 import ListOfCars from "../components/ListOfCars.vue";
 import ValetSlip from "../components/ValetSlip.vue";
-import LicensePlateEntry from '../components/LicensePlateEntry.vue';
-import CarsReqForPickup from '../components/CarsReqForPickup.vue';
-
-
-
+import LicensePlateEntry from "../components/LicensePlateEntry.vue";
+import CarsReqForPickup from "../components/CarsReqForPickup.vue";
 
 export default {
-  components: { ParkingLot, ListOfCars, ValetSlip, LicensePlateEntry, CarsReqForPickup },
+  components: {
+    ParkingLot,
+    ListOfCars,
+    ValetSlip,
+    LicensePlateEntry,
+    CarsReqForPickup,
+  },
   data() {
     return {
       showCheckInForm: false,
@@ -112,8 +129,8 @@ export default {
       valetSelection: "",
       showLicensePlateEntry: false,
       showRequestedCars: false,
-      checkoutButton:false,
-      pickupButton:false,
+      checkoutButton: false,
+      pickupButton: false,
     };
   },
   methods: {
@@ -126,11 +143,11 @@ export default {
       this.showLotTop = !this.showLotTop;
     },
     onCheckOut() {
-      this.showValetSlipIdForm = !this.showValetSlipIdForm
+      this.showValetSlipIdForm = !this.showValetSlipIdForm;
       this.showLotTop = !this.showLotTop;
       this.valetSelection = "checkoutCar";
 
-        this.checkoutButton = !this.checkoutButton;     
+      this.checkoutButton = !this.checkoutButton;
       //this.showLotTop = !this.showLotTop;
     },
     onViewAllCars() {
@@ -138,8 +155,7 @@ export default {
       this.showLotTop = !this.showLotTop;
     },
     onRequestCarPickup() {
-      
-      this.showValetSlipIdForm = !this.showValetSlipIdForm
+      this.showValetSlipIdForm = !this.showValetSlipIdForm;
       this.showLotTop = !this.showLotTop;
       this.valetSelection = "pickupCar";
 
@@ -147,24 +163,21 @@ export default {
       //this.showLotTop = !this.showLotTop;
     },
     onViewPickupRequest() {
-
-      this.showRequestedCars = !this.showRequestedCars
+      this.showRequestedCars = !this.showRequestedCars;
       //this.showLotTop = !this.showLotTop;
     },
     RateCalculator() {
       console.log("under construction");
       //this.showLotTop = !this.showLotTop;
     },
-    
   },
 };
 </script>
 
 <style>
-
-#home-parking-lot-container{
- border: 0.8vh solid orange;
- border-radius: 0.5rem;
+#home-parking-lot-container {
+  border: 0.8vh solid orange;
+  border-radius: 0.5rem;
 }
 .notpressed {
   background-color: rgb(246, 246, 246) !important;

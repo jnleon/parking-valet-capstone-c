@@ -14,7 +14,7 @@
             notpressed: !showValetSlip,
             pressed: showValetSlip,
           }"
-          >View Balance/Car Details</b-button
+          >View Balance</b-button
         >
         <b-button
           @click="requestPickup"
@@ -121,7 +121,7 @@ export default {
   background-color: rgb(245, 245, 245);
   padding: 0.5%;
   border-radius: 0.5rem;
-  margin-bottom: 0.5%;
+  margin-bottom: 0.8%;
   border: 0.8vh solid orange;
 }
 </style>
