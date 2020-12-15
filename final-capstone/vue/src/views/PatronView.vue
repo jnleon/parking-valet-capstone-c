@@ -123,5 +123,6 @@ export default {
   border-radius: 0.5rem;
   margin-bottom: 0.8%;
   border: 0.8vh solid orange;
+  height: auto;
 }
 </style>
