@@ -9,7 +9,6 @@ namespace Capstone.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    //[Authorize(Roles = "admin, valet")]  //REMOVE COMMENT TO ENABLE AUTHORIZATION!!!
     public class ValetSlipController : ControllerBase
     {
         private readonly IValetSlipDAO valetSlipDAO;
@@ -24,6 +23,7 @@ namespace Capstone.Controllers
         // get by ticket id
         // https://localhost:44315/valetslip/ticket/1
         [HttpGet("ticket/{ticketid}")]
+        [Authorize(Roles = "admin, valet, patron")]
         public IActionResult Get(int ticketid)
         {
             ValetSlip vs = valetSlipDAO.Get(ticketid);
@@ -43,6 +43,7 @@ namespace Capstone.Controllers
         // get by valet id
         // https://localhost:44315/valetslip/valet/1
         [HttpGet("valet/{valetid}")]
+        [Authorize(Roles = "admin, valet")]
         public IActionResult GetByValetId(int valetid)
         {
             List<ValetSlip> valetSlips = valetSlipDAO.GetByValetId(valetid);
@@ -62,6 +63,7 @@ namespace Capstone.Controllers
         // get by license plate
         // https://localhost:44315/valetslip/licenseplate/ABC123
         [HttpGet("licenseplate/{licensePlate}")]
+        [Authorize(Roles = "admin, valet, patron")]
         public IActionResult GetByLicensePlate(string licensePlate)
         {
             ValetSlip vs = valetSlipDAO.GetByLicensePlate(licensePlate);
@@ -77,11 +79,29 @@ namespace Capstone.Controllers
                 return Ok(vs);
             }
         }
+
         // https://localhost:44315/valetslip/alldata/
         [HttpGet("alldata")]
-        public IActionResult GetAllDataByLicensePlate()
+        [Authorize(Roles = "admin, valet")]
+        public IActionResult GetAllData()
         {
             List<VehicleValetSlipPatron> v = vehicleValetSlipPatronDAO.List();
+            if (v == null)
+            {
+                return NoContent();
+            }
+            else
+            {
+                return Ok(v);
+            }
+        }
+
+        // https://localhost:44315/valetslip/alldatapickuprequested/
+        [HttpGet("alldatapickuprequested")]
+        [Authorize(Roles = "admin, valet")]
+        public IActionResult GetAllDataPickupRequested()
+        {
+            List<VehicleValetSlipPatron> v = vehicleValetSlipPatronDAO.ListPickupRequested();
             if (v == null)
             {
                 return NoContent();
@@ -95,6 +115,7 @@ namespace Capstone.Controllers
         // park vehicle
         // https://localhost:44315/valetslip/parkvehicle/1
         [HttpPut("parkvehicle/{id}")]
+        [Authorize(Roles = "admin, valet")]
         public IActionResult ParkVehicle(int id, ValetSlip ValetSlipToUpdate)
         {
             ValetSlip updatedValetSlip = valetSlipDAO.ParkVehicle(id, ValetSlipToUpdate);
@@ -111,6 +132,7 @@ namespace Capstone.Controllers
         // request vehicle pick up
         // https://localhost:44315/valetslip/pickupvehicle/1
         [HttpPut("pickupvehicle/{id}")]
+        [Authorize(Roles = "admin, valet, patron")]
         public IActionResult PickupVehicle(int id, ValetSlip ValetSlipToUpdate)
         {
             ValetSlip updatedValetSlip = valetSlipDAO.PickupVehicle(id, ValetSlipToUpdate);
@@ -127,6 +149,7 @@ namespace Capstone.Controllers
         // pick up vehicle
         // https://localhost:44315/valetslip/requestpickupvehicle/1
         [HttpPut("requestpickupvehicle/{id}")]
+        [Authorize(Roles = "admin, valet, patron")]
         public IActionResult RequestPickupVehicle(int id, ValetSlip ValetSlipToUpdate)
         {
             ValetSlip updatedValetSlip = valetSlipDAO.RequestPickupVehicle(id, ValetSlipToUpdate);

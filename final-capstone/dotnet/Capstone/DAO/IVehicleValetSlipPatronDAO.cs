@@ -7,5 +7,6 @@ namespace Capstone.DAO
     public interface IVehicleValetSlipPatronDAO
     {
         List<VehicleValetSlipPatron> List();
+        List<VehicleValetSlipPatron> ListPickupRequested();
     }
 }

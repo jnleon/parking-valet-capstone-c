@@ -2,25 +2,22 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Capstone.DAO
 {
     public class VehicleValetSlipPatronSqlDAO : IVehicleValetSlipPatronDAO
     {
-            private readonly string connectionString;
+        private readonly string connectionString;
 
-            public VehicleValetSlipPatronSqlDAO(string dbConnectionString)
-            {
-                connectionString = dbConnectionString;
-            }
+        public VehicleValetSlipPatronSqlDAO(string dbConnectionString)
+        {
+            connectionString = dbConnectionString;
+        }
 
-            public List<VehicleValetSlipPatron> List()
+        public List<VehicleValetSlipPatron> List()
         {
 
             List<VehicleValetSlipPatron> vlist = new List<VehicleValetSlipPatron>();
-            
             VehicleValetSlipPatron v = null;
 
 
@@ -40,6 +37,46 @@ namespace Capstone.DAO
                                                     INNER JOIN patrons ON vehicles.patron_id = patrons.patron_id
                                                     INNER JOIN parking_statuses ON parking_statuses.parking_status_id = valet_slips.parking_status_id
                                                     WHERE parking_statuses.parking_status_id != 3 AND parking_statuses.parking_status_id != 5", conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.HasRows && reader.Read())
+                    {
+                        v = GetEverythingFromReader(reader);
+                        vlist.Add(v);
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+
+            return vlist;
+        }
+
+        public List<VehicleValetSlipPatron> ListPickupRequested()
+        {
+
+            List<VehicleValetSlipPatron> vlist = new List<VehicleValetSlipPatron>();
+            VehicleValetSlipPatron v = null;
+
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(@"SELECT ticket_id, valet_id, valet_slips.license_plate AS license_plate, 
+                                                    parking_spot_id, time_in, time_out, amount_owed, 
+                                                    parking_statuses.parking_status AS parking_status,
+                                                    vehicle_make, vehicle_model, vehicle_color, first_name, 
+                                                    last_name, phone_number, email_address
+                                                    FROM valet_slips
+                                                    INNER JOIN vehicles ON vehicles.license_plate = valet_slips.license_plate
+                                                    INNER JOIN patrons ON vehicles.patron_id = patrons.patron_id
+                                                    INNER JOIN parking_statuses ON parking_statuses.parking_status_id = valet_slips.parking_status_id
+                                                    WHERE parking_statuses.parking_status_id=4", conn);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.HasRows && reader.Read())
