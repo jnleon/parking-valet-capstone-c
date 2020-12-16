@@ -1,15 +1,16 @@
 <template>
   <div>
-    <div v-if="loadingLotData"><img src ="../img/bejjTitle.png"></div>
+    <div v-if="loadingLotData">
     <h3 class="container-text">Available Spots</h3>
     <b-alert
       id="alert-full"
       style="text-align: center"
       show
       variant="danger"
-      v-if="isFull"
+      v-if="isFull || loadingLotData"
+      
       >Parking Lot Full!</b-alert
-    >
+    ></div>
     <div v-if="!isFull">
       <div class="parking-lot-container">
         <parking-spot
@@ -50,14 +51,10 @@ export default {
   name: "parking-lot",
 
   created() {
+    this.loadingLotData=false;
     ParkingService.getParkingSpots().then((response) => {
       this.parkingSpots = response.data;
       
-    }).catch ((error) => {
-      console.log(error)
-    })
-    .finally (() => {
-      this.loadingLotData=false;
     });
     /* Add method in methods block for check-in - UpdateSpots()*/
   },
