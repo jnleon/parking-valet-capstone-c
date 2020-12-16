@@ -1,0 +1,1 @@
+UPDATE parking_spots SET is_occupied=1 WHERE is_occupied=0;
