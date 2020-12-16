@@ -30,6 +30,15 @@ INSERT INTO vehicles (license_plate, patron_id, vehicle_make, vehicle_model, veh
 INSERT INTO vehicles (license_plate, patron_id, vehicle_make, vehicle_model, vehicle_color) Values ('GBC723',(SELECT patron_id FROM patrons WHERE email_address = 'jdoe@aol.com'),'Chevy','Chevelle','red');
 INSERT INTO vehicles (license_plate, patron_id, vehicle_make, vehicle_model, vehicle_color) Values ('IBC923',(SELECT patron_id FROM patrons WHERE email_address = 'jaltuve@aol.com'),'Plymouth','Super Bird','orange');
 
+INSERT INTO vehicles (license_plate, patron_id, vehicle_make, vehicle_model, vehicle_color) Values ('NEWCAR1',(SELECT patron_id FROM patrons WHERE email_address = 'awinger@aol.com'),'Chevy','Bolt','Grey');
+INSERT INTO vehicles (license_plate, patron_id, vehicle_make, vehicle_model, vehicle_color) Values ('NEWCAR2',(SELECT patron_id FROM patrons WHERE email_address = 'asmith@aol.com'),'Tesla','Model3','White');
+
+
+INSERT INTO valet_slips (valet_id, license_plate, parking_spot_id, date, time_in, time_out, amount_owed, parking_status_id) VALUES (1, 'NEWCAR1',null, GETDATE(), (SELECT DATEADD(minute, -20, GETDATE())), '1753-1-1', 0, 2);
+INSERT INTO valet_slips (valet_id, license_plate, parking_spot_id, date, time_in, time_out, amount_owed, parking_status_id) VALUES (1, 'NEWCAR2', null, GETDATE(), (SELECT DATEADD(minute, -40, GETDATE())), '1753-1-1', 0, 2);
+
+
+
 INSERT INTO valet_slips (valet_id, license_plate, parking_spot_id, date, time_in, time_out, amount_owed, parking_status_id) VALUES (1, 'FBC623', 1, GETDATE(), (SELECT DATEADD(minute, -30, GETDATE())), '1753-1-1', 0, 2);
 INSERT INTO valet_slips (valet_id, license_plate, parking_spot_id, date, time_in, time_out, amount_owed, parking_status_id) VALUES (1, 'GBC723', 2, GETDATE(), (SELECT DATEADD(minute, -45, GETDATE())), '1753-1-1', 0, 2);
 INSERT INTO valet_slips (valet_id, license_plate, parking_spot_id, date, time_in, time_out, amount_owed, parking_status_id) VALUES (1, 'IBC923', 3, GETDATE(), (SELECT DATEADD(minute, -15, GETDATE())), '1753-1-1', 0, 2);
