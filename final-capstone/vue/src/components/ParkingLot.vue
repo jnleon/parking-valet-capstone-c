@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div v-if="loadingLotData">
+    <div v-if="!loadingLotData">
     <h3 class="container-text">Available Spots</h3>
     <b-alert
       id="alert-full"
       style="text-align: center"
       show
       variant="danger"
-      v-if="isFull || loadingLotData"
+      v-if="isFull"
       
       >Parking Lot Full!</b-alert
     ></div>
@@ -51,11 +51,15 @@ export default {
   name: "parking-lot",
 
   created() {
-    this.loadingLotData=false;
+    
     ParkingService.getParkingSpots().then((response) => {
       this.parkingSpots = response.data;
-      
+      this.loadingLotData=true;
+    })
+    .finally(() => {
+      this.loadingLotData=false;
     });
+    
     /* Add method in methods block for check-in - UpdateSpots()*/
   },
   computed: {
@@ -66,6 +70,7 @@ export default {
           occupiedSpots++;
         }
       });
+      
       return this.parkingSpots.length == occupiedSpots;
     },
   },
