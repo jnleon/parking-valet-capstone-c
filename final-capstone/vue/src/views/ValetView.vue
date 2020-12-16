@@ -42,7 +42,7 @@
           @click="onRequestCarPickup"
           v-bind:class="{
             notpressed: !pickupButton,
-            pressed: showRequestedCars,
+            pressed: pickupButton,
           }"
           >Request Car Pickup</b-button
         >
@@ -76,7 +76,6 @@
     </div>
 
     <div class="valetTopRightDiv">
-      
       <div class="componentsValet" v-if="showLicensePlateEntry">
         <license-plate-entry />
       </div>
@@ -88,17 +87,11 @@
         <cars-req-for-pickup v-if="showRequestedCars" />
       </div>
       <div class="componentsValet" v-if="showValetSlipIdForm">
-        
         <valet-slip v-bind:valetSelection="valetSelection" />
       </div>
+
       <div id="home-parking-lot-container" v-if="showLotTop">
         <parking-lot />
-      </div>
-    </div>
-
-    <div id="valetTopBottomDiv" v-if="!showLotTop">
-      <div >
-        <parking-lot  id="home-parking-lot-container"/>
       </div>
     </div>
   </div>
@@ -140,11 +133,9 @@ export default {
       //if license plate exists in car details table then add car to valet slip table
       //if license plate is new then show form to add car (check in car component)
       this.showCheckInForm = !this.showCheckInForm;
-      this.showLotTop = !this.showLotTop;
     },
     onCheckOut() {
       this.showValetSlipIdForm = !this.showValetSlipIdForm;
-      this.showLotTop = !this.showLotTop;
       this.valetSelection = "checkoutCar";
 
       this.checkoutButton = !this.checkoutButton;
@@ -152,11 +143,9 @@ export default {
     },
     onViewAllCars() {
       this.showListOfCars = !this.showListOfCars;
-      this.showLotTop = !this.showLotTop;
     },
     onRequestCarPickup() {
       this.showValetSlipIdForm = !this.showValetSlipIdForm;
-      this.showLotTop = !this.showLotTop;
       this.valetSelection = "pickupCar";
 
       this.pickupButton = !this.pickupButton;
@@ -231,9 +220,7 @@ export default {
 #valetMain {
   display: grid;
   grid-template-columns: 1fr 3fr;
-  grid-template-areas:
-    "valetMenu valetTopRight"
-    "valetMenu valetBottomRight";
+  grid-template-areas: "valetMenu components";
 
   grid-gap: 40px;
   height: fit-content;
@@ -243,6 +230,10 @@ export default {
 #valetMenu {
   background-color: rgb(226, 226, 226);
   grid-area: valetMenu;
+  border-bottom-left-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
+  border-top-left-radius: 0.3rem;
 }
 /*
 #valetTopRightDiv {

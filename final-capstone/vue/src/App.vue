@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <div id="headerBar" position= "sticky" fixed="top" >
-      <b-navbar toggleable="lg" type="light" variant="infoBar" >
+    <div id="headerBar">
+      <b-navbar fixed="top" toggleable="lg" type="light" variant="infoBar">
         <router-link v-bind:to="{ name: 'home' }"
           ><img id="headerlogo" src="@/img/jjebTitle.png" alt="Kitten"
         /></router-link>
@@ -36,18 +36,20 @@
       </b-navbar>
     </div>
     <router-view class="routerV" />
+    <footer-thing-component class="footer" />
   </div>
-  
 </template>
 
 <script>
 import RegistrationButton from "@/components/topbarFooter/RegistrationButton.vue";
 import LoginButton from "@/components/topbarFooter/LoginButton.vue";
+import FooterThingComponent from "@/components/topbarFooter/Footer.vue";
 
 export default {
   components: {
     RegistrationButton,
-    LoginButton
+    LoginButton,
+    FooterThingComponent,
   },
 };
 </script>
@@ -61,27 +63,20 @@ export default {
   min-width: 12rem !important;
 }
 
-
-
 @import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
-
-#headerBar {
-  grid-area: header;
-  display: inline-block;
-  position: sticky
-  
-}
 
 #app {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas:
     "header header header header header"
-    "content content content content content";
+    "content content content content content"
+    "footer footer footer footer footer";
   grid-gap: 10px;
   height: fit-content;
-  padding-bottom: 1%;
   background-color: rgb(246, 246, 246);
+
+  padding-top: 70px;
 }
 .routerV {
   grid-area: content;
@@ -92,5 +87,9 @@ export default {
   size: fixed;
   padding-left: 5%;
   display: inline-block;
+}
+
+.footer {
+  grid-area: footer;
 }
 </style>

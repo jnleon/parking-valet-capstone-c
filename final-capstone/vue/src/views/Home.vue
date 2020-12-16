@@ -13,7 +13,7 @@
           >
         </div>
       </div>
-      <div id="home-parking-lot-container">
+      <div id="home-parking-lot-container-yes">
         <parking-lot />
       </div>
 
@@ -78,6 +78,17 @@ s #available-box {
   color: red;
   width: 20px;
 }
+
+#home-parking-lot-container-yes {
+  color: white;
+  background-image: url("../img/p-lot-background.jpg");
+  padding-top: 3%;
+  padding-bottom: 0.05%;
+  font-family: "Jua";
+  text-transform: uppercase;
+  text-align: center;
+}
+
 #home-parking-lot-container {
   color: white;
   background-image: url("../img/p-lot-background.jpg");
@@ -99,6 +110,8 @@ marquee {
   text-transform: uppercase;
   justify-content: center;
   padding-top: 1.3%;
+  border-top-right-radius: 0.3rem;
+  border-top-left-radius: 0.3rem;
 }
 
 #lotInfo {
@@ -113,6 +126,8 @@ marquee {
   display: flex;
   padding: 4%;
   background-color: rgb(236, 234, 234);
+  border-bottom-left-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
   /*rgb(46, 83, 46)*/
 }
 #ganggang {
@@ -170,12 +185,6 @@ h2 {
   grid-gap: 40px;
   height: fit-content;
   margin: 0px 40px;
-}
-
-#menu {
-  background-color: rgb(240, re, 240);
-  grid-area: menu;
-  background-color: rgb(236, 234, 234);
 }
 
 div > iframe {

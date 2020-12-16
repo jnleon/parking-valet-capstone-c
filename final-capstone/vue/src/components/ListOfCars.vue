@@ -1,10 +1,11 @@
 <template>
   <div id="dodge">
-     <h3>CHECKED IN CARS</h3>
+    <h3>CHECKED IN CARS</h3>
     <b-container fluid>
       <!-- User Interface controls -->
       <b-row>
-        <b-col lg="4" class="my-2">  <b-form-group
+        <b-col lg="4" class="my-2">
+          <b-form-group
             label="Filter"
             label-cols-sm="3"
             label-align-sm="right"
@@ -26,13 +27,10 @@
                 >
               </b-input-group-append>
             </b-input-group>
-          </b-form-group></b-col>
+          </b-form-group></b-col
+        >
 
-        <b-col lg="6" class="my-1">
-         
-
-          
-        </b-col>
+        <b-col lg="6" class="my-1"> </b-col>
       </b-row>
 
       <b-table
@@ -63,8 +61,6 @@
           <b-card>
             <div id="listStuffModal">
               <div id="displayPatronList">
-               
-               
                 <h5>
                   PATRON ID :
                   <p style="display: inline" class="attributesList">
@@ -115,7 +111,6 @@
                   </p>
                 </h5>
 
-            
                 <h5>
                   VEHICLE COLOR :
                   <p style="display: inline" class="attributesList">
@@ -126,9 +121,17 @@
                 <h5>
                   PARKING SPOT :
                   <p style="display: inline" class="attributesList">
-                    {{ row.item.parkingSpotId }} 
-                  </p><p><button @click="showParkingSpotForm(row.item.ticketId)">update parking spot</button>
-                  <update-spot-id v-if="ParkingSpotForm" v-bind:ticketId="ticketId" /></p>
+                    {{ row.item.parkingSpotId }}
+                  </p>
+                  <p>
+                    <button @click="showParkingSpotForm(row.item.ticketId)">
+                      update parking spot
+                    </button>
+                    <update-spot-id
+                      v-if="ParkingSpotForm"
+                      v-bind:ticketId="ticketId"
+                    />
+                  </p>
                 </h5>
                 <h5>
                   TIME IN :
@@ -143,13 +146,10 @@
                 <h5>
                   AMOUNT OWED :
                   <p style="display: inline" class="attributesList">
-                  ${{calcTime(row.item.timeIn)}}
+                    ${{ calcTime(row.item.timeIn) }}
                   </p>
                 </h5>
-
-         
-
-              </div> 
+              </div>
             </div>
           </b-card>
         </template>
@@ -160,13 +160,13 @@
 
 <script>
 import ValetService from "@/services/ValetService.js";
-import moment from 'moment';
+import moment from "moment";
 import UpdateSpotId from "@/components/UpdateSpotId.vue";
 
 export default {
   name: "list-of-cars",
-  
-  components: {UpdateSpotId},
+
+  components: { UpdateSpotId },
   created() {
     ValetService.getAllTheInfo().then((response) => {
       this.$store.commit("LOAD_CAR_LIST", response.data);
@@ -175,7 +175,6 @@ export default {
   },
   data() {
     return {
-   
       fields: [
         { key: "ticketId", sortable: true, class: "text-center" },
         { key: "vehicleMake", sortable: true, class: "text-center" },
@@ -196,7 +195,7 @@ export default {
       filter: null,
       filterOn: [],
       ParkingSpotForm: false,
-      ticketId: '',
+      ticketId: "",
     };
   },
   computed: {
@@ -208,7 +207,6 @@ export default {
           return { text: f.label, value: f.key };
         });
     },
-   
   },
   /*mounted() {
     // Set the initial number of items
@@ -220,15 +218,14 @@ export default {
       this.infoModal.content = JSON.stringify(item, null, 2);
       this.$root.$emit("bv::show::modal", this.infoModal.id, button);
     },
-        calcTime(date) {
-        var now = moment(new Date())
-        var end = moment(date)
-        var duration = moment.duration(now.diff(end))
-        var minutes = duration.asMinutes()
-       var calc = ((minutes) / 60) * 5;
-       return calc.toFixed(2);
+    calcTime(date) {
+      var now = moment(new Date());
+      var end = moment(date);
+      var duration = moment.duration(now.diff(end));
+      var minutes = duration.asMinutes();
+      var calc = (minutes / 60) * 5;
+      return calc.toFixed(2);
     },
-        
 
     onFiltered(filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
@@ -238,11 +235,9 @@ export default {
     showParkingSpotForm(ticketId) {
       this.ticketId = ticketId;
       this.ParkingSpotForm = !this.ParkingSpotForm;
-      
-    }
-    
+    },
   },
-}
+};
 </script>
 
 <style>

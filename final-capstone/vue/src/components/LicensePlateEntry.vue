@@ -1,9 +1,10 @@
 <template>
   <div>
+         <h3>CHECK-IN</h3>
     <b-form @submit="LicensePlateSubmit" @reset="onReset" v-if="show">
       <b-form-group
         id="license-plate-entry-label"
-        label="License Plate:"
+        label="Enter License Plate:"
         label-for="license-plate-entry"
         description="Please enter the car's license plate."
       >

@@ -11,8 +11,8 @@
           block
           variant="light"
           v-bind:class="{
-            notpressed: !showValetSlip,
-            pressed: showValetSlip,
+            notpressed: !viewBalanceButton,
+            pressed: viewBalanceButton,
           }"
           >View Balance</b-button
         >
@@ -21,8 +21,8 @@
           block
           variant="light"
           v-bind:class="{
-            notpressed: !showValetSlip,
-            pressed: showValetSlip,
+            notpressed: !viewPickupButton,
+            pressed: viewPickupButton,
           }"
           >Request Pickup</b-button
         >
@@ -47,18 +47,11 @@
       <div class="componentsValet" v-if="showValetSlip">
         <valet-slip v-bind:patronSelection="patronSelection" />
       </div>
-      <div id="home-parking-lot-container" v-if="!showValetSlip">
-        <parking-lot />
-      </div>
-    </div>
 
-    <!-- <div id="valetBottomRightDiv">-->
-    <div class="valetTopBottomDiv" v-if="showValetSlip">
       <div id="home-parking-lot-container">
         <parking-lot />
       </div>
     </div>
-    <!-- </div>-->
   </div>
 </template>
 
@@ -70,17 +63,21 @@ export default {
   data() {
     return {
       showValetSlip: false,
+      viewBalanceButton: false,
+      viewPickupButton: false,
       patronSelection: "",
     };
   },
   components: { ParkingLot, ValetSlip },
   methods: {
     onSubmitBalanceRequest() {
-      this.showValetSlip = !this.showValetSlip;
       this.patronSelection = "showBalance";
+      this.viewBalanceButton = !this.viewBalanceButton;
+      this.showValetSlip = !this.showValetSlip;
     },
     requestPickup() {
       this.patronSelection = "pickupCar";
+      this.viewPickupButton = !this.viewPickupButton;
       this.showValetSlip = !this.showValetSlip;
     },
   },
@@ -105,24 +102,20 @@ export default {
   max-width: 1000px;
 }
 
-
-.valetTopBottomDiv {
-  grid-area: valetBottomRight;
-  padding: 0.5%;
-  border-radius: 0.5rem;
-}
-
 .valetTopRightDiv {
-  grid-area: valetTopRight;
-
+  grid-area: components;
+  display: flex;
+  flex-direction: column;
 }
 
 .componentsValet {
-  background-color: rgb(245, 245, 245);
-  padding: 0.5%;
+  background-color: rgb(241, 241, 241);
+  padding: 1%;
   border-radius: 0.5rem;
-  margin-bottom: 0.8%;
+  margin-bottom: 1%;
   border: 0.8vh solid orange;
-  height: auto;
+  font-family: "Jua", "Times New Roman", Times, serif;
+  text-transform: uppercase;
+  color: rgb(0, 0, 0);
 }
 </style>

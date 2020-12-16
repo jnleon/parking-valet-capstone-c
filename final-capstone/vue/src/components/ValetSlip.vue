@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3 v-if="this.valetSelection == 'pickupCar' || this.patronSelection == 'pickupCar'">REQUEST CAR PICKUP</h3>
-      <h3 v-if="this.valetSelection == 'checkoutCar'">CHECK OUT</h3>
+      <h3 v-if="this.valetSelection == 'checkoutCar'">CHECK-OUT</h3>
       <h3 v-if="this.patronSelection == 'showBalance'">VIEW BALANCE</h3>
 
     <b-form @submit="PatronCarDetailsSubmit" @reset="onReset" v-if="show">
