@@ -1,7 +1,7 @@
 <template>
   <div id="dodge">
     <h3>Cars Requested For Pickup</h3>
-    
+
     <b-container fluid>
       <!-- User Interface controls -->
       <b-row>
@@ -56,9 +56,16 @@
           <b-button size="sm" @click="row.toggleDetails">
             {{ row.detailsShowing ? "Hide" : "Show" }} Details
           </b-button>
-          <b-button size="sm" @click="checkOutCar(row.item.tickedId)" v-if="showAmountOwedOnList"> CHECKOUT CAR </b-button>
-              <h5 v-if="showAmountOwedOnList">AMOUNT OWED {{this.finalAmountOwed}}</h5>
-
+          <b-button
+            size="sm"
+            @click="checkOutCar(row.item.tickedId)"
+            v-if="showAmountOwedOnList"
+          >
+            CHECKOUT CAR
+          </b-button>
+          <h5 v-if="showAmountOwedOnList">
+            AMOUNT OWED {{ this.finalAmountOwed }}
+          </h5>
         </template>
 
         <template #row-details="row">
@@ -150,8 +157,7 @@ export default {
       sortDirection: "asc",
       filter: null,
       filterOn: [],
-      showAmountOwedOnList:false,
-
+      showAmountOwedOnList: false,
     };
   },
   computed: {
@@ -167,11 +173,9 @@ export default {
 
   methods: {
     checkOutCar(slipID) {
-      CarDetailsService.checkoutCar(slipID).then(
-        (response) => {
-          alert(response.data.amountOwed);
-        }
-      );
+      CarDetailsService.checkoutCar(slipID).then((response) => {
+        alert(response.data.amountOwed);
+      });
     },
     info(item, index, button) {
       this.infoModal.title = `Row index: ${index}`;

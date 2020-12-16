@@ -22,6 +22,7 @@ export default new Vuex.Store({
     user: currentUser || {},
     checkedInCars: [],
     requestedCars: [],
+    parkingSpots: [],
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -45,7 +46,9 @@ export default new Vuex.Store({
     },
     LOAD_REQUESTED_CAR_LIST(state, cars) {
       state.requestedCars = cars
+    },
+    FILL_PARKING_SPOTS(state, spots){
+      state.parkingSpots = spots
     }
-
   }
 })

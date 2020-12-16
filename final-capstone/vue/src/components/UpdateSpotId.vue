@@ -26,7 +26,7 @@
 import ValetService from "@/services/ValetService.js";
 
 export default {
-  name:"update-spot-id",
+  name: "update-spot-id",
   show: false,
   props: ["ticketId"],
   data() {
@@ -34,7 +34,6 @@ export default {
       form: {
         spotNumber: "",
         name: "",
-        
       },
       show: true,
       showValetCall: false,
@@ -43,22 +42,26 @@ export default {
     };
   },
   methods: {
-      UpdateSpotNumber() {
-        if (this.form.spotNumber < 1 || this.form.spotNumber > 10) {
-          alert("Please enter a valid spot number")
-
-        } else {
-          ValetService.updateParkingSpot(this.ticketId,this.form.spotNumber).then((response) => {
-          alert("Spot number updated")
-          if (response.status==200 ){
-            location.reload();
+    UpdateSpotNumber() {
+      if (this.form.spotNumber < 1 || this.form.spotNumber > 10) {
+        alert("Please enter a valid spot number");
+      } else {
+        this.$store.state.parkingSpots.forEach((spot) => {
+          if (spot.parkingSpotId == this.form.spotNumber) {
+            if (spot.isOccupied == true) {
+              alert("Parking spot already taken");
+            } else {
+              ValetService.updateParkingSpot(
+                this.ticketId,
+                this.form.spotNumber
+              );
+              alert("Spot number updated");
+            }
           }
-        })
-        }
-        
-
-      },
-      onReset(evt) {
+        });
+      }
+    },
+    onReset(evt) {
       evt.preventDefault();
       // Reset our form values
       this.form.email = "";
@@ -71,6 +74,6 @@ export default {
         this.show = true;
       });
     },
-  }
-}
+  },
+};
 </script>

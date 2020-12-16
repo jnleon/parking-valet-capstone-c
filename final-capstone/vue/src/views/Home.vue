@@ -13,9 +13,7 @@
           >
         </div>
       </div>
-      <div id="home-parking-lot-container-yes">
-        <parking-lot />
-      </div>
+      <parking-lot />
 
       <div id="palceholderFunnyPhoto">
         <img id="ganggang" src="../img/jjeb.png" />
