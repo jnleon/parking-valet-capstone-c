@@ -100,9 +100,6 @@ export default {
       });
 
       evt.preventDefault();
-      //this.$router.push({
-      //path: '/valet'
-      //});
     },
     onReset(evt) {
       evt.preventDefault();
@@ -112,7 +109,6 @@ export default {
       this.car.licensePlate = "";
       this.car.vehicleColor = "";
       this.car.patronEmail = "";
-
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {

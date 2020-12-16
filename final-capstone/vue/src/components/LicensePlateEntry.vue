@@ -1,6 +1,6 @@
 <template>
   <div>
-         <h3>CHECK-IN</h3>
+    <h3>CHECK-IN</h3>
     <b-form @submit="LicensePlateSubmit" @reset="onReset" v-if="show">
       <b-form-group
         id="license-plate-entry-label"
@@ -22,14 +22,11 @@
     </b-form>
     <check-in-car v-if="showCheckInForm" />
     <h3 v-if="confirmCarAddedMessage">Valet Slip has been created for car</h3>
-    
-    
   </div>
 </template>
 <script>
-//import PatronCarDetails from "@/components/PatronCarDetails.vue";
 import ValetService from "@/services/ValetService.js";
-import CheckInCar from '../components/CheckInCar.vue';
+import CheckInCar from "../components/CheckInCar.vue";
 
 export default {
   carExists: "",
@@ -39,36 +36,33 @@ export default {
     return {
       form: {
         licensePlate: "",
-        
       },
       show: true,
       showCheckInForm: false,
       confirmCarAddedMessage: false,
-      
     };
   },
-  components: {CheckInCar },
+  components: { CheckInCar },
   methods: {
     LicensePlateSubmit(evt) {
       evt.preventDefault();
       //alert(this.form.valetSlipNumber)
-      ValetService.checkLicensePlate(this.form.licensePlate).then ((response) => {
-        if (response.data.licensePlate != null) { //as long as car exists, do this . . 
+      ValetService.checkLicensePlate(this.form.licensePlate).then(
+        (response) => {
+          if (response.data.licensePlate != null) {
+            //as long as car exists, do this . .
             //if license plate exists in car details table then add car to valet slip table
-            
             this.show = !this.show;
-            this.showCheckInForm =false;
+            this.showCheckInForm = false;
             this.confirmCarAddedMessage = true;
-            
-        } else { //if car doesn't exist/entered incorrectly do this
+          } else {
+            //if car doesn't exist/entered incorrectly do this
             //if license plate is new then show form to add car (check in car component)
             this.showCheckInForm = !this.showCheckInForm;
             this.show = !this.show;
+          }
         }
-        
-      })
-      
-      
+      );
     },
     onSubmitPatronRequest() {
       this.show = false;

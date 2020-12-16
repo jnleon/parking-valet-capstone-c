@@ -56,8 +56,12 @@
           }"
           >View Pickup Requests</b-button
         >
-       
-        <b-button v-if="showCalcButton" block variant="light" @click="RateCalculator"
+
+        <b-button
+          v-if="showCalcButton"
+          block
+          variant="light"
+          @click="RateCalculator"
           >Rate Calculator</b-button
         >
       </div>
@@ -70,7 +74,7 @@
           allowfullscreen=""
           aria-hidden="false"
           tabindex="0"
-          height="100%"
+          height="auto"
         >
         </iframe>
       </div>
@@ -91,16 +95,13 @@
         <valet-slip v-bind:valetSelection="valetSelection" />
       </div>
 
-      <div id="home-parking-lot-container" v-if="showLotTop">
-        <parking-lot />
-      </div>
+      <parking-lot id="home-parking-lot-container" v-if="showLotTop" />
     </div>
   </div>
 </template>
 
 <script>
 import ParkingLot from "../components/ParkingLot.vue";
-//import CheckInCar from "../components/CheckInCar.vue";
 import ListOfCars from "../components/ListOfCars.vue";
 import ValetSlip from "../components/ValetSlip.vue";
 import LicensePlateEntry from "../components/LicensePlateEntry.vue";
@@ -125,7 +126,7 @@ export default {
       showRequestedCars: false,
       checkoutButton: false,
       pickupButton: false,
-      showCalcButton:false,
+      showCalcButton: false,
     };
   },
   methods: {
@@ -139,9 +140,7 @@ export default {
     onCheckOut() {
       this.showValetSlipIdForm = !this.showValetSlipIdForm;
       this.valetSelection = "checkoutCar";
-
       this.checkoutButton = !this.checkoutButton;
-      //this.showLotTop = !this.showLotTop;
     },
     onViewAllCars() {
       this.showListOfCars = !this.showListOfCars;
@@ -151,15 +150,12 @@ export default {
       this.valetSelection = "pickupCar";
 
       this.pickupButton = !this.pickupButton;
-      //this.showLotTop = !this.showLotTop;
     },
     onViewPickupRequest() {
       this.showRequestedCars = !this.showRequestedCars;
-      //this.showLotTop = !this.showLotTop;
     },
     RateCalculator() {
       console.log("under construction");
-      //this.showLotTop = !this.showLotTop;
     },
   },
 };
@@ -193,10 +189,6 @@ export default {
   padding: 2vh !important;
 }
 
-#MenuButtons {
-  margin: 8%;
-}
-
 .btn-block:hover {
   transition: var(--transition-speed) !important;
   background-color: var(--li-color-hover) !important;
@@ -213,10 +205,6 @@ export default {
   border-color: white !important;
   margin-bottom: 3.5vh;
   padding: 2vh !important;
-}
-
-#MenuButtons .btn-secondary {
-  max-width: 1000px;
 }
 
 #valetMain {
@@ -237,25 +225,4 @@ export default {
   border-top-right-radius: 0.3rem;
   border-top-left-radius: 0.3rem;
 }
-/*
-#valetTopRightDiv {
-  grid-area: valetTopRight;
-  background-color: orange;
-  padding: 0.5%;
-  border-radius: 0.5rem;
-}
-
-#valetTopBottomDiv {
-  grid-area: valetBottomRight;
-  background-color: orange;
-  padding: 0.5%;
-  border-radius: 0.5rem;
-  margin-bottom: 2%;
-}
-
-#componentsValet {
-  background-color: rgb(245, 245, 245);
-  padding: 0.5%;
-  border-radius: 0.5rem;
-}*/
 </style>

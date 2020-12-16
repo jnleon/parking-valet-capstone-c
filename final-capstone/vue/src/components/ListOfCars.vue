@@ -207,10 +207,6 @@ export default {
         });
     },
   },
-  /*mounted() {
-    // Set the initial number of items
-    this.totalRows = this.items.length;
-  },*/
   methods: {
     info(item, index, button) {
       this.infoModal.title = `Row index: ${index}`;

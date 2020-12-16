@@ -6,7 +6,7 @@
 
 <script>
 import PatronService from "@/services/PatronService.js";
-import moment from 'moment';
+import moment from "moment";
 
 export default {
   name: "patron-car-details",
@@ -21,18 +21,16 @@ export default {
   created() {
     PatronService.getValetSlip(this.slipId).then((response) => {
       this.valetSlip = response.data;
-      //alert(this.calculateCurrentBalance());
     });
-    //currentBalance = valetSlip.timeIn
   },
   methods: {
     calcTime(date) {
-        var now = moment(new Date())
-        var end = moment(date)
-        var duration = moment.duration(now.diff(end))
-        var minutes = duration.asMinutes()
-       var calc = ((minutes) / 60) * 5;
-       return calc.toFixed(2);
+      var now = moment(new Date());
+      var end = moment(date);
+      var duration = moment.duration(now.diff(end));
+      var minutes = duration.asMinutes();
+      var calc = (minutes / 60) * 5;
+      return calc.toFixed(2);
     },
     currentTime() {
       var today = new Date();
