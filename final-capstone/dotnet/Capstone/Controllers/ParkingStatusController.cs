@@ -31,7 +31,6 @@ namespace Capstone.Controllers
             }
             else
             {
-                // Switch to 200 OK
                 return Ok(parkingStatuses);
             }         
         }
@@ -44,12 +43,10 @@ namespace Capstone.Controllers
 
             if (ps == null)
             {
-                //return StatusCode(500);
                 return NoContent();
             }
             else
             {
-                // Switch to 200 OK
                 return Ok(ps);
             }
         }

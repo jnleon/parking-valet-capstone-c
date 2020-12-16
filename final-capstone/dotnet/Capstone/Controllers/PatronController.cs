@@ -27,12 +27,10 @@ namespace Capstone.Controllers
 
             if (p == null)
             {
-                //return StatusCode(500);
                 return NoContent();
             }
             else
             {
-                // Switch to 200 OK
                 return Ok(p);
             }
         }
@@ -45,12 +43,10 @@ namespace Capstone.Controllers
 
             if (p == null)
             {
-                //return StatusCode(500);
                 return NoContent();
             }
             else
             {
-                // Switch to 200 OK
                 return Ok(p);
             }
         }

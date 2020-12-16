@@ -18,7 +18,6 @@ namespace Capstone.Models
         [Required]
         public int ParkingSpotId { get; set; }
         
-        //[Required]
         public DateTime Date { get; set; }
         
         [Required]

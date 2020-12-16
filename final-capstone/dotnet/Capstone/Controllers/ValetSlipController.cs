@@ -30,12 +30,10 @@ namespace Capstone.Controllers
 
             if (vs == null)
             {
-                //return StatusCode(500);
                 return NoContent();
             }
             else
             {
-                // Switch to 200 OK
                 return Ok(vs);
             }
         }
@@ -50,12 +48,10 @@ namespace Capstone.Controllers
 
             if (valetSlips == null)
             {
-                //return StatusCode(500);
                 return NoContent();
             }
             else
             {
-                // Switch to 200 OK
                 return Ok(valetSlips);
             }
         }
@@ -70,12 +66,10 @@ namespace Capstone.Controllers
 
             if (vs == null)
             {
-                //return StatusCode(500);
                 return NoContent();
             }
             else
             {
-                // Switch to 200 OK
                 return Ok(vs);
             }
         }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Capstone.Models
@@ -20,7 +19,6 @@ namespace Capstone.Models
         [MaxLength(10, ErrorMessage = "Max length for parking spot is 10.")]
         public int ParkingSpotId { get; set; }
 
-        //[Required]
         public DateTime Date { get; set; }
 
         [Required]
