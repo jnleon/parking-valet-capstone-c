@@ -58,7 +58,6 @@ export default {
   methods: {
     PatronCarDetailsSubmit(evt) {
       evt.preventDefault();
-      //alert(this.form.valetSlipNumber)
       PatronService.getValetSlip(this.form.valetSlipNumber).then((response) => {
         if (response.data != "") {
           //as long as ID exists, do this . .
@@ -84,14 +83,12 @@ export default {
           } else if (this.valetSelection == "checkoutCar") {
             CarDetailsService.checkoutCar(this.form.valetSlipNumber).then(
               (response) => {
-                  alert("$" + response.data.amountOwed.toFixed(2))
                    this.finalAmountOwed   ="$" + response.data.amountOwed.toFixed(2)
                   this.show =false,
                   this.showAmountOwed = true
               }
             );
 
-            alert("hello, car checked was reached heheheh");
           }
         } else {
           //if id doesn't exist/entered incorrectly do this

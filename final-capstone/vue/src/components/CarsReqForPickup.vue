@@ -56,7 +56,9 @@
           <b-button size="sm" @click="row.toggleDetails">
             {{ row.detailsShowing ? "Hide" : "Show" }} Details
           </b-button>
-          <b-button size="sm" @click="checkOutCar"> CHECKOUT CAR </b-button>
+          <b-button size="sm" @click="checkOutCar(row.item.tickedId)" v-if="showAmountOwedOnList"> CHECKOUT CAR </b-button>
+              <h5 v-if="showAmountOwedOnList">AMOUNT OWED {{this.finalAmountOwed}}</h5>
+
         </template>
 
         <template #row-details="row">
@@ -148,6 +150,8 @@ export default {
       sortDirection: "asc",
       filter: null,
       filterOn: [],
+      showAmountOwedOnList:false,
+
     };
   },
   computed: {
@@ -162,8 +166,8 @@ export default {
   },
 
   methods: {
-    checkOutCar() {
-      CarDetailsService.checkoutCar(this.form.valetSlipNumber).then(
+    checkOutCar(slipID) {
+      CarDetailsService.checkoutCar(slipID).then(
         (response) => {
           alert(response.data.amountOwed);
         }

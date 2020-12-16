@@ -89,7 +89,6 @@ export default {
 
   methods: {
     onSubmit(evt) {
-      console.log("hello");
       carDetailsService.checkInCar(this.car).then((response) => {
         if (response.status == 201) {
           //this.showCheckInForm = !this.showCheckInForm;

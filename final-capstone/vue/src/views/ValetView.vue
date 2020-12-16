@@ -56,7 +56,8 @@
           }"
           >View Pickup Requests</b-button
         >
-        <b-button block variant="light" @click="RateCalculator"
+       
+        <b-button v-if="showCalcButton" block variant="light" @click="RateCalculator"
           >Rate Calculator</b-button
         >
       </div>
@@ -124,6 +125,7 @@ export default {
       showRequestedCars: false,
       checkoutButton: false,
       pickupButton: false,
+      showCalcButton:false,
     };
   },
   methods: {

@@ -170,7 +170,6 @@ export default {
   created() {
     ValetService.getAllTheInfo().then((response) => {
       this.$store.commit("LOAD_CAR_LIST", response.data);
-      console.log("hello");
     });
   },
   data() {
