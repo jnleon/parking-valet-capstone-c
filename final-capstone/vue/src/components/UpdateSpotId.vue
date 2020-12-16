@@ -49,7 +49,7 @@ export default {
 
         } else {
           ValetService.updateParkingSpot(this.ticketId,this.form.spotNumber).then((response) => {
-          alert("Spot number updated" + response.status)
+          alert("Spot number updated")
           if (response.status==200 ){
             location.reload();
           }

@@ -92,7 +92,7 @@ export default {
       carDetailsService.checkInCar(this.car).then((response) => {
         if (response.status == 201) {
           //this.showCheckInForm = !this.showCheckInForm;
-          alert()
+          //alert()
           location.reload();
         } else {
           console.log("Car not created.");
