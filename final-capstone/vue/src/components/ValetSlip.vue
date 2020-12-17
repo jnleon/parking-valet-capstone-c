@@ -14,7 +14,7 @@
     <b-form @submit="PatronCarDetailsSubmit" @reset="onReset" v-if="show">
       <b-form-group
         id="input-group-1"
-        label="Enter Valet Number:"
+        label="Enter Valet Slip Number:"
         label-for="input-1"
         description="Please enter your valet slip number."
       >
@@ -32,7 +32,12 @@
     </b-form>
 
     <h3 v-if="showValetCall">The valet will arrive shortly with your car.</h3>
-    <h3 v-if="showAmountOwed">AMOUNT OWED {{ this.finalAmountOwed }}</h3>
+    <div v-if="showAmountOwed"><h3>AMOUNT OWED {{ this.finalAmountOwed }}  &nbsp;
+      <b-button style="display: inline" variant="primary" size="lg" onClick="window.location.reload();">
+          PAID
+          </b-button></h3>
+    
+     </div>
     <h3 v-if="showValetRequestMessage">Pickup request from Valet received</h3>
     <patron-car-details v-if="showPatronCar" v-bind:slipId="slipId" />
   </div>
@@ -93,6 +98,7 @@ export default {
                 this.finalAmountOwed =
                   "$" + response.data.amountOwed.toFixed(2);
                 (this.show = false), (this.showAmountOwed = true);
+              
               }
             );
           }
@@ -108,10 +114,7 @@ export default {
     onReset(evt) {
       evt.preventDefault();
       // Reset our form values
-      this.form.email = "";
-      this.form.name = "";
-      this.form.food = null;
-      this.form.checked = [];
+      this.form.valetSlipNumber = "";
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {

@@ -145,7 +145,7 @@ namespace Capstone.DAO
                 VehicleMake = Convert.ToString(reader["vehicle_make"]),
                 VehicleModel = Convert.ToString(reader["vehicle_model"]),
                 VehicleColor = Convert.ToString(reader["vehicle_color"]),
-                EmailAddress = Convert.ToString(reader["email_address"]),
+                PatronEmail = Convert.ToString(reader["email_address"]),
                 PatronId = Convert.ToInt32(reader["patron_id"])
             };
 

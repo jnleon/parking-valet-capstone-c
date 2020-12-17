@@ -23,7 +23,7 @@ namespace Capstone.Models
         [MaxLength(20, ErrorMessage = "Max length for vehicle color is 20.")]
         public string VehicleColor { get; set; }
 
-        public string EmailAddress { get; set; }
+        public string PatronEmail { get; set; }
         
         public Vehicle()
         {

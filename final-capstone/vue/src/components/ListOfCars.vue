@@ -62,13 +62,6 @@
             <div id="listStuffModal">
               <div id="displayPatronList">
                 <h5>
-                  PATRON ID :
-                  <p style="display: inline" class="attributesList">
-                    {{ row.item.patronId }}
-                  </p>
-                </h5>
-
-                <h5>
                   PATRON NAME :
                   <p style="display: inline" class="attributesList">
                     {{ row.item.firstName }} {{ row.item.lastName }}
@@ -179,6 +172,7 @@ export default {
         { key: "vehicleMake", sortable: true, class: "text-center" },
         { key: "vehicleModel", sortable: true, class: "text-center" },
         { key: "licensePlate", sortable: true, class: "text-center" },
+        { key: "parkingSpotId", sortable: true, class: "text-center" },
 
         {
           sortable: true,

@@ -73,22 +73,9 @@
             <div id="listStuffModal">
               <div id="displayPatronList">
                 <h5>
-                  PATRON ID :
-                  <p style="display: inline" class="attributesList">
-                    {{ row.item.patronId }}
-                  </p>
-                </h5>
-
-                <h5>
                   SPOT NUMBER:
                   <p style="display: inline" class="attributesList">
                     {{ row.item.parkingSpotId }}
-                  </p>
-                </h5>
-                <h5>
-                  PATRON ID :
-                  <p style="display: inline" class="attributesList">
-                    {{ row.item.patronId }}
                   </p>
                 </h5>
 
@@ -100,6 +87,13 @@
                 </h5>
               </div>
               <div id="displayCarList">
+                <h3>
+                  AMOUNT OWED :
+                  <p style="display: inline" class="attributesList">
+                    ${{ calcTime(row.item.timeIn) }}
+                  </p>
+                </h3>
+
                 <h5>
                   LICENSE PLATE :
                   <p style="display: inline" class="attributesList">
@@ -108,9 +102,23 @@
                 </h5>
 
                 <h5>
-                  AMOUNT OWED :
+                  VEHICLE MAKE :
                   <p style="display: inline" class="attributesList">
-                    ${{ calcTime(row.item.timeIn) }}
+                    {{ row.item.vehicleMake }}
+                  </p>
+                </h5>
+
+                <h5>
+                  VEHICLE MODEL :
+                  <p style="display: inline" class="attributesList">
+                    {{ row.item.vehicleModel }}
+                  </p>
+                </h5>
+
+                <h5>
+                  VEHICLE COLOR :
+                  <p style="display: inline" class="attributesList">
+                    {{ row.item.vehicleColor }}
                   </p>
                 </h5>
               </div>
@@ -139,10 +147,12 @@ export default {
     return {
       fields: [
         { key: "ticketId", sortable: true, class: "text-center" },
-        { key: "parkingSpotId", sortable: true, class: "text-center" },
         { key: "firstName", sortable: true, class: "text-center" },
         { key: "lastName", sortable: true, class: "text-center" },
         { key: "licensePlate", sortable: true, class: "text-center" },
+        { key: "parkingSpotId", sortable: true, class: "text-center" },
+
+       
 
         {
           sortable: true,

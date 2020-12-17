@@ -57,7 +57,7 @@ namespace Capstone.Controllers
 
         // https://localhost:44315/vehicle
         [HttpPost]
-        [Authorize(Roles = "admin, valet, owner")]
+        [Authorize(Roles = "admin,valet, owner")]
         public IActionResult Create(NewVehicle vehicleToCreate)
         {
             Valet currentValet = valetDAO.GetByUserId((int)GetCurrentUserId());

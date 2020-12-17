@@ -26,6 +26,8 @@
 <script>
 import ValetService from "@/services/ValetService.js";
 import CheckInCar from "../components/CheckInCar.vue";
+import carDetailsService from "@/services/CarDetailsService.js";
+
 export default {
   carExists: "",
   name: "license-plate-entry",
@@ -35,7 +37,7 @@ export default {
       form: {
         licensePlate: "",
       },
-      licensePlate: '',
+      licensePlate: "",
       show: true,
       showCheckInForm: false,
       confirmCarAddedMessage: false,
@@ -47,8 +49,17 @@ export default {
       evt.preventDefault();
       //alert(this.form.valetSlipNumber)
       ValetService.checkLicensePlate(this.form.licensePlate).then(
-        (response) => {
-          if (response.data.licensePlate != null) {
+        (response1) => {
+          if (response1.data.licensePlate != null) {
+             carDetailsService.checkInCar(response1.data).then((response) => {
+              alert(response.status)
+              if (response.status == 201) {
+                //this.showCheckInForm = !this.showCheckInForm;
+                location.reload();
+              } else {
+                console.log("Car not created.");
+              }
+            });
             //as long as car exists, do this . .
             //if license plate exists in car details table then add car to valet slip table
             this.show = !this.show;
@@ -57,7 +68,7 @@ export default {
           } else {
             //if car doesn't exist/entered incorrectly do this
             //if license plate is new then show form to add car (check in car component)
-            this.licensePlate=this.form.licensePlate;
+            this.licensePlate = this.form.licensePlate;
             this.showCheckInForm = !this.showCheckInForm;
             this.show = !this.show;
           }
@@ -70,10 +81,7 @@ export default {
     onReset(evt) {
       evt.preventDefault();
       // Reset our form values
-      this.form.email = "";
-      this.form.name = "";
-      this.form.food = null;
-      this.form.checked = [];
+      this.form.licensePlate = "";
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {

@@ -56,6 +56,7 @@ export default {
                 this.form.spotNumber
               );
               alert("Spot number updated");
+              location.reload();
             }
           }
         });
