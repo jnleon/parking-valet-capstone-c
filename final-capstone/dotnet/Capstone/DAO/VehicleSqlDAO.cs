@@ -86,8 +86,9 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT license_plate, vehicle_make, vehicle_model, vehicle_color, patron_id " +
+                    SqlCommand cmd = new SqlCommand("SELECT license_plate, vehicle_make, vehicle_model, vehicle_color, patrons.patron_id AS patron_id, email_address " +
                                                     "FROM vehicles " +
+                                                    "INNER JOIN patrons ON patrons.patron_id = vehicles.patron_id " +
                                                     "WHERE license_plate = @licensePlate", conn);
                     cmd.Parameters.AddWithValue("@licensePlate", licensePlate);
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -144,6 +145,7 @@ namespace Capstone.DAO
                 VehicleMake = Convert.ToString(reader["vehicle_make"]),
                 VehicleModel = Convert.ToString(reader["vehicle_model"]),
                 VehicleColor = Convert.ToString(reader["vehicle_color"]),
+                EmailAddress = Convert.ToString(reader["email_address"]),
                 PatronId = Convert.ToInt32(reader["patron_id"])
             };
 
