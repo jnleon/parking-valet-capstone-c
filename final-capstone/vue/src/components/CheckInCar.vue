@@ -14,7 +14,6 @@
           placeholder="Make"
         ></b-form-input>
       </b-form-group>
-
       <b-form-group id="modelLabel" label="Model:" label-for="Model">
         <b-form-input
           id="model"
@@ -23,7 +22,6 @@
           placeholder="model"
         ></b-form-input>
       </b-form-group>
-
       <b-form-group
         id="licensePlateLabel"
         label="License Plate:"
@@ -36,7 +34,6 @@
           placeholder="License Plate"
         ></b-form-input>
       </b-form-group>
-
       <b-form-group id="colorLabel" label="Color:" label-for="Color">
         <b-form-input
           id="color"
@@ -45,7 +42,6 @@
           placeholder="Color"
         ></b-form-input>
       </b-form-group>
-
       <b-form-group
         id="emailLabel"
         label="Patron Email:"
@@ -58,47 +54,41 @@
           placeholder="Patron Email"
         ></b-form-input>
       </b-form-group>
-
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
   </div>
 </template>
-
 <script>
 import carDetailsService from "@/services/CarDetailsService.js";
-
 export default {
   name: "check-in-car",
   //props: [checkedInCars],
-  props: ["showCheckInForm"],
+  props: ["showCheckInForm","licensePlate"],
   data() {
     return {
       car: {
         vehicleMake: "",
         vehicleModel: "",
-        licensePlate: "",
+        licensePlate: this.licensePlate,
         vehicleColor: "",
         patronEmail: "",
         vehicleSpot: 0,
       },
-
       show: true,
     };
   },
-
   methods: {
     onSubmit(evt) {
       carDetailsService.checkInCar(this.car).then((response) => {
         if (response.status == 201) {
           //this.showCheckInForm = !this.showCheckInForm;
-          //alert()
+          //alert(response.status)
           location.reload();
         } else {
           console.log("Car not created.");
         }
       });
-
       evt.preventDefault();
     },
     onReset(evt) {
@@ -118,7 +108,6 @@ export default {
   },
 };
 </script>
-
 <style>
 #formCheckInCar {
   font-weight: 500;

@@ -16,18 +16,16 @@
           placeholder="License Plate"
         ></b-form-input>
       </b-form-group>
-
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
-    <check-in-car v-if="showCheckInForm" />
+    <check-in-car v-if="showCheckInForm" v-bind:licensePlate="licensePlate" />
     <h3 v-if="confirmCarAddedMessage">Valet Slip has been created for car</h3>
   </div>
 </template>
 <script>
 import ValetService from "@/services/ValetService.js";
 import CheckInCar from "../components/CheckInCar.vue";
-
 export default {
   carExists: "",
   name: "license-plate-entry",
@@ -37,6 +35,7 @@ export default {
       form: {
         licensePlate: "",
       },
+      licensePlate: '',
       show: true,
       showCheckInForm: false,
       confirmCarAddedMessage: false,
@@ -58,6 +57,7 @@ export default {
           } else {
             //if car doesn't exist/entered incorrectly do this
             //if license plate is new then show form to add car (check in car component)
+            this.licensePlate=this.form.licensePlate;
             this.showCheckInForm = !this.showCheckInForm;
             this.show = !this.show;
           }
@@ -83,6 +83,5 @@ export default {
   },
 };
 </script>
-
 <style>
 </style>
