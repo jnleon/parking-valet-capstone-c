@@ -2,7 +2,7 @@
   <div id="valetMain">
     <div id="valetMenu">
       <div id="simpleBar">
-        <h4>Patron Options</h4>
+        <h4><strong>Patron Options</strong></h4>
       </div>
 
       <div id="MenuButtons">
@@ -48,9 +48,7 @@
         <valet-slip v-bind:patronSelection="patronSelection" />
       </div>
 
-      <div id="home-parking-lot-container">
-        <parking-lot />
-      </div>
+      <parking-lot id="home-parking-lot-container" />
     </div>
   </div>
 </template>
@@ -87,15 +85,21 @@ export default {
 <style>
 .mapViews {
   display: flex;
-  grid-area: map;
-  padding: 0.8%;
+  padding: 1.5%;
   background-color: orange;
   border-radius: 0.5rem;
-  margin: 8%;
+  margin-right: 8%;
+  margin-left: 8%;
+  margin-bottom: 5%;
+
+  grid-area: GoogleMapsBar;
 }
 
 #MenuButtons {
-  margin: 8%;
+  margin-right: 8%;
+  margin-left: 8%;
+  margin-top: 6.5%;
+  grid-area: ButtonBar;
 }
 
 #MenuButtons .btn-secondary {

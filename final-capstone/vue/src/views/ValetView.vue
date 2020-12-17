@@ -2,7 +2,7 @@
   <div id="valetMain">
     <div id="valetMenu">
       <div id="simpleBar">
-        <h4>Valet Options</h4>
+        <h4><strong>Valet Options</strong></h4>
       </div>
 
       <div id="MenuButtons">
@@ -68,13 +68,12 @@
       <div class="mapViews">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8516.561050240627!2d-84.46975296246113!3d39.15195057631328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8841b2f72057d245%3A0x27bc76f0bdcb7dfd!2sTech%20Elevator%20Cincinnati!5e1!3m2!1sen!2sus!4v1607456474306!5m2!1sen!2sus"
-          width="2000"
+          width="100%"
           frameborder="0"
           style="border: 0"
           allowfullscreen=""
           aria-hidden="false"
           tabindex="0"
-          height="auto"
         >
         </iframe>
       </div>
@@ -162,6 +161,19 @@ export default {
 </script>
 
 <style>
+#simpleBar{
+  display: flex;
+  background-color: orange;
+  font-family: "Jua";
+  font-weight: 900;
+  text-transform: uppercase;
+  justify-content: center;
+  padding-top: 1.3%;
+  border-top-right-radius: 0.3rem;
+  border-top-left-radius: 0.3rem;
+  text-align: center;
+}
+
 #home-parking-lot-container {
   border: 0.8vh solid orange;
   border-radius: 0.5rem;
@@ -203,7 +215,7 @@ export default {
   font-family: "Jua";
   text-transform: uppercase;
   border-color: white !important;
-  margin-bottom: 3.5vh;
+  margin-bottom: 3vh !important;
   padding: 2vh !important;
 }
 
@@ -224,5 +236,14 @@ export default {
   border-bottom-right-radius: 0.3rem;
   border-top-right-radius: 0.3rem;
   border-top-left-radius: 0.3rem;
+
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 0.05fr 0.1fr auto;
+  grid-template-areas:
+    "SmallheaderBar"
+    "ButtonBar"
+    "GoogleMapsBar";
 }
+
 </style>

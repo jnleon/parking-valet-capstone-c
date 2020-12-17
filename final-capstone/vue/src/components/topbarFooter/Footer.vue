@@ -12,8 +12,8 @@
 
     </div>
   </div>
-  <div class="footer-copyright text-center py-2 "> © 2020 Copyright:
-    <a href="https://www.techelevator.com/"> techelevator.com </a>
+  <div class="footer-copyright text-center py-2 "><strong> © 2020 Copyright:
+    <a href="https://www.techelevator.com/"> techelevator.com </a></strong>
   </div>
 </footer>
 </template>
@@ -24,7 +24,7 @@ export default {};
 
 <style>
 .footer-copyright {
-  background-color: rgb(255, 186, 25);
+  background-color:rgb(241, 157, 0);
 }
 .page-footer {
   background-color: orange;

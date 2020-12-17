@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <div id="menu">
-      <div id="simpleBar">
-        <p>full service Valet</p>
+      <div id="simpleBarHome">
+        <h2><strong>full service Valet</strong></h2>
       </div>
       <info-component />
       <div id="pricingSection">
@@ -100,13 +100,13 @@ marquee {
   font-family: "Jua";
   font-size: 6vh;
 }
-#simpleBar {
+#simpleBarHome{
   display: flex;
   background-color: orange;
   font-family: "Jua";
-  font-weight: 900;
   text-transform: uppercase;
   justify-content: center;
+  align-items: center;
   padding-top: 1.3%;
   border-top-right-radius: 0.3rem;
   border-top-left-radius: 0.3rem;
